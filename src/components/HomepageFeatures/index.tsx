@@ -14,8 +14,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Ptah.sh is a SaaS for indie and small to medium businesses. It requires us to create the easiest hosting platform.
       </>
     ),
   },
@@ -24,18 +23,16 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Pick any of the pre-made templates and deploy it to your own servers with a single click.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Powered by Docker Swarm',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        We decided to not invent the wheel and we use the power of Docker Swarm, which is a proven technology by thousands of businesses.
       </>
     ),
   },
