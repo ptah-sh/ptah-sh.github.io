@@ -1,0 +1,44 @@
+---
+title: Self-Hosted made Easy
+description: Host Databases, Servers, custom Docker Images on your own servers.
+template: splash
+hero:
+  title: |
+    Ptah.sh -
+    <span
+      class="font-black text-transparent
+        bg-clip-text bg-gradient-to-b
+        from-accent-700 to-accent-400
+        dark:from-accent-500 dark:to-accent-200"
+    >
+      self-hosted made easy
+    </span>
+  tagline: A flexible, opensource and independent alternative to Big Corp - Heroku, Vercel and others.
+  image:
+    file: ../../assets/app-screenshot.webp
+  actions:
+    - text: Join Waitlist
+      link: https://docs.google.com/forms/d/e/1FAIpQLSeyF3d4OZAMhv04eHXMrxR739H99BSdTvIDmYGqoeq8_quGQA/viewform
+      icon: right-arrow
+      variant: primary
+    # - text: Read the Starlight docs
+    #   link: https://starlight.astro.build
+    #   icon: external
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Why Ptah.sh?
+
+<CardGrid stagger>
+	<Card title="Easy to Use" icon="pencil">
+		Ptah.sh is a SaaS for indie and small to medium businesses. It requires us to create the easiest hosting platform.
+	</Card>
+	<Card title="Focus on What Matters" icon="add-document">
+		Pick any of the pre-made templates and deploy it to your own servers with a single click.
+	</Card>
+	<Card title="Powered by Docker Swarm" icon="setting">
+		We decided to not invent the wheel and we use the power of Docker Swarm, which is a proven technology by thousands of businesses.
+	</Card>
+</CardGrid>
+
