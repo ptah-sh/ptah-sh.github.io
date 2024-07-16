@@ -2,6 +2,20 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import tailwind from '@astrojs/tailwind';
 
+const head = [
+	{
+		tag: "script",
+		attrs: {
+			async: true,
+			src: "https://www.googletagmanager.com/gtag/js?id=G-0D6LCHDZB8"
+		}
+	},
+	{
+		tag: "script",
+		content: "window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-0D6LCHDZB8');",
+	}
+];
+
 // https://astro.build/config
 export default defineConfig({
 	site: "https://ptah.sh",
@@ -29,6 +43,7 @@ export default defineConfig({
 				},
 			],
 			customCss: ['./src/tailwind.css'],
+			head: process.env.NODE_ENV === 'production' ? head : [],
 		}),
 		tailwind({ applyBaseStyles: false }),
 	],
