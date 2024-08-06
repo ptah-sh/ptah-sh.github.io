@@ -1,0 +1,78 @@
+---
+title: E-Sportstats.com saved of 82% costs per year
+description: "E-Sportstats.com: Optimizing Costs and Performance with Ptah.sh"
+---
+
+## Project Genesis and Growth
+
+E-Sportstats.com began its journey in November 2020, founded by a trio of visionaries: a tech lead, a product lead, and an investor who funded the initial development. The platform was designed to provide users with real-time match statistics for various eSports disciplines, including League of Legends, Dota 2, CS2, Valorant, and Mobile Legends.
+
+The startup's innovative approach quickly gained traction, culminating in winning Product Hunt's "Product of the Day" in November 2021, a significant milestone that validated their concept and boosted their visibility in the tech community.
+
+## The Infrastructure Journey
+
+E-Sportstats.com's quest for the ideal infrastructure solution led them through several iterations:
+
+1. **Heroku**: The initial choice, which proved to be expensive and underperforming for their needs.
+2. **AWS**: Adopted for its power, but the complexity of the platform posed challenges.
+3. **DigitalOcean**: Chosen for its simplicity and cost-effectiveness compared to AWS.
+4. **Hetzner**: The final destination, offering powerful yet cost-effective virtual machines.
+
+As economic conditions shifted, the team began exploring ways to further optimize their costs without compromising performance. This led them to [Hetzner](https://hetzner.cloud/?ref=8i4yWKDa1YqW), which provided the powerful infrastructure they needed at a more competitive price point.
+
+Throughout these transitions, Cloudflare played a crucial role. Its services allowed E-Sportstats.com to migrate between different solutions without experiencing any downtimes, ensuring continuous service for their users even as they optimized their backend infrastructure.
+
+## Technical Setup
+
+The startup maintained **two environments**: staging and production. Each environment comprised:
+
+- A Spring Boot web application
+- An ETL system based on Java
+- A WordPress instance
+- A new portal developed in PHP
+
+To ensure stability and avoid inter-project impacts, separate managed databases were used for the web app, WordPress, and the new portal, resulting in **three RDBMS instances per environment**. This setup, while robust, contributed to higher operational costs.
+
+## The Birth of ptah.sh
+
+The tech lead, drawing from years of experience configuring deployment pipelines, recognized an opportunity. Inspired by innovators like Marc Louvion and Andras Bacsai, he envisioned a tool that could not only manage E-Sportstats.com's services but also host everything on Hetzner's powerful yet cost-effective virtual machines.
+
+This vision gave birth to ptah.sh, a solution designed to address the specific needs of E-Sportstats.com while offering potential value to other startups facing similar challenges.
+
+## Implementing ptah.sh
+
+With ptah.sh, E-Sportstats.com was able to:
+
+1. **Consolidate Infrastructure**: Move from multiple managed services to powerful, cost-effective virtual machines on Hetzner.
+2. **Streamline Management**: Simplify the deployment and management of their diverse application stack.
+3. **Optimize Resources**: Better utilize server resources across their Spring Boot, Java ETL, WordPress, and PHP applications.
+4. **Maintain Separation**: Continue using separate databases for different components to ensure stability and performance isolation.
+5. **Ensure Seamless Transitions**: Leverage Cloudflare's services to facilitate smooth migrations between infrastructure solutions without service interruptions.
+
+## Results
+
+The implementation of ptah.sh led to significant improvements:
+
+1. **Cost Reduction**: Yearly expenses decreased from **$4,300** to **$768**, a remarkable **82% reduction**. This substantial saving over the course of a year provided E-Sportstats.com with significant financial flexibility.
+
+2. **Performance Boost**: Despite the considerable cost savings, the platform saw improved performance due to more efficient resource utilization. This meant that E-Sportstats.com could offer better service to its users while simultaneously reducing operational costs.
+
+3. **Scalability**: The new setup provided better scalability to handle traffic spikes during major eSports events. This was crucial for maintaining service quality during peak times, which are critical for an eSports statistics platform.
+
+4. **Simplified Operations**: The custom-built tool streamlined deployment and management processes, reducing operational overhead. This allowed the small team to focus more on feature development and less on infrastructure management.
+
+## Financial Impact
+
+The reduction in yearly expenses from **$4,300** to **$768** represents a saving of **$3,532 per year**. For a startup, this level of cost optimization can be transformative:
+
+- It extends the runway, allowing more time for growth and development without additional funding.
+- It frees up capital that can be reinvested into marketing, feature development, or hiring.
+- It improves the company's financial health, making it more attractive to potential investors or partners.
+
+## Conclusion
+
+E-Sportstats.com's journey from a startup using off-the-shelf solutions to developing their own infrastructure management tool showcases the potential for tech-savvy teams to innovate beyond their core product. By creating ptah.sh, they not only solved their own infrastructure challenges but also laid the groundwork for a potential new business venture in the DevOps space.
+
+This case study demonstrates how deep technical knowledge, combined with a willingness to think outside the box, can lead to significant yearly cost savings and operational improvements. The dramatic reduction in annual expenses highlights the potential long-term impact of smart infrastructure decisions for startups.
+
+Furthermore, it underscores how startups can turn their internal solutions into products that can benefit the wider tech community. The success of ptah.sh in optimizing E-Sportstats.com's operations suggests that other companies facing similar challenges could potentially benefit from this tool, opening up new business opportunities for the founders.
