@@ -26,7 +26,8 @@ hero:
     #   icon: external
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, Icon } from '@astrojs/starlight/components';
+
 
 ## Why Ptah.sh?
 
@@ -40,10 +41,24 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 	<Card title="Focus on What Matters" icon="add-document">
 		Pick any of the pre-made templates and deploy it to your own servers with a single click.
 	</Card>
+	<Card title="Secure by Default" icon="approve-check">
+	 <ul>
+	  <li>Ptah.sh doesn't require you to have any ports open. You can even manage intranet infrastructure with our cloud option.</li>
+		<li>Web requests are served by Caddy, so you're getting HTTPS for free and built-in.</li>
+		</ul>
+	</Card>
 	<Card title="Powered by Docker Swarm" icon="setting">
 		We decided to not invent the wheel and we use the power of Docker Swarm, which is a proven technology by thousands of businesses.
 	</Card>
 </CardGrid>
+
+<div class="flex flex-col items-center my-24 border p-8">
+  ## Support us on Product Hunt
+
+  <div class="py-8">Our public release is scheduled on 1st of September.</div>
+
+  <a href="https://www.producthunt.com/posts/ptah-sh?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-ptah&#0045;sh" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=476578&theme=light" alt="Ptah&#0046;sh - Self&#0045;hosted&#0032;made&#0032;easy | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+</div>
 
 <div id="pricing"></div>
 
@@ -154,6 +169,16 @@ You can self-host the service by clonning the <a href="https://github.com/ptah-s
 	</Card>
 </CardGrid>
 
+## And a little bit more!
+
+<CardGrid stagger>
+	<Card title="Developed in Public" icon="pencil">
+	  Want to learn the challenges we've met?
+
+		Follow <a href="https://x.com/b_shulha" rel="nofollow" target="_blank">@b_shulha</a> on Xitter to watch after the development process!
+	</Card>
+</CardGrid>
+
 ## Want to give it a try?
 
 We provide you with a <span class="text-green-600 text-lg font-bold">free 14 days trial</span>.
@@ -161,3 +186,14 @@ We provide you with a <span class="text-green-600 text-lg font-bold">free 14 day
 <div class="w-96">
   <button type="button" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeyF3d4OZAMhv04eHXMrxR739H99BSdTvIDmYGqoeq8_quGQA/viewform')" class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center font-bold">Join the Waitlist!</button>
 </div>
+
+## Support & Contact
+
+<CardGrid>
+	<Card title="Community Support" icon="github">
+	  You can get community support on our <a href="https://github.com/ptah-sh/ptah-server/discussions">GitHub Discussions</a> page
+	</Card>
+	<Card title="E-Mail" icon="email">
+	 This option is dedicated primarily to paing users, but feel free to e-mail us at <a href="mailto:contact@ptah.sh">contact@ptah.sh</a> if you have extra questions.
+	</Card>
+</CardGrid>
