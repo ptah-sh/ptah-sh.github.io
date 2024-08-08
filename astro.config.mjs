@@ -28,7 +28,11 @@ export default defineConfig({
         replacesTitle: true,
       },
       social: {
+        "x.com": "https://x.com/ptah_sh",
         github: "https://github.com/ptah-sh",
+      },
+      components: {
+        ThemeSelect: "./src/components/auth-header.astro",
       },
       sidebar: [
         // {
@@ -42,6 +46,14 @@ export default defineConfig({
         // 	label: 'Reference',
         // 	autogenerate: { directory: 'reference' },
         // },
+        {
+          label: "Introduction",
+          link: "/introduction",
+        },
+        {
+          label: "Tutorial",
+          autogenerate: { directory: "tutorial" },
+        },
         {
           label: "Case Studies",
           autogenerate: { directory: "case-studies" },

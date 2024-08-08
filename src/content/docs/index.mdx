@@ -30,6 +30,7 @@ hero:
 ---
 
 import { Card, CardGrid, Icon } from '@astrojs/starlight/components';
+import PricingCard from '../../components/PricingCard.astro';
 
 
 ## Why Ptah.sh?
@@ -63,78 +64,18 @@ import { Card, CardGrid, Icon } from '@astrojs/starlight/components';
   <a href="https://www.producthunt.com/posts/ptah-sh?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-ptah&#0045;sh" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=476578&theme=light" alt="Ptah&#0046;sh - Self&#0045;hosted&#0032;made&#0032;easy | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 </div>
 
-<div id="pricing"></div>
-
+<div id="pricing">
 ## Simple pricing for projects of any size
 
-<p>Are you an indie hacker? Small startup? Established business? We've got your back!</p>
-<p>You are free to set up any teams/servers configuration to match your needs.</p>
-<div
-    class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-    <div class="flex items-baseline text-gray-900 dark:text-white">
-        <span class="text-3xl font-semibold">$</span>
-        <span class="text-5xl font-extrabold tracking-tight">14</span>
-        <span class="ms-1 text-xl font-normal text-gray-500 dark:text-gray-400"> /server /month</span>
-    </div>
-    <small class="italic text-gray-400">(price excludes tax)</small>
-    <ul role="list" class="space-y-5 my-7 ps-0">
-    <li class="flex items-center">
-            <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
-                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-            </svg>
-            <span
-                class="text-base leading-tight text-gray-500 dark:text-gray-400 ms-3 text-lg text-green-600 font-bold">Free 14 Days Trial</span>
-        </li>
-        <li class="flex items-center">
-                <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
-                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-                </svg>
-                <span
-                    class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Unlimited Servers</span>
-            </li>
-        <li class="flex">
-            <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
-                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-            </svg>
-            <span
-                class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Unlimited Teams</span>
-        </li>
-        <li class="flex">
-            <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
-                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-            </svg>
-            <span
-                class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Unlimited Apps</span>
-        </li>
-        <li class="flex">
-            <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
-                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-            </svg>
-            <span
-                class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Unlimited Databases</span>
-        </li>
-        <li class="flex">
-            <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true"
-                 xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-            </svg>
-            <span
-                class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3">Unlimited Backups</span>
-        </li>
-    </ul>
-    <button type="button" onclick="window.open('https://docs.google.com/forms/d/e/1FAIpQLSeyF3d4OZAMhv04eHXMrxR739H99BSdTvIDmYGqoeq8_quGQA/viewform')"
-            class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 font-medium rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center font-bold">Join the Waitlist!</button>
+  <p>Are you an indie hacker? Small startup? Established business? We've got your back!</p>
+
+  <div class="flex gap-12">
+    <PricingCard name="Hobby" description="Perfect plan to try the service or host non-critical applications" price="14" singleServer />
+    <PricingCard name="Startup" description="Need more power or an improved stability? This is your choice!" price="49" mostPopular />
+    <PricingCard name="Business" description="Your business got traction? We will cover your back!" price="199" prioritySupport waitlist="https://forms.gle/YFZ8oJuiVvDm2gEU6" />
+  </div>
+
+  <p class="italic text-right text-xs">* Given prices are per-team. You may create as many teams as you need.</p>
 </div>
 
 ## Open-source
@@ -175,6 +116,18 @@ You can self-host the service by clonning the <a href="https://github.com/ptah-s
 ## And a little bit more!
 
 <CardGrid stagger>
+  <Card title="Push to Deploy (soon)" icon="telegram">
+    Connect your GitHub or GitLab repository and we'll launch deployment on each `git push` you make.
+
+    As simple as it can be!
+  </Card>
+
+  <Card title="1-Click Apps (soon)" icon="puzzle">
+      Do you need PostgreSQL or MongoDB, Wordpress or something else for your project but you don't want configure it from scratch?
+
+      Use 1-Click Apps to deploy the services you need with a reasonable defaults.
+    </Card>
+
 	<Card title="Developed in Public" icon="pencil">
 	  Want to learn the challenges we've met?
 
