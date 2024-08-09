@@ -15,6 +15,14 @@ const head = [
     content:
       "window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-0D6LCHDZB8');",
   },
+  {
+    tag: "meta",
+    attrs: {
+      name: "keywords",
+      content:
+        "ptah.sh, infrastructure management, devops, cost optimization, self-hosting, deployment automation, fair source license, startup tools",
+    },
+  },
 ];
 
 // https://astro.build/config
