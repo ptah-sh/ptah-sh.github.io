@@ -23,6 +23,27 @@ const head = [
         "ptah.sh, infrastructure management, devops, cost optimization, self-hosting, deployment automation, fair source license, startup tools",
     },
   },
+  {
+    tag: "script",
+    attrs: {
+      type: "application/ld+json",
+    },
+    content: `
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "ptah.sh",
+        "applicationCategory": "Infrastructure Management Tool",
+        "operatingSystem": "Web-based",
+        "offers": {
+          "@type": "Offer",
+          "price": "14",
+          "priceCurrency": "USD"
+        },
+        "description": "Optimize your infrastructure costs and simplify deployment with ptah.sh."
+      }
+    `,
+  },
 ];
 
 // https://astro.build/config
