@@ -58,9 +58,17 @@ export default defineConfig({
           label: "Case Studies",
           autogenerate: { directory: "case-studies" },
         },
+        {
+          label: "Company Blog",
+          autogenerate: { directory: "blog" },
+          collapsed: true,
+        },
       ],
       customCss: ["./src/tailwind.css"],
       head: process.env.NODE_ENV === "production" ? head : [],
+      editLink: {
+        baseUrl: "https://github.com/ptah-sh/ptah-sh.github.io/edit/main/",
+      },
     }),
     tailwind({ applyBaseStyles: false }),
   ],
