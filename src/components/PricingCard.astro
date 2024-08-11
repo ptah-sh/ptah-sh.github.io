@@ -15,17 +15,22 @@ const {
 ---
 
 <div
-    class="w-full max-w-sm mt-4 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"
+    class:list={[
+        "w-full max-w-sm mt-4 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700",
+        { "border-green-700 border-4": mostPopular },
+    ]}
 >
     <div class="flex flex-col items-center">
         {
             mostPopular && (
-                <div class="absolute -m-12 -rotate-3 bg-green-600 font-semibold text-white w-44 text-center rounded">
-                    <div class="rotate-2 p-2 font-mono">most popular</div>
+                <div class="absolute -m-14 -rotate-3 bg-green-600 font-semibold text-white w-44 text-center rounded">
+                    <div class="rotate-2 p-2 font-mono">recommended</div>
                 </div>
             )
         }
-        <div class="font-semibold">{name}</div>
+        <div class:list={["font-semibold", { "text-2xl": mostPopular }]}>
+            {name}
+        </div>
         <div class="items-baseline text-gray-900 dark:text-white">
             <span class="text-3xl font-semibold">$</span>
             <span class="text-5xl font-extrabold tracking-tight">{price}</span>
