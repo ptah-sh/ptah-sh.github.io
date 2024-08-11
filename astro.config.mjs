@@ -58,6 +58,7 @@ export default defineConfig({
       },
       social: {
         "x.com": "https://x.com/ptah_sh",
+        discord: "https://discord.gg/cgYBFJ4VbQ",
         github: "https://github.com/ptah-sh",
       },
       components: {

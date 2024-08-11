@@ -8,7 +8,7 @@ const {
     price,
     singleServer,
     mostPopular,
-    prioritySupport,
+    dedicatedDiscord,
     roleManagement,
     waitlist,
 } = Astro.props;
@@ -145,8 +145,8 @@ const {
         </li>
         <li class="flex">
             {
-                prioritySupport ? (
-                    <FatCheckIcon />
+                dedicatedDiscord ? (
+                    <Icon name="discord" color="blue" />
                 ) : (
                     <Icon name="approve-check-circle" />
                 )
@@ -155,11 +155,21 @@ const {
             <span
                 class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3"
             >
-                {prioritySupport ? "Priority Support" : "Basic Support"}
+                {
+                    dedicatedDiscord
+                        ? "Dedicated Discord Channel"
+                        : "Community Discord Channel"
+                }
             </span>
         </li>
         <li class="flex">
-            {roleManagement ? <FatCheckIcon /> : <Icon name="information" />}
+            {
+                roleManagement ? (
+                    <FatCheckIcon />
+                ) : (
+                    <Icon name="approve-check-circle" />
+                )
+            }
 
             <span
                 class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3"
