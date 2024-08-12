@@ -13,7 +13,7 @@ hero:
     >
       self-hosted made easy
     </span>
-  tagline: A flexible, opensource and independent alternative to Big Corp - Heroku, Vercel and others.
+  tagline: A flexible, <a href="/blog/2024-08-09-we-use-fair-source/">fair source</a> and independent alternative to Big Corp - Heroku, Vercel and others.
   image:
     html: |
       <iframe width="400" height="315" src="https://www.youtube.com/embed/KPRljIUIhlA?si=9gxAYens28vOueNS" title="Ptah.sh Introduction - YouTube Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -32,6 +32,25 @@ hero:
 
 import { Card, CardGrid, Icon } from '@astrojs/starlight/components';
 import PricingCard from '../../components/PricingCard.astro';
+
+<div class="text-center">
+  ## Save up to 82% costs on hosting your services
+
+  <div class="text-center flex justify-center items-center">
+    <span class="text-[96px] italic text-gray-200">«</span>
+    <blockquote class="max-w-[650px] inline-block p-4 italic" style="border-inline-start: 0;">
+      Yearly <strong>expenses decreased from $4,300 to $768</strong>, a remarkable 82% reduction. This substantial saving over the course of a year provided E-Sportstats.com with significant financial flexibility.
+    </blockquote>
+    <span class="text-[96px] italic text-gray-200">»</span>
+  </div>
+
+  <a href="/case-studies/e-sportstats/"
+    style="color: white"
+    class="border m-2 py-2 px-4 inline-block rounded-xl bg-green-600 font-semibold hover:bg-green-900"
+  >
+    Read E-Sportstats Case Study
+  </a>
+</div>
 
 
 ## Why Ptah.sh?
@@ -83,11 +102,12 @@ import PricingCard from '../../components/PricingCard.astro';
   </div>
 
   <p class="italic text-right text-xs">* Given prices are per-team. You may create as many teams as you need.</p>
+  <p class="italic text-right text-xs">** Soft-quotas are being applied. Please E-Mail us at contact@ptah.sh if you need to increase quotas.</p>
 </div>
 
-## Open-source
+## Fair Source
 
-The Ptah.sh service suite is open-sourced software licensed under the <a href="https://github.com/ptah-sh/ptah-server/blob/main/LICENSE.md" target="_blank" rel="nofollow">Functional Source License, Version 1.1, Apache 2.0 Future License</a>. Read more about the FSL License at <a href="https://fsl.software" target="_blank">fsl.software</a>
+The Ptah.sh service suite is a <a href="https://fair.io">Fair Source</a> software licensed under the <a href="https://github.com/ptah-sh/ptah-server/blob/main/LICENSE.md" target="_blank" rel="nofollow">Functional Source License, Version 1.1, Apache 2.0 Future License</a>. Read more about the FSL License at <a href="https://fsl.software" target="_blank">fsl.software</a>
 
 You can self-host the service by clonning the <a href="https://github.com/ptah-sh/ptah-server" target="_blank" rel="nofollow">GitHub Repo</a>.
 
