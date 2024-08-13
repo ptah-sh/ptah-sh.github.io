@@ -4,3 +4,28 @@ description: Ptah.sh is the SaaS which allows to to manage and deploy services o
 ---
 
 Ptah.sh is the SaaS which allows to to manage and deploy services on your own infrastructure.
+
+## Quick Guide
+
+<iframe width="640" height="400" class="min-h-[396px]" src="https://www.youtube.com/embed/KPRljIUIhlA?si=9gxAYens28vOueNS" title="Ptah.sh Introduction - YouTube Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+## Architecture of Ptah.sh
+
+Ptah.sh is a [Fair Source](https://fair.io) software consisting of two components:
+
+- **An agent installed on the server** (VPS) that interacts with the system and running Docker Daemon by executing predefined commands (creating-updating-running services and backups).
+
+- **A web-based UI** that allows configuring services, access points, and periodic tasks.
+
+This provides the following guarantees and capabilities:
+- Deployment of services in **any environment** with **any provider** of virtual or physical machines, or even in a home office.
+
+- **Virtual machine security** - all ports can be closed while still maintaining the ability to deploy services (for example, for intranet infrastructure).
+
+- Open source code theoretically guarantees **quick resolution of critical vulnerabilities**.
+
+- The Fair Source model also allows **hosting the service on your own hardware**, thus taking control of your entire infrastructure.
+
+- **Docker Swarm**, which is a key element of the system, ensures that all services will be isolated within their networks, organizes the ability to combine multiple nodes into a single cluster, and helps increase the overall reliability of the system.
+
+- **Vendor lock-free**: all configurations are stored on the Docker Swarm cluster, allowing you to discontinue the service at any time while still being able to perform deployments and be confident that your site-application-API won't turn into a pumpkin at midnight.

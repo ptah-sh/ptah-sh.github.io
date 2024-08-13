@@ -57,9 +57,9 @@ export default defineConfig({
         replacesTitle: true,
       },
       social: {
-        "x.com": "https://x.com/ptah_sh",
-        discord: "https://discord.gg/cgYBFJ4VbQ",
-        github: "https://github.com/ptah-sh",
+        "x.com": "https://dub.sh/ptah-sh-twitter",
+        discord: "https://dub.sh/ptah-sh-discord",
+        github: "https://git.new/ptah-sh-github",
       },
       components: {
         ThemeSelect: "./src/components/auth-header.astro",

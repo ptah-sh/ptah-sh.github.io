@@ -1,0 +1,53 @@
+---
+title: Deploy a Service
+description: "Deployng a Docker Image onto the Docker Swarm cluster created with Ptah"
+slug: tutorial/deploy-a-service
+sidebar:
+  order: 1
+---
+
+As a test, I will be deploying a simple Docker Image - <a href="https://hub.docker.com/r/nginxdemos/hello/" rel="nofollow" target="_blank">nginxdemos/hello</a>, which contains an nginx server and will return a dynamic page to the browser with basic information about the HTTP request: address, hostname (container), date and time of request processing.
+
+## Create a Service
+
+_Navigate to the "Services" page and click "Create"._
+
+Among the key parameters, you'll need to specify the service name, the Docker Image from which to raise the container, and, in our case, the HTTP Endpoint through which the launched service can be accessed.
+
+By default, Ptah.sh runs <a href="https://caddyserver.com/" rel="nofollow" target="_blank">Caddy</a>, which handles all external HTTP requests and automates certificate acquisition through Let's Encrypt.
+
+In addition to the already mentioned capabilities, you can configure:
+
+- Environment variables (public and secret).
+
+- Configuration files (also public and secret).
+
+- Docker Volumes (for saving files on disk).
+
+- Backups (in the form of self-defined commands and automated Volume backups).
+
+- Additional processes (workers for heavy tasks).
+
+- And additional Docker Services that will work following the pattern of Sidecar Containers in K8s (for example, for pgbouncer/pgpool).
+
+<video width="640" height="480" controls>
+  <source src="/tutorial/create-service.mp4" type="video/mp4" />
+</video>
+
+## Visit a new Service
+
+As soon as the service deployment is complete, you can view the results in your favorite browser.
+
+In the previous step, I specified that the service would run on `localhost` and handle all requests starting with `/nginx-demos/`. Additionally, I indicated that it should listen for requests on the HTTPS port, so Caddy will configure the corresponding endpoint.
+
+Therefore, the full link for testing is as follows:
+
+`https://localhost/nginx-demos/dou-demo`
+
+After passing through the cautionary screen regarding certificate integrity (since this is localhost), the following screen should be displayed:
+
+<img src="/tutorial/deployment-complete.png" width="600" height="480" alt="Service Demo" />
+
+So... That's it, congratulations! You've deployed your first service using ptah.sh. :)
+
+As you can see, we indeed bypass many configuration-related issues, thanks to the opinionated approach of the service.
