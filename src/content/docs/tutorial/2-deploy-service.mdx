@@ -6,6 +6,8 @@ sidebar:
   order: 1
 ---
 
+import Video from '../../../components/Video.astro';
+
 As a test, I will be deploying a simple Docker Image - <a href="https://hub.docker.com/r/nginxdemos/hello/" rel="nofollow" target="_blank">nginxdemos/hello</a>, which contains an nginx server and will return a dynamic page to the browser with basic information about the HTTP request: address, hostname (container), date and time of request processing.
 
 ## Create a Service
@@ -30,9 +32,7 @@ In addition to the already mentioned capabilities, you can configure:
 
 - And additional Docker Services that will work following the pattern of Sidecar Containers in K8s (for example, for pgbouncer/pgpool).
 
-<video width="640" height="480" controls>
-  <source src="/tutorial/create-service.mp4" type="video/mp4" />
-</video>
+<Video src="/tutorial/create-service.mp4" type="video/mp4" />
 
 ## Visit a new Service
 

@@ -1,0 +1,14 @@
+---
+const { src } = Astro.props;
+---
+
+<video width="640" height="480" controls>
+    <source src={src} type="video/mp4" />
+</video>
+<div class="italic text-xs ps-8">
+    * Recorded with <a
+        href="https://out.ptah.sh/screen-studio"
+        rel="nofollow"
+        target="_blank">Screen Studio</a
+    >
+</div>
