@@ -1,15 +1,26 @@
 ---
-title: Trigger a new Deployment
+title: Deployments
 description: Use CI/CD tools to deploy latest version of your service alongside new environment variables.
 ---
 
 **Incomplete Section**
 
+## Use GitHub Action
+
+You can use our GitHub action to launch deployments of your services.
+
+```yml
+- uses: ptah-sh/deploy-action
+
 ```
+
+## Use Raw HTTP API
+
+```sh
 curl --fail-with-body -X POST \
             -H 'Content-Type: application/json' \
             -H 'Accept: application/json' \
             -H 'Authorization: Bearer ${{ secrets.PTAH_API_TOKEN }}' \
             -d '{"processes":[{"name":"svc","dockerImage":"ghcr.io/ptah-sh/ptah-server:latest"}]}' \
-            https://ctl.ptah.sh/api/v0/services/3/deploy
+            https://ctl.ptah.sh/api/v0/services/${serviceId}/deploy
 ```
