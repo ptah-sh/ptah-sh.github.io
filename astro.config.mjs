@@ -85,6 +85,10 @@ export default defineConfig({
           autogenerate: { directory: "tutorial" },
         },
         {
+          label: "API Docs",
+          autogenerate: { directory: "api" },
+        },
+        {
           label: "Case Studies",
           autogenerate: { directory: "case-studies" },
         },
