@@ -59,7 +59,7 @@ export default defineConfig({
       social: {
         "x.com": "https://r.ptah.sh/twitter",
         discord: "https://r.ptah.sh/discord",
-        github: "https://git.new/ptah-sh",
+        github: "https://r.ptah.sh/github",
       },
       components: {
         ThemeSelect: "./src/components/auth-header.astro",
