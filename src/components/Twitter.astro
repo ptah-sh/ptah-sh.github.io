@@ -1,0 +1,11 @@
+---
+const { handle, name } = Astro.props;
+
+import { Icon } from "@astrojs/starlight/components";
+---
+
+<div class="gap-1 inline-flex items-baseline">
+    <Icon name="twitter" class="text-blue-400" />
+    <a href={"https://x.com/" + handle} rel="nofollow" target="_blank">{name}</a
+    >
+</div>
