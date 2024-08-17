@@ -1,0 +1,40 @@
+---
+title: Services
+description: "What are the Services? How to launch them?"
+---
+
+Services are the main building blocks of the Ptah.sh system.
+
+## Processes
+
+The services are represented by the "processes" in the system. Each process defines its own configuration and behavior.
+
+For example, the PostgreSQL service may be defined as two processes: PostgreSQL server itself and pgpool to run as a sidecar container.
+
+### Workers
+
+Additionally, each process may have additional workers (sidecar containers) that are used to run additional processes or services that are not part of the main process. They maintain the same environment variables and configuration files as the main process.
+
+### Release Command
+
+Each process may also have a release command that is executed when the service is started.
+
+### Backup Command
+
+Each process may also have a backup command that is executed when the service is stopped.
+
+### Volumes
+
+Each process may also have a list of volumes that are mounted to the container.
+
+### Environment Variables
+
+Each process may also have a list of environment variables that are set on the container.
+
+### Configuration Files
+
+Each process may also have a list of configuration files that are mounted to the container.
+
+### Port and Endpoint Configuration
+
+Each process may also have a list of ports and endpoints that are exposed to the server node / internet.

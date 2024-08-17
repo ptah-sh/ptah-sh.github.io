@@ -85,6 +85,10 @@ export default defineConfig({
           autogenerate: { directory: "tutorial" },
         },
         {
+          label: "Concepts",
+          autogenerate: { directory: "concepts" },
+        },
+        {
           label: "API Docs",
           autogenerate: { directory: "api" },
         },
