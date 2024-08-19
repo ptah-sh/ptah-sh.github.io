@@ -1,0 +1,88 @@
+{
+    "name": "PostgreSQL",
+    "slug": "databases/postgresql",
+    "description": "Single-server PostgreSQL database",
+    "url": "https://www.postgresql.org/",
+    "form": {
+        "schema": {
+            "type": "object",
+            "properties": {
+                "user": { "type": "string" },
+                "password": { "type": "string" },
+                "database": { "type": "string" }
+            },
+            "required": ["user", "password", "database"]
+        }
+    },
+    "processes": [
+        {
+            "name": "PostgreSQL",
+            "description": "PostgreSQL database",
+            "url": "https://github.com/bitnami/containers/tree/main/bitnami/postgresql",
+            "data": {
+                "name": "pg",
+                "dockerImage": "bitnami/postgresql:16",
+                "envVars": [
+                    {
+                        "name": "POSTGRESQL_USER",
+                        "value": "{{user}}"
+                    },
+                    {
+                        "name": "POSTGRESQL_PASSWORD",
+                        "value": "{{password}}"
+                    },
+                    {
+                        "name": "POSTGRESQL_DATABASE",
+                        "value": "{{database}}"
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "data",
+                        "path": "/bitnami/postgresql",
+                        "backupSchedule": null
+                    }
+                ]
+            }
+        },
+        {
+            "name": "PGBouncer",
+            "description": "Connection pool manager for PostgreSQL",
+            "url": "https://github.com/bitnami/containers/tree/main/bitnami/pgbouncer",
+            "data": {
+                "name": "pgbouncer",
+                "dockerImage": "bitnami/pgbouncer:latest",
+                "envVars": [
+                    {
+                        "name": "PGBOUNCER_POOL_MODE",
+                        "value": "session"
+                    },
+                    {
+                        "name": "POSTGRESQL_USERNAME",
+                        "value": "{{user}}"
+                    },
+                    {
+                        "name": "POSTGRESQL_PASSWORD",
+                        "value": "{{password}}"
+                    },
+                    {
+                        "name": "POSTGRESQL_DATABASE",
+                        "value": "{{database}}"
+                    },
+                    {
+                        "name": "POSTGRESQL_HOST",
+                        "value": "pg.{{service/internalDomainName}}"
+                    },
+                    {
+                        "name": "PGBOUNCER_PORT",
+                        "value": "5432"
+                    },
+                    {
+                        "name": "PGBOUNCER_DATABASE",
+                        "value": "{{database}}"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,64 @@
+---
+import type { GetStaticPaths } from "astro";
+import MarketplacePage from "../../../components/MarketplacePage.astro";
+import { getCollection, getEntry } from 'astro:content';
+
+
+export const getStaticPaths = (async () => {
+    const apps = await getCollection('marketplace', entry => entry.id.includes('/'));
+
+    return apps.map(app => {
+        const [category, template] = app.id.split('/');
+
+        return {
+            params: {
+                category,
+                template,
+            }
+        }
+    });
+}) satisfies GetStaticPaths;
+
+const category = await getEntry('marketplace', Astro.params.category);
+const template = await getEntry('marketplace', `${Astro.params.category}/${Astro.params.template}`);
+
+const extendsApps = await getCollection('marketplace', entry => template.data.extends?.map((e: any) => e.slug).includes(entry.id));
+---
+
+<MarketplacePage title={"1-Click Apps: " +category.data.name + ' - ' + template.data.name} showCategories={false}>
+    <p>{template.data.description}</p>
+    <dl>
+        <dt>Website</dt>
+        <dd><a href={template.data.url} rel="noopener noreferrer nofollow" target="_blank">{template.data.url}</a></dd>
+        <dt>Extends</dt>
+        <dd>
+            {extendsApps.length === 0 && "None"}
+            {extendsApps.map(app => (
+                <span>
+                    <a href={`/marketplace/${app.id}/`}>{app.data.name}</a> - {app.data.description}
+                </span>
+            ))}
+        </dd>
+    </dl>
+
+    <h2>Processes</h2>
+    <ul class="list-none p-0 grid gap-4 md:grid-cols-2">
+        {template.data.processes.map((process: any) => (
+            <li class="border border-gray-200 my-4 rounded">
+                <h3 class="bg-gray-50 font-bold p-4" style="font-size: 1rem">{process.name}</h3>
+                <div class="px-4">
+                    <p>{process.description}</p>
+
+                    <dl>
+                        <dt>Docker Image</dt>
+                        <dd><code>{process.data.dockerImage}</code></dd>
+                    </dl>
+                </div>
+
+                <div class="px-4 text-sm">
+                    <a href={process.url} rel="noopener noreferrer nofollow" target="_blank">Documentation</a>
+                </div>
+            </li>
+        ))}
+    </ul>
+</MarketplacePage>

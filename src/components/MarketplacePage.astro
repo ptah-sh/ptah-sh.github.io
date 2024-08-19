@@ -1,0 +1,56 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+import { getCollection, getEntry } from 'astro:content';
+
+const { title, showCategories = true } = Astro.props;
+
+const categories = await getCollection('marketplace', entry => !entry.id.includes('/'));
+
+const counts: Record<string, number> = {};
+for (const category of categories) {
+    const templates = await getCollection('marketplace', entry => entry.id.startsWith(category.id) && entry.id.includes('/'));
+
+    counts[category.id] = templates.length;
+}
+---
+
+<StarlightPage
+    frontmatter={{
+        title,
+        tableOfContents: false,
+        editUrl: 'https://github.com/ptah-sh/ptah-sh.github.io/tree/main/src/content/marketplace',
+    }}
+    hasSidebar={false}
+>
+    {showCategories && (
+        <div>
+            <p class="italic">Today 1-Click Apps in Ptah.sh are implemented as <a href="/concepts/services">service</a> templates.</p>
+
+            <h2>Categories</h2>
+            <ul class="my-8 p-0 list-none grid gap-4 grid-cols-4">
+                {categories.map(category => (
+                    <li class="w-full">
+                        <a href={`/marketplace/${category.id}/`}
+                            class:list={[
+                                "no-underline block inline-flex items-center justify-between w-full py-2 px-4 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700",
+                                {
+                                    "border-2 border-blue-500": category.id === Astro.props.category
+                                }
+                            ]}
+                        >
+                            <span class="block">
+                                <span class="block font-medium text-gray-900 dark:text-gray-300">{category.data.name}
+                                    <span class="text-xs font-normal text-gray-500 dark:text-gray-300">({counts[category.id]})</span>
+                                </span>
+                                <span class="text-xs font-normal text-gray-500 dark:text-gray-300">{category.data.description}</span>
+                            </span>
+                        </a>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )}
+
+    <slot />
+</StarlightPage>

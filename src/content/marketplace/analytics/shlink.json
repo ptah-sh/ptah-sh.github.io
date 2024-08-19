@@ -1,0 +1,76 @@
+{
+    "extends": [
+        {
+            "slug": "databases/postgresql"
+        }
+    ],
+
+    "name": "Shlink",
+    "slug": "analytics/shlink",
+    "description": "Shlink.io url shortener",
+    "url": "https://shlink.io/",
+    "form": {
+        "schema": {
+            "type": "object",
+            "properties": {
+                "domain": { "type": "string" },
+                "geoLiteKey": { "type": "string" },
+                "apiKey": { "type": "string" }
+            }
+        }
+    },
+    "processes": [
+        {
+            "name": "Shlink",
+            "description": "Shlink.io url shortener",
+            "url": "https://github.com/shlinkio/shlink",
+            "data": {
+                "name": "shlink",
+                "dockerImage": "shlinkio/shlink",
+                "envVars": [
+                    { "name": "DEFAULT_DOMAIN", "value": "{{domain}}" },
+                    { "name": "IS_HTTPS_ENABLED", "value": "true" },
+                    { "name": "DB_DRIVER", "value": "postgres" },
+                    {
+                        "name": "DB_NAME",
+                        "value": "{{databases/postgresql/database}}"
+                    },
+                    {
+                        "name": "DB_USER",
+                        "value": "{{databases/postgresql/user}}"
+                    },
+                    {
+                        "name": "DB_PASSWORD",
+                        "value": "{{databases/postgresql/password}}"
+                    },
+                    {
+                        "name": "DB_HOST",
+                        "value": "pgbouncer.{{service/internalDomainName}}"
+                    },
+                    { "name": "DB_PORT", "value": "5432" }
+                ],
+                "secretVars": {
+                    "vars": [
+                        {
+                            "name": "GEOLITE_LICENSE_KEY",
+                            "value": "{{geoLiteKey}}"
+                        },
+                        {
+                            "name": "INITIAL_API_KEY",
+                            "value": "{{apiKey}}"
+                        }
+                    ]
+                },
+                "caddy": [
+                    {
+                        "targetProtocol": "http",
+                        "targetPort": "8080",
+                        "publishedPort": "443",
+                        "domain": "{{domain}}",
+                        "path": "/*"
+                    }
+                ]
+            }
+        }
+    ]
+}
