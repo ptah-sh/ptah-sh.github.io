@@ -31,18 +31,46 @@ const head = [
     content: `
       {
         "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
+        "@type": "DeveloperApplication",
         "name": "ptah.sh",
         "applicationCategory": "Infrastructure Management Tool",
         "operatingSystem": "Web-based",
         "offers": {
           "@type": "Offer",
-          "price": "14",
+          "price": "19.00",
           "priceCurrency": "USD"
         },
         "description": "Optimize your infrastructure costs and simplify deployment with ptah.sh."
       }
     `,
+  },
+  {
+    tag: "meta",
+    attrs: {
+      property: "og:image",
+      content: "https://ptah.sh/og-image.png",
+    },
+  },
+  {
+    tag: "meta",
+    attrs: {
+      property: "og:image:width",
+      content: "1200",
+    },
+  },
+  {
+    tag: "meta",
+    attrs: {
+      property: "og:image:height",
+      content: "630",
+    },
+  },
+  {
+    tag: "meta",
+    attrs: {
+      property: "og:image:type",
+      content: "image/png",
+    },
   },
 ];
 
@@ -52,6 +80,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Ptah.sh",
+      favicon: "favicon.svg",
       logo: {
         src: "./src/assets/navbar-logo.svg",
         replacesTitle: true,
