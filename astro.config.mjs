@@ -72,6 +72,48 @@ const head = [
       content: "image/png",
     },
   },
+  {
+    tag: "meta",
+    attrs: {
+      name: "twitter:card",
+      content: "summary_large_image",
+    },
+  },
+  {
+    tag: "meta",
+    attrs: {
+      name: "twitter:site",
+      content: "@ptah_sh",
+    },
+  },
+  {
+    tag: "meta",
+    attrs: {
+      name: "twitter:title",
+      content: "Ptah.sh - Self-Hosted made Easy",
+    },
+  },
+  {
+    tag: "meta",
+    attrs: {
+      name: "twitter:description",
+      content: "Save up to 82% costs on hosting your services. A flexible, fair source and independent alternative to Heroku/Vercel which puts you in control of your expenses.",
+    },
+  },
+  {
+    tag: "meta",
+    attrs: {
+      name: "twitter:image",
+      content: "https://ptah.sh/og-image.png",
+    },
+  },
+  {
+    tag: "meta",
+    attrs: {
+      name: "twitter:image:alt",
+      content: "Ptah.sh - Self-Hosted made Easy",
+    },
+  }
 ];
 
 // https://astro.build/config
