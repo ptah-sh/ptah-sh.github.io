@@ -25,7 +25,11 @@ const template = await getEntry('marketplace', `${Astro.params.category}/${Astro
 const extendsApps = await getCollection('marketplace', entry => template.data.extends?.map((e: any) => e.slug).includes(entry.id));
 ---
 
-<MarketplacePage title={"1-Click Apps: " +category.data.name + ' - ' + template.data.name} showCategories={false}>
+<MarketplacePage
+    title={"1-Click Apps: " +category.data.name + ' - ' + template.data.name}
+    description={"Deploy fully configured " + template.data.name + " in seconds with 1-click apps."}
+    showCategories={false}
+>
     <p>{template.data.description}</p>
     <dl>
         <dt>Website</dt>

@@ -19,7 +19,11 @@ const category = await getEntry('marketplace', Astro.params.category);
 const templates = await getCollection('marketplace', entry => entry.id.startsWith(Astro.params.category) && entry.id.includes('/'));
 ---
 
-<MarketplacePage title={"1-Click Apps: " + category.data.name} category={Astro.params.category}>
+<MarketplacePage
+    title={"1-Click Apps: " + category.data.name}
+    description={"Deploy ready to use " + category.data.name + " - " + category.data.description + " - in seconds."}
+    category={Astro.params.category}
+>
     <h2>Application Templates</h2>
 
     <ul class="my-8 p-0 list-none grid gap-4 grid-cols-4">

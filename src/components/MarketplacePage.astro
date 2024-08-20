@@ -3,7 +3,7 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 
 import { getCollection, getEntry } from 'astro:content';
 
-const { title, showCategories = true } = Astro.props;
+const { title, description, showCategories = true } = Astro.props;
 
 const categories = await getCollection('marketplace', entry => !entry.id.includes('/'));
 
@@ -13,11 +13,14 @@ for (const category of categories) {
 
     counts[category.id] = templates.length;
 }
+
+const defaultDescription = "Deploy ready to use " + categories.slice(0, 3).map(c => c.data.name).join(', ') + ", and other apps and services in seconds."
 ---
 
 <StarlightPage
     frontmatter={{
         title,
+        description: description || defaultDescription,
         tableOfContents: false,
         editUrl: 'https://github.com/ptah-sh/ptah-sh.github.io/tree/main/src/content/marketplace',
     }}
@@ -25,7 +28,7 @@ for (const category of categories) {
 >
     {showCategories && (
         <div>
-            <p class="italic">Today 1-Click Apps in Ptah.sh are implemented as <a href="/concepts/services">service</a> templates.</p>
+            <p class="italic text-sm">Today 1-Click Apps in Ptah.sh are implemented as <a href="/concepts/services">service</a> templates.</p>
 
             <h2>Categories</h2>
             <ul class="my-8 p-0 list-none grid gap-4 grid-cols-4">
