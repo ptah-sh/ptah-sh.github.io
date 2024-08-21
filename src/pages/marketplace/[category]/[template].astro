@@ -23,6 +23,8 @@ const category = await getEntry('marketplace', Astro.params.category);
 const template = await getEntry('marketplace', `${Astro.params.category}/${Astro.params.template}`);
 
 const extendsApps = await getCollection('marketplace', entry => template.data.extends?.map((e: any) => e.slug).includes(entry.id));
+const usedByApps = await getCollection('marketplace', entry => entry.data.extends?.map((e: any) => e.slug).includes(template.id));
+
 ---
 
 <MarketplacePage
@@ -30,18 +32,34 @@ const extendsApps = await getCollection('marketplace', entry => template.data.ex
     description={"Deploy fully configured " + template.data.name + " in seconds with 1-click apps."}
     showCategories={false}
 >
-    <p>{template.data.description}</p>
     <dl>
+        <dt>Info</dt>
+        <dd>{template.data.description}</dd>
+        <dt>About {template.data.name}</dt>
+        <dd>{template.data.about}</dd>
         <dt>Website</dt>
         <dd><a href={template.data.url} rel="noopener noreferrer nofollow" target="_blank">{template.data.url}</a></dd>
         <dt>Extends</dt>
         <dd>
-            {extendsApps.length === 0 && "None"}
-            {extendsApps.map(app => (
-                <span>
-                    <a href={`/marketplace/${app.id}/`}>{app.data.name}</a> - {app.data.description}
-                </span>
-            ))}
+            {extendsApps.length === 0 && <i>None</i>}
+            <ul class="px-4">
+                {extendsApps.map(app => (
+                    <li>
+                        <a href={`/marketplace/${app.id}/`}>{app.data.name}</a> - {app.data.description}
+                    </li>
+                ))}
+            </ul>
+        </dd>
+        <dt>Used by</dt>
+        <dd>
+            {usedByApps.length === 0 && <i>None</i>}
+            <ul class="px-4">
+                {usedByApps.map(app => (
+                    <li>
+                        <a href={`/marketplace/${app.id}/`}>{app.data.name}</a> - {app.data.description}
+                    </li>
+                ))}
+            </ul>
         </dd>
     </dl>
 

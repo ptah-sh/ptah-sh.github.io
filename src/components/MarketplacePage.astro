@@ -28,8 +28,6 @@ const defaultDescription = "Deploy ready to use " + categories.slice(0, 3).map(c
 >
     {showCategories && (
         <div>
-            <p class="italic text-sm">Today 1-Click Apps in Ptah.sh are implemented as <a href="/concepts/services">service</a> templates.</p>
-
             <h2>Categories</h2>
             <ul class="my-8 p-0 list-none grid gap-4 grid-cols-4">
                 {categories.map(category => (
@@ -56,4 +54,10 @@ const defaultDescription = "Deploy ready to use " + categories.slice(0, 3).map(c
     )}
 
     <slot />
+
+<div class="mt-8">
+    <h2>What are 1-Click Apps?</h2>
+    <p>Instantly deploy pre-configured applications and services with 1-Click Apps, streamlining your project workflow. Explore how they can enhance your projects.</p>
+    <a href="/concepts/services/#1-click-apps" class="btn">Learn About 1-Click Apps</a>
+</div>
 </StarlightPage>
