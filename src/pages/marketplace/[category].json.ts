@@ -24,6 +24,7 @@ export async function GET({ params }: any) {
                     name: p.name,
                     description: p.description,
                     dockerImage: p.data.dockerImage,
+                    url: p.url,
                 }
             }),
         }
