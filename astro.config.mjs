@@ -134,6 +134,7 @@ export default defineConfig({
       },
       components: {
         ThemeSelect: "./src/components/auth-header.astro",
+        Footer: "./src/components/Footer.astro",
       },
       sidebar: [
         // {
@@ -149,7 +150,7 @@ export default defineConfig({
         // },
         {
           label: "Introduction",
-          link: "/introduction",
+          link: "/introduction/",
         },
         {
           label: "Tutorial",

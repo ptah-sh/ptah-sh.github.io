@@ -1,0 +1,74 @@
+{
+    "extends": [
+        {
+            "slug": "databases/mysql"
+        }
+    ],
+
+    "name": "Storyngine",
+    "slug": "cms/storyngine",
+    "description": "Storyngine is a free and open-source blog engine.",
+    "about": "Storyngine is a free and open-source blog engine.",
+    "url": "https://github.com/ptah-sh/storyngine",
+    "form": {
+        "schema": {
+            "type": "object",
+            "properties": {
+                "domain": { "type": "string" }
+            }
+        }
+    },
+    "processes": [
+        {
+            "name": "Storyngine",
+            "description": "Storyngine is a free and open-source blog engine.",
+            "url": "https://github.com/ptah-sh/storyngine",
+            "data": {
+                "name": "storyngine",
+                "dockerImage": "ghcr.io/ptah-sh/storyngine",
+                "releaseCommand": {
+                    "command": "php artisan config:cache && php artisan migrate --no-interaction --verbose --ansi --force"
+                },
+                "envVars": [
+                    { "name": "APP_ENV", "value": "production" },
+                    { "name": "APP_URL", "value": "https://{{domain}}" },
+                    { "name": "DB_CONNECTION", "value": "mysql" },
+                    {
+                        "name": "DB_DATABASE",
+                        "value": "{{databases/mysql/database}}"
+                    },
+                    {
+                        "name": "DB_USERNAME",
+                        "value": "{{databases/mysql/user}}"
+                    },
+                    {
+                        "name": "DB_HOST",
+                        "value": "mysql.{{service/internalDomainName}}"
+                    },
+                    { "name": "DB_PORT", "value": "3306" }
+                ],
+                "secretVars": {
+                    "vars": [
+                        {
+                            "name": "APP_KEY",
+                            "value": "base64:{{randomBytes:32|base64}}"
+                        },
+                        {
+                            "name": "DB_PASSWORD",
+                            "value": "{{databases/mysql/password}}"
+                        }
+                    ]
+                },
+                "caddy": [
+                    {
+                        "targetProtocol": "http",
+                        "targetPort": "8080",
+                        "publishedPort": "443",
+                        "domain": "{{domain}}",
+                        "path": "/*"
+                    }
+                ]
+            }
+        }
+    ]
+}

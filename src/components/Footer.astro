@@ -1,0 +1,85 @@
+---
+import type { Props } from '../props';
+
+import EditLink from 'virtual:starlight/components/EditLink';
+import LastUpdated from 'virtual:starlight/components/LastUpdated';
+import Pagination from 'virtual:starlight/components/Pagination';
+import config from 'virtual:starlight/user-config';
+import { Icon } from '@astrojs/starlight/components';
+---
+
+<footer class="sl-flex">
+	<div class="meta sl-flex">
+		<EditLink {...Astro.props} />
+		<LastUpdated {...Astro.props} />
+	</div>
+	<Pagination {...Astro.props} />
+
+    <div class="container mx-auto px-2 md:px-4 flex flex-col md:flex-row justify-between">
+        <div class="w-full md:w-1/4 xl:w-1/4 p-4 md:p-6">
+        <img src="/navbar-logo.svg" alt="Logo" class="w-32 h-auto" />
+        <div class="mb-2">Email: <a href="mailto:contact@ptah.sh" class="text-blue-600 hover:text-blue-800">contact@ptah.sh</a></div>
+
+        </div>
+        <div class="w-full md:w-1/4 xl:w-1/4 p-4 md:p-6">
+        <h3 class="text-md font-semibold mb-4">Ptah.sh</h3>
+        <div class="mb-2"><a href="/introduction/" class="text-blue-600 hover:text-blue-800">Introduction</a></div>
+        <div class="mb-2"><a href="/tutorial/" class="text-blue-600 hover:text-blue-800">Tutorial</a></div>
+        <div class="mb-2"><a href="/concepts/" class="text-blue-600 hover:text-blue-800">Concepts</a></div>
+        <div class="mb-2"><a href="/api-docs/" class="text-blue-600 hover:text-blue-800">API Docs</a></div>
+        <div class="mb-2"><a href="/case-studies/" class="text-blue-600 hover:text-blue-800">Case Studies</a></div>
+        <div class="mb-2"><a href="/company-blog/" class="text-blue-600 hover:text-blue-800">Company Blog</a></div>
+        </div>
+        <div class="w-full md:w-1/4 xl:w-1/4 p-4 md:p-6">
+        <h3 class="text-md font-semibold mb-4">Connect</h3>
+        <div class="mb-2"><a href="https://x.com/ptah_sh" target="_blank" rel="nofollow" class="text-blue-600 hover:text-blue-800">X (formerly Twitter)</a></div>
+        <div class="mb-2"><a href="https://r.ptah.sh/discord" target="_blank" rel="nofollow" class="text-blue-600 hover:text-blue-800">Discord</a></div>
+        <div class="mb-2"><a href="https://github.com/ptah-sh/ptah-server" target="_blank" rel="nofollow" class="text-blue-600 hover:text-blue-800">GitHub</a></div>
+        </div>
+        <div class="w-full md:w-1/4 xl:w-1/4 p-4 md:p-6">
+        <h3 class="text-md font-semibold mb-4">Partners</h3>
+        <div class="mb-2"><a href="https://stories.ptah.sh/" target="_blank" class="text-blue-600 hover:text-blue-800">Vendor Stories</a></div>
+        </div>
+    </div>
+      
+	{
+		config.credits && (
+			<a class="kudos sl-flex" href="https://starlight.astro.build">
+				<Icon name={'starlight'} /> {Astro.props.labels['builtWithStarlight.label']}
+			</a>
+		)
+	}
+</footer>
+
+<style>
+	footer {
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+	.meta {
+		gap: 0.75rem 3rem;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		margin-top: 3rem;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-3);
+	}
+	.meta > :global(p:only-child) {
+		margin-inline-start: auto;
+	}
+
+	.kudos {
+		align-items: center;
+		gap: 0.5em;
+		margin: 1.5rem auto;
+		font-size: var(--sl-text-xs);
+		text-decoration: none;
+		color: var(--sl-color-gray-3);
+	}
+	.kudos :global(svg) {
+		color: var(--sl-color-orange);
+	}
+	.kudos:hover {
+		color: var(--sl-color-white);
+	}
+</style>
