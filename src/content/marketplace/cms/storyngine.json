@@ -14,7 +14,9 @@
         "schema": {
             "type": "object",
             "properties": {
-                "domain": { "type": "string" }
+                "siteName": { "type": "string" },
+                "domain": { "type": "string" },
+                "gtmId": { "type": "string" }
             }
         }
     },
@@ -32,6 +34,8 @@
                 "envVars": [
                     { "name": "APP_ENV", "value": "production" },
                     { "name": "APP_URL", "value": "https://{{domain}}" },
+                    { "name": "APP_NAME", "value": "{{siteName}}"},
+                    { "name": "APP_GTM_ID", "value": "{{gtmId}}" },
                     { "name": "LOG_CHANNEL", "value": "errorlog" },
                     { "name": "DB_CONNECTION", "value": "mysql" },
                     {

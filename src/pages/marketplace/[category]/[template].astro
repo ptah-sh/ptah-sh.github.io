@@ -83,4 +83,8 @@ const usedByApps = await getCollection('marketplace', entry => entry.data.extend
             </li>
         ))}
     </ul>
+    <h2>Why host {template?.data.name} on your own VPS or dedicated server?</h2>
+    <p>Hosting {template?.data.name} on your own VPS or dedicated server gives you full control over your application. You can customize the server environment, optimize performance, and ensure security. It also allows you to scale your application as needed without any restrictions.</p>
+    <p>Additionally, hosting on your own VPS or dedicated server can lead to significant cost savings. By managing your own infrastructure, you can avoid the recurring costs associated with cloud services and optimize your resource allocation to meet your specific needs. This can result in a more cost-effective solution for your application.</p>
+    <p>Want to explore more options? <a href="/marketplace/{category?.id}/">See all {category?.data.description}</a> to find the best fit for your needs.</p>
 </MarketplacePage>
