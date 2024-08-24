@@ -129,7 +129,7 @@ export default defineConfig({
       },
       social: {
         "x.com": "https://r.ptah.sh/twitter",
-        discord: "https://r.ptah.sh/discord",
+        discord: "https://r.ptah.sh/chat",
         github: "https://r.ptah.sh/github",
       },
       components: {
@@ -167,6 +167,10 @@ export default defineConfig({
         {
           label: "Case Studies",
           autogenerate: { directory: "case-studies" },
+        },
+        {
+          label: "Compare",
+          autogenerate: { directory: "compare" },
         },
         {
           label: "Company Blog",
