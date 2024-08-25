@@ -19,7 +19,13 @@ const {
         "w-full max-w-sm mt-4 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700",
         { "border-green-700 border-4": mostPopular },
     ]}
+    itemscope
+    itemtype="https://schema.org/PriceSpecification"
 >
+    <meta itemprop="price" content={price} />
+    <meta itemprop="priceCurrency" content="USD" />
+    <meta itemprop="name" content={`${name} Plan`} />
+    <meta itemprop="description" content={description} />
     <div class="flex flex-col items-center">
         {
             mostPopular && (
