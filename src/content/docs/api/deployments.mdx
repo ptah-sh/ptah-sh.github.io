@@ -1,26 +1,74 @@
 ---
 title: Deployments
-description: Use CI/CD tools to deploy latest version of your service alongside new environment variables.
+description: Use CI/CD tools to deploy the latest version of your service alongside new environment variables.
 ---
 
-**Incomplete Section**
+## Deployment Options
+
+Ptah.sh offers multiple ways to deploy your services. Choose the method that best fits your workflow:
+
+1. GitHub Actions
+2. Raw HTTP API
 
 ## Use GitHub Action
 
-You can use our GitHub action to launch deployments of your services.
+### What is GitHub Actions?
+
+GitHub Actions is a powerful automation tool integrated directly into GitHub repositories. It allows you to create custom workflows that can automatically build, test, and deploy your code. These workflows are triggered by specific events in your repository, such as pushing code, creating a pull request, or releasing a new version. GitHub Actions makes it easy to implement continuous integration and continuous deployment (CI/CD) practices, helping you automate your software development lifecycle.
+
+We provide an official GitHub Action for seamless deployments. You can find it in the GitHub Actions Marketplace:
+
+[Deploy Service to Ptah.sh](https://github.com/marketplace/actions/deploy-service-to-ptah-sh)
+
+### Use the action in your workflow
 
 ```yml
-- uses: ptah-sh/deploy-action
+name: Deploy to Ptah.sh
+on:
+  push:
+    branches: [ main ]
 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build Docker image
+      run: docker build -t my-service:${{ github.sha }} .
+
+    - name: Push Docker image
+      run: docker push my-service:${{ github.sha }}
+
+    - name: Deploy to Ptah.sh
+      uses: ptah-sh/deploy-action@v1
+      with:
+        apiKey: ${{ secrets.PTAH_API_KEY }}
+        service: 'my-service-slug'
+        processes: |
+          - name: svc
+            dockerImage: my-service:${{ github.sha }}
+            envVars:
+              - name: SENTRY_VERSION
+                value: ${{ github.sha }}
+      id: deploy
+    - name: Get the deployment ID
+      run: echo "The deployment ID is ${{ steps.deploy.outputs.deploymentId }}"
 ```
 
+For an example of a complete workflow, see the [example workflow](https://github.com/ptah-sh/ptah-server/blob/main/.github/workflows/release-please.yml).
+
 ## Use Raw HTTP API
+
+You can use our HTTP API to deploy your service if you want more flexibility or integration with other CI/CD tools.
+
+The structure of the request is the same as the one used by the GitHub Action.
 
 ```sh
 curl --fail-with-body -X POST \
             -H 'Content-Type: application/json' \
             -H 'Accept: application/json' \
-            -H 'Authorization: Bearer ${{ secrets.PTAH_API_TOKEN }}' \
+            -H "Authorization: Bearer ${{ secrets.PTAH_API_TOKEN }}" \
             -d '{"processes":[{"name":"svc","dockerImage":"ghcr.io/ptah-sh/ptah-server:latest"}]}' \
-            https://ctl.ptah.sh/api/v0/services/${serviceId}/deploy
+            https://ctl.ptah.sh/api/v0/services/custom-ptah-server/deploy
 ```
