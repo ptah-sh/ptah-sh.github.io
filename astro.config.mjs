@@ -161,7 +161,7 @@ export default defineConfig({
           autogenerate: { directory: "concepts" },
         },
         {
-          label: "API Docs",
+          label: "CI/CD",
           autogenerate: { directory: "api" },
         },
         {
