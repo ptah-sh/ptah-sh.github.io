@@ -10,6 +10,7 @@
     "description": "Shlink.io url shortener",
     "about": "Shlink is a free and open-source URL shortener with a dead simple API.",
     "url": "https://shlink.io/",
+    "tags": ["url-shortener"],
     "form": {
         "schema": {
             "type": "object",

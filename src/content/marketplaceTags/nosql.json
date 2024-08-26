@@ -1,0 +1,5 @@
+{
+    "slug": "nosql",
+    "name": "NoSQL",
+    "description": "A NoSQL database is a database management system that uses non-relational tables to store data. It's particularly useful for storing unstructured data and for querying data. NoSQL databases offer several advantages over RDBMS databases, including better scalability, flexibility, and performance. Additionally, NoSQL databases are well-suited for applications that require high availability, horizontal scalability, and flexible data models."
+}

@@ -25,16 +25,26 @@ const template = await getEntry('marketplace', `${Astro.params.category}/${Astro
 const extendsApps = await getCollection('marketplace', entry => template.data.extends?.map((e: any) => e.slug).includes(entry.id));
 const usedByApps = await getCollection('marketplace', entry => entry.data.extends?.map((e: any) => e.slug).includes(template.id));
 
+const allTags = await getCollection('marketplaceTags');
+
+const tags = template?.data.tags.map((tag: any) => {
+    const tagEntry = allTags.find((t: any) => t.id === tag);
+
+    return tagEntry;
+});
+
 ---
 
 <MarketplacePage
     title={"1-Click Apps: " +category.data.name + ' - ' + template.data.name}
     description={"Deploy fully configured " + template.data.name + " in seconds with 1-click apps."}
     showCategories={false}
+    tags={tags}
 >
     <dl>
         <dt>Info</dt>
-        <dd>{template.data.description}</dd>
+        <dd>{template.data.description}
+        </dd>
         <dt>About {template.data.name}</dt>
         <dd>{template.data.about}</dd>
         <dt>Website</dt>
@@ -87,4 +97,9 @@ const usedByApps = await getCollection('marketplace', entry => entry.data.extend
     <p>Hosting {template?.data.name} on your own VPS or dedicated server gives you full control over your application. You can customize the server environment, optimize performance, and ensure security. It also allows you to scale your application as needed without any restrictions.</p>
     <p>Additionally, hosting on your own VPS or dedicated server can lead to significant cost savings. By managing your own infrastructure, you can avoid the recurring costs associated with cloud services and optimize your resource allocation to meet your specific needs. This can result in a more cost-effective solution for your application.</p>
     <p>Want to explore more options? <a href={`/marketplace/${category?.id}/`}>See all {category?.data.description}</a> to find the best fit for your needs.</p>
+
+    {tags.map(tag => (
+        <h2>Why use {tag.data.name}?</h2>
+        <p>{tag.data.description}</p>
+    ))}
 </MarketplacePage>

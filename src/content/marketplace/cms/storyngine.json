@@ -10,6 +10,7 @@
     "description": "Storyngine is a free and open-source blog engine.",
     "about": "Storyngine is a free and open-source blog engine.",
     "url": "https://github.com/ptah-sh/storyngine",
+    "tags": ["cms"],
     "form": {
         "schema": {
             "type": "object",

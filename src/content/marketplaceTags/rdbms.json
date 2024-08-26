@@ -1,0 +1,5 @@
+{
+    "slug": "rdbms",
+    "name": "Relational Database Management Systems",
+    "description": "A RDBMS is a database management system that uses relational tables to store data. It's particularly useful for storing structured data and for querying data. RDBMS offers several advantages over NoSQL databases, including better support for complex transactions, stronger data consistency, and more robust security features. Additionally, RDBMS databases are well-suited for applications that require strict data integrity and ACID compliance."
+}

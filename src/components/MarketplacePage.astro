@@ -3,7 +3,7 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 
 import { getCollection, getEntry } from 'astro:content';
 
-const { title, description, showCategories = true } = Astro.props;
+const { title, description, showCategories = true, tags = [] } = Astro.props;
 
 const categories = await getCollection('marketplace', entry => !entry.id.includes('/'));
 
@@ -25,7 +25,13 @@ const defaultDescription = "Deploy ready to use " + categories.slice(0, 3).map(c
         editUrl: 'https://github.com/ptah-sh/ptah-sh.github.io/tree/main/src/content/marketplace',
     }}
     hasSidebar={false}
->
+>        <div class="flex flex-wrap gap-2">
+            {tags.map((tag: any) => (
+                <span class="bg-blue-500 text-white text-xs font-semibold py-1 px-2 rounded-full">
+                    {tag.data.name}
+                </span>
+            ))}
+        </div>
     {showCategories && (
         <div>
             <h2>Categories</h2>
