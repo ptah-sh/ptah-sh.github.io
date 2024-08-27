@@ -12,14 +12,35 @@
     "url": "https://github.com/ptah-sh/storyngine",
     "tags": ["cms"],
     "form": {
-        "schema": {
-            "type": "object",
-            "properties": {
-                "siteName": { "type": "string" },
-                "domain": { "type": "string" },
-                "gtmId": { "type": "string" }
+        "type": "v-stack",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Domain",
+                        "name": "domain",
+                        "format": "string",
+                        "required": true
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Site Name",
+                        "name": "siteName",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            },
+            {
+                "type": "text-field",
+                "label": "GTM ID",
+                "name": "gtmId",
+                "format": "string",
+                "required": true
             }
-        }
+        ]
     },
     "processes": [
         {

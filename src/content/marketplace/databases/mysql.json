@@ -6,17 +6,54 @@
     "url": "https://www.mysql.com/",
     "tags": ["rdbms"],
     "form": {
-        "schema": {
-            "type": "object",
-            "properties": {
-                "user": { "type": "string" },
-                "password": { "type": "string" },
-                "database": { "type": "string" },
-                "rootUser": { "type": "string" },
-                "rootPassword": { "type": "string" }
+        "type": "v-stack",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "User",
+                        "name": "user",
+                        "format": "string",
+                        "required": true
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Password",
+                        "name": "password",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
             },
-            "required": ["user", "password", "database", "rootUser", "rootPassword"]
-        }
+            {
+                "type": "text-field",
+                "label": "Database",
+                "name": "database",
+                "format": "string",
+                "required": true
+            },
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Root User",
+                        "name": "rootUser",
+                        "format": "string",
+                        "required": true
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Root Password",
+                        "name": "rootPassword",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            }
+        ]
     },
     "processes": [
         {

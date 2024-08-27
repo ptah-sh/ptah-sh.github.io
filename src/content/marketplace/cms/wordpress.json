@@ -12,15 +12,47 @@
     "url": "https://wordpress.org/",
     "tags": ["cms"],
     "form": {
-        "schema": {
-            "type": "object",
-            "properties": {
-                "user": { "type": "string" },
-                "password": { "type": "string" },
-                "blogName": { "type": "string" },
-                "domain": { "type": "string" }
+        "type": "v-stack",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Domain",
+                        "name": "domain",
+                        "format": "string",
+                        "required": true
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Blog Name",
+                        "name": "blogName",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            },
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Username",
+                        "name": "user",
+                        "format": "string",
+                        "required": true
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Password",
+                        "name": "password",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
             }
-        }
+        ]
     },
     "processes": [
         {

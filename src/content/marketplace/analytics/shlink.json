@@ -12,14 +12,35 @@
     "url": "https://shlink.io/",
     "tags": ["url-shortener"],
     "form": {
-        "schema": {
-            "type": "object",
-            "properties": {
-                "domain": { "type": "string" },
-                "geoLiteKey": { "type": "string" },
-                "apiKey": { "type": "string" }
+        "type": "v-stack",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Domain",
+                        "name": "domain",
+                        "format": "string",
+                        "required": true
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "API Key",
+                        "name": "apiKey",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            },
+            {
+                "type": "text-field",
+                "label": "GeoLite2 License Key",
+                "name": "geoLiteKey",
+                "format": "string",
+                "required": true
             }
-        }
+        ]
     },
     "processes": [
         {
