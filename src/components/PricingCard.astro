@@ -1,6 +1,7 @@
 ---
 import { Icon } from "@astrojs/starlight/components";
 import FatCheckIcon from "../components/icons/FatCheckIcon.astro";
+import PricingFeature from "./PricingFeature.astro";
 
 const {
     name,
@@ -11,6 +12,7 @@ const {
     dedicatedDiscord,
     roleManagement,
     waitlist,
+    customErrorPages,
 } = Astro.props;
 ---
 
@@ -67,127 +69,21 @@ const {
                 Free 14 Days Trial
             </span>
         </li>
-        <li class="flex">
-            <svg
-                class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-            >
-                <path
-                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
-                ></path>
-            </svg>
-            <span
-                class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3"
-            >
-                Unlimited Apps
-            </span>
-        </li>
-        <li class="flex">
-            <svg
-                class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-            >
-                <path
-                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
-                ></path>
-            </svg>
-            <span
-                class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3"
-            >
-                Unlimited Databases
-            </span>
-        </li>
-        <li class="flex">
-            <svg
-                class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-            >
-                <path
-                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
-                ></path>
-            </svg>
-            <span
-                class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3"
-            >
-                Unlimited Backups
-            </span>
-        </li>
-        <li class="flex">
-            <svg
-                class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-            >
-                <path
-                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
-                ></path>
-            </svg>
-            <span
-                class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3"
-            >
-                Unlimited Users
-            </span>
-        </li>
-        <li class="flex items-center">
-            {
-                singleServer ? (
-                    <Icon name="approve-check-circle" />
-                ) : (
-                    <FatCheckIcon />
-                )
-            }
+        <PricingFeature name="Unlimited Apps & Databases" />
+        <PricingFeature name="Unlimited Backups" />
+        <PricingFeature name="Unlimited Users" />
 
-            <span
-                class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3"
-            >
-                {singleServer ? "Single Server" : "Unlimited Servers"}
-            </span>
-        </li>
-        <li class="flex">
-            {
-                dedicatedDiscord ? (
-                    <Icon name="discord" color="blue" />
-                ) : (
-                    <Icon name="approve-check-circle" />
-                )
-            }
+        {singleServer && <PricingFeature name="Signle Server" partial />}
+        {!singleServer && <PricingFeature name="Unlimited Servers" />}
 
-            <span
-                class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3"
-            >
-                {
-                    dedicatedDiscord
-                        ? "Dedicated Discord Channel"
-                        : "Community Discord Channel"
-                }
-            </span>
-        </li>
-        <li class="flex">
-            {
-                roleManagement ? (
-                    <FatCheckIcon />
-                ) : (
-                    <Icon name="approve-check-circle" />
-                )
-            }
+        {customErrorPages && <PricingFeature soon name="Custom Error Pages" hint="Custom Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." />}
+        {!customErrorPages && <PricingFeature soon name="Custom Error Pages" partial hint="Custom Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." />}
 
-            <span
-                class="text-base font-normal leading-tight text-gray-500 dark:text-gray-400 ms-3"
-            >
-                {roleManagement ? "Multiple User Roles" : "Single User Role"}
-            </span>
-        </li>
+        {dedicatedDiscord && <PricingFeature name="Dedicated Discord Channel" icon="discord" />}
+        {!dedicatedDiscord && <PricingFeature name="Community Discord Channel" icon="discord" partial />}
+
+        {roleManagement && <PricingFeature name="Multiple User Roles" soon />}
+        {!roleManagement && <PricingFeature name="Single User Role" partial />}
     </ul>
 
     <div class="italic text-sm text-center text-balance p-2">{description}</div>

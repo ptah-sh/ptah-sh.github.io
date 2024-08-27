@@ -1,0 +1,36 @@
+---
+import { Icon } from "@astrojs/starlight/components";
+import FatCheckIcon from "../components/icons/FatCheckIcon.astro";
+
+const {
+    name,
+    hint = null,
+    icon = null,
+    partial = false,
+    soon = false,
+} = Astro.props;
+---
+
+<li class="flex relative group">
+    {
+        partial ? (
+            <Icon name={icon || "approve-check-circle"} />
+        ) : (
+            icon ? <Icon name={icon} color="blue" /> : <FatCheckIcon />
+        )
+    }
+
+    <span
+        class={`text-base font-normal leading-tight ${
+            soon ? 'text-gray-400 dark:text-gray-500' : 'text-gray-500 dark:text-gray-400'
+        } ms-3`}
+    >
+        <span class={hint ? 'border-b border-dotted border-gray-500 dark:border-gray-400 cursor-help' : ''}>{name}</span>{soon && <span class="text-xs whitespace-nowrap ml-1">(soon)</span>}
+    </span>
+
+    {hint && (
+        <div class="absolute left-0 bottom-full mb-2 hidden group-hover:block bg-gray-800 text-white text-sm rounded p-2 max-w-">
+            {hint}
+        </div>
+    )}
+</li>
