@@ -130,6 +130,7 @@ export default defineConfig({
       social: {
         "x.com": "https://r.ptah.sh/twitter",
         discord: "https://r.ptah.sh/chat",
+        "youtube": "https://r.ptah.sh/youtube",
         github: "https://r.ptah.sh/github",
       },
       components: {
