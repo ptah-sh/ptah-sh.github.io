@@ -221,10 +221,84 @@ You can self-host the service by clonning the <a href="https://r.ptah.sh/github"
   </Card>
 </CardGrid>
 
-## Special Thanks
+<div class="md:grid grid-cols-2 gap-8">
+  <div>
+    ## Special Thanks
 
-_These are the people and communities who made the Ptah.sh possible. The list is not exhaustive, but we're trying our best._
+    _These are the people and communities who made the Ptah.sh possible. The list is not exhaustive, but we're trying our best._
 
-- <Twitter handle="marc_louvion" name="Marc Lou" /> and <Twitter handle="heyandras" name="Andras Bacsai" /> who inspired me (<Twitter handle="b_shulha" name="Bohdan Shulha" />) to finally convert my devops-y experience into a service.
-- <Twitter handle="fairsrc" name="Fair Source" /> (<a href="https://fair.io/?utm_source=ptah.sh" target="_blank">fair.io</a>) organization, who makes the enormous commitment into open source distribution model.
-- <Twitter handle="SaidAitmbarek" name="Saïd Aitmbarek" />, who manages the <a href="https://microlaunch.net/?utm_source=ptah.sh">microlaunch.net</a> platform.
+    - <Twitter handle="marc_louvion" name="Marc Lou" /> and <Twitter handle="heyandras" name="Andras Bacsai" /> who inspired me (<Twitter handle="b_shulha" name="Bohdan Shulha" />) to finally convert my devops-y experience into a service.
+    - <Twitter handle="fairsrc" name="Fair Source" /> (<a href="https://fair.io/?utm_source=ptah.sh" target="_blank">fair.io</a>) organization, who makes the enormous commitment into open source distribution model.
+    - <Twitter handle="SaidAitmbarek" name="Saïd Aitmbarek" />, who manages the <a href="https://microlaunch.net/?utm_source=ptah.sh">microlaunch.net</a> platform.
+  </div>
+
+  <div>
+    ## FAQ
+
+    <div class="accordion" itemscope itemtype="https://schema.org/FAQPage">
+      <details itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+        <summary itemprop="name">What is Ptah.sh?</summary>
+        <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+          <p itemprop="text">Ptah.sh is a self-hosted platform that simplifies deploying and managing applications, databases, and services on your own servers. It's designed to be an easy-to-use, cost-effective alternative to managed cloud services.</p>
+        </div>
+      </details>
+
+      <details itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+        <summary itemprop="name">How does Ptah.sh differ from other hosting platforms?</summary>
+        <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+          <p itemprop="text">Ptah.sh allows you to host on your own VPS, giving you more control over your infrastructure and costs. It's powered by Docker Swarm and offers a simple pricing model with no unexpected bills.</p>
+        </div>
+      </details>
+
+      <details itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+        <summary itemprop="name">Can I use Ptah.sh for my existing projects?</summary>
+        <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+          <p itemprop="text">Yes! Ptah.sh supports various languages, frameworks, and databases. You can deploy Ruby on Rails, Spring Boot, Laravel, WordPress, and many other types of applications.</p>
+        </div>
+      </details>
+
+      <details itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+        <summary itemprop="name">Is Ptah.sh secure?</summary>
+        <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+          <p itemprop="text">Security is a top priority. Ptah.sh doesn't require open ports, uses Caddy for automatic HTTPS, and can even manage intranet infrastructure through our cloud option.</p>
+        </div>
+      </details>
+
+      <details itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+        <summary itemprop="name">What kind of support do you offer?</summary>
+        <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+          <p itemprop="text">We offer community support through GitHub Discussions, email support for paying users, and the option to schedule a call for personalized assistance.</p>
+        </div>
+      </details>
+
+      <details itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+        <summary itemprop="name">Can I self-host Ptah.sh?</summary>
+        <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+          <p itemprop="text">Yes, Ptah.sh is Fair Source licensed. You can clone our GitHub repository and self-host the service if you prefer.</p>
+        </div>
+      </details>
+
+      <details itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+        <summary itemprop="name">Is Ptah.sh free?</summary>
+        <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+          <p itemprop="text">Self-hosting Ptah.sh is and always will be free. You can clone our GitHub repository and run it on your own infrastructure at no cost.</p>
+          <p>For those who prefer a managed solution, we offer a cloud option with a 14-day free trial for new users. After the trial period, our cloud service has paid plans starting at $9 per month for the Hobby plan. While the cloud service isn't free, it can significantly reduce your hosting costs compared to other managed solutions.</p>
+        </div>
+      </details>
+
+      <details itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+        <summary itemprop="name">How does Ptah.sh differ from Coolify and CapRover?</summary>
+        <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+          <p itemprop="text">While Ptah.sh shares some similarities with Coolify and CapRover, it has several key differences:</p>
+          <ul>
+            <li>**Commercial Focus**: Ptah.sh uses Fair Source Licensing, allowing for commercialization while still permitting self-hosting for internal needs. This model supports better quality, faster development, and improved customer support.</li>
+            <li>**Opinionated Design**: Ptah.sh is more opinionated in its architecture, focusing on simplicity and covering the needs of 80% of small to medium businesses while maintaining an easy-to-use interface.</li>
+            <li>**Docker Swarm Only**: Unlike some alternatives, Ptah.sh exclusively uses Docker Swarm as its backend, simplifying development, support, and user experience.</li>
+            <li>**Careful Feature Selection**: New features are carefully evaluated to maintain a simplified user experience and attract users and contributors with a similar mindset.</li>
+          </ul>
+          <p>For a more detailed comparison, check out our <a href="/compare/ptah-sh-vs-coolify-vs-caprover/">full comparison page</a>.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</div>
