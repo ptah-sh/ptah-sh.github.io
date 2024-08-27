@@ -77,7 +77,7 @@ const {
         {!singleServer && <PricingFeature name="Unlimited Servers" />}
 
         {customErrorPages && <PricingFeature soon name="Custom Error Pages" hint="Custom Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." />}
-        {!customErrorPages && <PricingFeature soon name="Custom Error Pages" partial hint="Custom Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." />}
+        {!customErrorPages && <PricingFeature soon name="Standard Error Pages" partial hint="Ptah.sh branded Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." />}
 
         {dedicatedDiscord && <PricingFeature name="Dedicated Discord Channel" icon="discord" />}
         {!dedicatedDiscord && <PricingFeature name="Community Discord Channel" icon="discord" partial />}
