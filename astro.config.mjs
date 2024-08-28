@@ -37,7 +37,7 @@ const head = [
         "operatingSystem": "Web-based",
         "offers": {
           "@type": "Offer",
-          "price": "19.00",
+          "price": "9.00",
           "priceCurrency": "USD"
         },
         "description": "Optimize your infrastructure costs and simplify deployment with ptah.sh."
