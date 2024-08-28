@@ -32,6 +32,7 @@ hero:
 import { Card, CardGrid, Icon } from '@astrojs/starlight/components';
 import PricingCard from '../../components/PricingCard.astro';
 import Twitter from '../../components/Twitter.astro';
+import FeatureCard from '../../components/FeatureCard.astro';
 
 <div class="text-center">
   ## Save up to 82% costs on hosting your services
@@ -63,10 +64,10 @@ import Twitter from '../../components/Twitter.astro';
 		Ptah.sh is a SaaS for indie and small to medium businesses. It requires us to create the easiest hosting platform.
 	</Card>
 	<Card title="Host on your own VPS" icon="setting">
-		Ptah.sh provides VPS management service. Pick any cloud provider you want - AWS, DigitalOcean, Hetzner and we'll deploy your software there.
+		Ptah.sh provides VPS management service. Pick any cloud provider you want - AWS, DigitalOcean, <a href="https://r.ptah.sh/hetzner" rel="nofollow">Hetzner</a> and we'll deploy your software there.
 	</Card>
 	<Card title="Focus on What Matters" icon="add-document">
-		Pick any of the pre-made templates and deploy it to your own servers with a single click.
+		Deploy fully functional apps backed with databases and queues with our <a href="/marketplace/">1-Click Apps Marketplace</a>. Get your complex applications up and running in minutes, not hours.
 	</Card>
 	<Card title="Secure by Default" icon="approve-check">
 	 <ul>
@@ -77,9 +78,12 @@ import Twitter from '../../components/Twitter.astro';
 	<Card title="Powered by Docker Swarm" icon="setting">
 		We decided to not invent the wheel and we use the power of Docker Swarm, which is a proven technology by thousands of businesses.
 	</Card>
+	<Card title="Private Cloud" icon="rocket">
+    Create your own private cloud infrastructure. Perfect for businesses with specific security or compliance requirements.
+  </Card>
 </CardGrid>
 
-<div class="md:grid grid-cols-2 gap-4">
+<div class="md:grid grid-cols-2 py-8 gap-4">
   <div>
     <h2 class="text-center mb-4">
       😰 Before
@@ -117,7 +121,7 @@ import Twitter from '../../components/Twitter.astro';
     </div>
 </div>
 
-<div class="flex flex-col items-center my-24 border p-8">
+<div class="flex flex-col items-center my-24 p-8">
   ## Support us on Product Hunt
 
   <div class="py-8">Our public release is scheduled on 1st of September.</div>
@@ -156,60 +160,66 @@ The Ptah.sh service suite is a <a href="https://fair.io">Fair Source</a> softwar
 
 You can self-host the service by clonning the <a href="https://r.ptah.sh/github" target="_blank" rel="nofollow">GitHub Repo</a>.
 
-## Not yet convinced?
+<div class="grid md:grid-cols-3 gap-4 py-8">
+  <FeatureCard
+    title="Any Language, Any Framework"
+    description="Run services in Ruby, Nodejs, PHP, Python, Java, and more."
+    listItems={[
+      "Ruby on Rails? No problem.",
+      "Spring Boot? As you wish.",
+      "Laravel? What a pleasure!",
+      "Wordpress? Oh, ok..."
+    ]}
+  />
 
-<CardGrid stagger>
-	<Card title="Any Language, Any Framework" icon="pencil">
-	  You can run services written in Ruby, Nodejs, PHP, Python, Java and any other language you imaging.
-		<ul>
-			<li>Ruby on Rails? No problem.</li>
-			<li>Spring Boot? As you wish <small>(just ensure you have lots of RAM)</small>.</li>
-			<li>Laravel? What a pleasure!</li>
-			<li>Wordpress? Oh, ok...</li>
-		</ul>
-	</Card>
-	<Card title="Any Database" icon="setting">
-		MySQL, PostgreSQL, MongoDB, Supabase! We'll launch anything!
-		<ul>
-		  <li>Automated backups.</li>
-			<li>Disk Space Monitoring <small>(soon)</small>.</li>
-		</ul>
-	</Card>
-	<Card title="Any Docker Image" icon="add-document">
-		You have an exotic image you want to run? Sure, we're glad to help!
-		<ul>
-		  <li>Custom Healthchecks.</li>
-			<li>Custom Startup Commands.</li>
-			<li>Custom Storage Options.</li>
-		</ul>
-	</Card>
-</CardGrid>
+  <FeatureCard
+    title="Any Database"
+    description="MySQL, PostgreSQL, MongoDB, Supabase! We'll launch anything!"
+    listItems={[
+      "Automated backups.",
+      "Disk Space Monitoring <small>(soon)</small>."
+    ]}
+  />
 
-## And a little bit more!
+  <FeatureCard
+    title="Any Docker Image"
+    description="Run exotic images with ease."
+    listItems={[
+      "Custom Healthchecks.",
+      "Custom Startup Commands.",
+      "Custom Storage Options."
+    ]}
+  />
 
-<CardGrid stagger>
-  <Card title="Integrate with CI/CD (GitHub, GitLab, etc)" icon="telegram">
-    To integrate with CI/CD, simply add a step to your pipeline that starts a deployment for a Docker image.
+  <FeatureCard
+    title="Own Your Data"
+    description="Keep full control of your data and infrastructure."
+    listItems={[
+      "Host on your own servers.",
+      "No vendor lock-in.",
+      "Easy data migration.",
+      "Compliance-friendly setup."
+    ]}
+  />
 
-    [As simple as it can be!](/api/deployments/)
+  <FeatureCard
+    title="Integrate with CI/CD"
+    description="Easily integrate with GitHub, GitLab, and more."
+    link={{
+      text: "Learn more about deployments",
+      url: "/api/deployments/"
+    }}
+  />
 
-    <p>See also <a href="https://github.com/marketplace/actions/deploy-service-to-ptah-sh" target="_blank" rel="nofollow">Deploy Service to Ptah.sh</a> via GitHub Actions</p>
-  </Card>
-
-  <Card title="1-Click Apps" icon="puzzle">
-      Do you need PostgreSQL or MongoDB, Wordpress or something else for your project but you don't want configure it from scratch?
-
-      Use 1-Click Apps to deploy the services you need with a reasonable defaults.
-
-      [Browse marketplace](/marketplace/).
-  </Card>
-
-	<Card title="Developed in Public" icon="pencil">
-	  Want to learn the challenges we've met?
-
-		Follow <a href="https://x.com/b_shulha" rel="nofollow" target="_blank">@b_shulha</a> on Xitter to watch after the development process!
-	</Card>
-</CardGrid>
+  <FeatureCard
+    title="1-Click Apps"
+    description="Deploy services with reasonable defaults in one click."
+    link={{
+      text: "Browse marketplace",
+      url: "/marketplace/"
+    }}
+  />
+</div>
 
 ## Support & Contact
 
@@ -225,7 +235,7 @@ You can self-host the service by clonning the <a href="https://r.ptah.sh/github"
   </Card>
 </CardGrid>
 
-<div class="md:grid grid-cols-2 gap-8">
+<div class="md:grid grid-cols-2 py-8 gap-8">
   <div>
     ## Special Thanks
 

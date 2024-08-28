@@ -179,7 +179,7 @@ export default defineConfig({
           collapsed: true,
         },
       ],
-      customCss: ["./src/tailwind.css"],
+      customCss: ["./src/tailwind.css", "./src/styles/starlight-content.css"],
       head: process.env.NODE_ENV === "production" ? head : [],
       editLink: {
         baseUrl: "https://github.com/ptah-sh/ptah-sh.github.io/edit/main/",

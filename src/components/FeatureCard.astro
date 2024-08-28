@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  listItems?: string[];
+  link?: {
+    text: string;
+    url: string;
+  };
+}
+
+const { title, description, listItems = [], link } = Astro.props;
+---
+
+<div class="m-4 rounded-lg flex flex-col h-full">
+  <h3 class="text-lg font-bold mb-2 text-balance text-center">{title}</h3>
+  <p class="text-balance text-center">{description}</p>
+  {listItems.length > 0 && (
+    <ul class="list-disc list-inside">
+      {listItems.map((item) => (
+        <li set:html={item} />
+      ))}
+    </ul>
+  )}
+  {link && (
+    <p class="mt-auto text-center">
+      <a href={link.url} class="inline-block text-balance">{link.text}</a>
+    </p>
+  )}
+</div>
