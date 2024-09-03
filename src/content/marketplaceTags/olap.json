@@ -1,0 +1,5 @@
+{
+    "slug": "olap",
+    "name": "OLAP Databases",
+    "description": "OLAP (Online Analytical Processing) is a type of database management system that is optimized for complex queries and analytical operations. OLAP databases are designed to handle large amounts of data and provide fast and efficient access to data for analysis and reporting. OLAP databases are particularly useful for applications that require high-performance data analysis and reporting, such as financial analysis, market research, and scientific research."
+}

@@ -4,7 +4,7 @@
     "description": "Single-server ClickHouse database",
     "about": "ClickHouse is an open-source, column-oriented database management system that is designed for high-performance analytics and real-time data processing. It is particularly useful for handling large volumes of data and for querying data in real-time. ClickHouse offers several advantages over traditional relational databases, including better performance, scalability, and flexibility. Additionally, ClickHouse is well-suited for applications that require high availability, horizontal scalability, and flexible data models.",
     "url": "https://clickhouse.com/",
-    "tags": ["nosql"],
+    "tags": ["nosql", "olap"],
     "form": {
         "type": "v-stack",
         "items": [
