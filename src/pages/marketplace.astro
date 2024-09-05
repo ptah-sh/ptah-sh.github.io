@@ -1,7 +1,13 @@
 ---
 import MarketplacePage from '../components/MarketplacePage.astro';
+
+const description = "Explore our 1-Click Apps Marketplace for easy-to-deploy, pre-configured applications and services. Save time and streamline your development process.";
 ---
-<MarketplacePage title="1-Click Apps Marketplace" category="">
+<MarketplacePage 
+  title="1-Click Apps Marketplace" 
+  category=""
+  description={description}
+>
   <div class="mb-8">
     <h2 class="text-2xl font-bold mb-4">See How Easy It Is</h2>
     <p class="mb-4">Watch this quick demo of our 1-Click Apps in action:</p>
