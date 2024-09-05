@@ -1,0 +1,6 @@
+{
+    "name": "GeoIP",
+    "slug": "geoip",
+    "question": "What is GeoIP?",
+    "description": "GeoIP is a database that provides information about the location of an IP address. It is used to determine the country, region, city, latitude, longitude, and postal code of an IP address. GeoIP is needed for applications that require location-based services, such as targeted advertising, content localization, fraud detection, and compliance with regional regulations."
+}

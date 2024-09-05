@@ -98,8 +98,8 @@ const tags = template?.data.tags.map((tag: any) => {
     <p>Additionally, hosting on your own VPS or dedicated server can lead to significant cost savings. By managing your own infrastructure, you can avoid the recurring costs associated with cloud services and optimize your resource allocation to meet your specific needs. This can result in a more cost-effective solution for your application.</p>
     <p>Want to explore more options? <a href={`/marketplace/${category?.id}/`}>See all {category?.data.description}</a> to find the best fit for your needs.</p>
 
-    {tags.map(tag => (
-        <h2>Why use {tag.data.name}?</h2>
+    {tags.map((tag: { data: { question?: string, name: string, description: string } }) => (
+        <h2>{tag.data.question || `Why use ${tag.data.name}?`}</h2>
         <p>{tag.data.description}</p>
     ))}
 </MarketplacePage>
