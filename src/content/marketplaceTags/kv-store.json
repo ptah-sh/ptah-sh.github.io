@@ -1,0 +1,5 @@
+{
+    "slug": "kv-store",
+    "name": "KV Store",
+    "description": "A key-value store is a database management system that uses key-value pairs to store data. It's particularly useful for storing frequently accessed data and for querying data. KV stores offer several advantages over traditional relational databases, including better scalability, flexibility, and performance. Additionally, KV stores are well-suited for applications that require high availability, horizontal scalability, and flexible data models."
+}

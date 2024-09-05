@@ -1,0 +1,5 @@
+{
+    "slug": "message-broker",
+    "name": "Message Broker",
+    "description": "A message broker is a software component that acts as an intermediary between different applications or services. It's particularly useful for storing frequently accessed data and for querying data. Caches offer several advantages over traditional relational databases, including better scalability, flexibility, and performance. Additionally, caches are well-suited for applications that require high availability, horizontal scalability, and flexible data models."
+}

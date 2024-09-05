@@ -1,0 +1,52 @@
+{
+    "name": "Redis",
+    "slug": "databases/redis",
+    "description": "Single-server Redis database",
+    "about": "Redis is an open-source, in-memory data structure store used as a database, cache, and message broker. It is particularly useful for handling large volumes of data and for querying data in real-time. Redis offers several advantages over traditional relational databases, including better performance, scalability, and flexibility.",
+    "url": "https://redis.io/",
+    "tags": ["nosql", "kv-store", "cache", "message-broker"],
+    "form": {
+        "type": "v-stack",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Password",
+                        "name": "password",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            }
+        ]
+    },
+    "processes": [
+        {
+            "name": "Redis",
+            "description": "Redis database",
+            "url": "https://github.com/bitnami/containers/tree/main/bitnami/redis",
+            "data": {
+                "name": "redis",
+                "dockerImage": "bitnami/redis:7.4",
+                "envVars": [],
+                "secretVars": {
+                    "vars": [
+                        {
+                            "name": "REDIS_PASSWORD",
+                            "value": "{{password}}"
+                        }
+                    ]
+                },
+                "volumes": [
+                    {
+                        "name": "data",
+                        "path": "/bitnami/redis",
+                        "backupSchedule": null
+                    }
+                ]
+            }
+        }
+    ]
+}
