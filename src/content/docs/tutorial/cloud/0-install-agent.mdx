@@ -1,12 +1,13 @@
 ---
-title: Set up the Server
+title: Install the Agent
 description: "Preparing the Server (VPS) to deploy services with Ptah"
-slug: tutorial/setup-node
-sidebar:
-  order: 0
+slug: tutorial/cloud
+next:
+  label: Deploy a Service
+  link: /tutorial/service/
 ---
 
-import Video from '../../../components/Video.astro';
+import Video from '../../../../components/Video.astro';
 
 To be able to deploy Docker containers, you need to install Docker and the Ptah.sh agent, respectively. Fortunately, this won't require much effort from you: the service will generate a bash command for you, so all you need is the common skill of copy-pasting. :)
 
@@ -45,3 +46,13 @@ So, as soon as you've installed the agent and your server card on the dashboard 
 Among the necessary parameters is the _Advertisement Address_ - in case you wish to create a cluster of several servers in the future. If all your servers will be within the same network of your provider, choose the internal address. However, if your requirements include having multiple geographic zones (providers, availability zones, and so on), choose the external address.
 
 <Video src="/tutorial/initialize-cluster.mp4" />
+
+## Additional Information
+
+The installation script automatically sets up two important components:
+
+1. **Ptah.sh Agent**: This service manages your Ptah.sh installation and communicates with the Ptah.sh server.
+
+2. **Docker Ingress Routing Daemon (DIRD)**: This component handles routing for your Docker services, ensuring proper network connectivity.
+
+Both of these services are configured as systemd units and will start automatically on system boot. You can check their status using the following commands:

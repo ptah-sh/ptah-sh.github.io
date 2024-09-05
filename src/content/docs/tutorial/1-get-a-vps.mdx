@@ -1,0 +1,76 @@
+---
+title: "Prepare a VPS"
+slug: "tutorial/vps"
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+## Choosing a Hosting Provider
+
+When setting up your server, you have several options for hosting providers. Here, we'll discuss two popular choices: Hetzner and DigitalOcean.
+
+<Aside type="note" title="VPS Requirements">
+  The specific requirements for your VPS are:
+  - x86_64 hardware architecture
+  - Ubuntu 24.04 operating system
+  - Minimum 1 GiB RAM
+  - Minimum 20 GiB disk space
+</Aside>
+
+### Hetzner
+
+#### Why Choose Hetzner?
+
+Hetzner is an excellent choice for hosting your server for several reasons:
+
+1. **Competitive Pricing**: Hetzner offers some of the most cost-effective solutions in the market, providing great value for your money.
+
+2. **Performance**: Their servers are known for their robust performance and reliability.
+
+3. **Data Centers in Europe**: If your target audience is primarily in Europe, Hetzner's data centers provide low-latency connections.
+
+4. **Scalability**: Hetzner offers a wide range of server options, from small VPS instances to dedicated servers, allowing you to scale as your needs grow.
+
+5. **Good Support**: While primarily self-service, Hetzner provides solid technical support when needed.
+
+<Aside type="tip" title="Referral Offer">
+  If you're considering Hetzner, you can use our referral link to get started. As soon as you sign up using this personal link, you'll receive <strong>€⁠20 in cloud credits</strong>. [Sign up with Hetzner](https://r.ptah.sh/hetzner)
+</Aside>
+
+### DigitalOcean
+
+#### Why Choose DigitalOcean?
+
+DigitalOcean is another popular option for hosting, with its own set of advantages:
+
+1. **User-Friendly Interface**: DigitalOcean is known for its simple, intuitive control panel, making it easy for beginners to get started.
+
+2. **Global Data Centers**: With multiple data centers around the world, DigitalOcean allows you to host your server closer to your target audience.
+
+3. **Extensive Documentation**: DigitalOcean provides a wealth of tutorials and documentation, which is especially helpful for those new to server management.
+
+4. **Developer-Friendly Features**: With features like team accounts and API access, DigitalOcean caters well to development teams.
+
+5. **Flexible Pricing**: Their pricing model is straightforward and allows you to pay by the hour, which can be cost-effective for temporary or experimental projects.
+
+<Aside type="tip" title="Referral Offer">
+  If DigitalOcean sounds like the right choice for you, you can take advantage of our referral offer. Everyone who signs up using our referral link gets <strong>$200 in credit over 60 days</strong>. This gives you ample time to explore DigitalOcean's features and set up your server. [Sign up with DigitalOcean](https://r.ptah.sh/digitalocean)
+</Aside>
+
+## Choose Your Installation Path
+
+Now that you've selected a hosting provider, it's time to decide how you want to install and manage your Ptah.sh panel. We offer two main options:
+
+<CardGrid>
+  <LinkCard
+    title="Cloud-Hosted Panel"
+    description="Quick setup with our managed cloud service. Ideal for beginners or those who prefer a hands-off approach."
+    href="/tutorial/cloud/"
+  />
+  <LinkCard
+    title="Self-Hosted Panel"
+    description="Full control by installing on your own VPS. Perfect for advanced users or those who need customization options."
+    href="/tutorial/self-hosted/"
+  />
+</CardGrid>

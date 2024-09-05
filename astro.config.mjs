@@ -155,7 +155,27 @@ export default defineConfig({
         },
         {
           label: "Tutorial",
-          autogenerate: { directory: "tutorial" },
+          items: [
+            { slug: 'tutorial' },
+            { slug: 'tutorial/vps' },
+            { label: 'Cloud-Hosted Panel', 
+              items: [
+                { slug: 'tutorial/cloud' },
+              ]
+            },
+            {
+              label: 'Self-Hosted Panel',
+              items: [
+                { slug: 'tutorial/self-hosted' },
+              ]
+            },
+            {
+              slug: 'tutorial/service',
+            },
+            {
+              slug: 'tutorial/whats-next',
+            }
+          ],
         },
         {
           label: "Concepts",

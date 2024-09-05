@@ -1,0 +1,92 @@
+---
+title: "Install the Panel"
+slug: tutorial/self-hosted
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+This tutorial will guide you through the process of installing the Ptah.sh Panel on your Virtual Private Server (VPS). If you haven't set up a VPS yet, please refer to our [VPS setup guide](/tutorial/vps) first.
+
+## Prerequisites
+
+- A VPS with SSH access
+- Basic knowledge of using the command line
+
+## Installation Steps
+
+1. **Connect to your VPS**
+
+   Use SSH to connect to your VPS. The command typically looks like this:
+
+   ```bash
+   ssh username@your_server_ip
+   ```
+
+   Replace `username` and `your_server_ip` with your actual SSH username and server IP address.
+
+2. **Run the installation command**
+
+   Once connected to your VPS, run one of the following commands:
+
+   <Tabs>
+   <TabItem value="curl" label="Using curl">
+
+   ```bash
+   curl -sSL https://r.ptah.sh/install-server | bash
+   ```
+
+   </TabItem>
+   <TabItem value="wget" label="Using wget">
+
+   ```bash
+   wget -qO- https://r.ptah.sh/install-server | bash
+   ```
+
+   </TabItem>
+   </Tabs>
+
+   This command will download and execute the installation script.
+
+3. **Answer the configuration questions**
+
+   During the installation process, you'll be prompted to answer two important questions:
+
+   a) **Advertise address for Docker Swarm**
+      - This is typically a private IP address that other Swarm nodes will use to connect to this node.
+      - If your VPS is on a private network, you should choose the private IP address.
+      - The script will present you with a list of available IP addresses. Choose the appropriate one for your setup.
+
+   b) **Public IP address of the server**
+      - This is the IP address where the panel will be accessible from the internet.
+      - It's usually the public IP address of your VPS.
+      - The script will again present you with a list of available IP addresses. Select the correct public IP.
+
+4. **Wait for the installation to complete**
+
+   The script will proceed to:
+   - Install Docker
+   - Run the ptah-server Docker container
+   - Install the Ptah.sh agent
+   - Install and configure the Docker Ingress Routing Daemon (DIRD)
+   - Set up systemd services for the Ptah.sh Agent and DIRD
+   - Configure all necessary components
+
+5. **Note your admin credentials**
+
+   At the end of the installation process, the script will output the admin user email and a randomly generated password. Make sure to save these credentials securely, as you'll need them to log in to your Ptah.sh Dashboard.
+
+6. **Access your Ptah.sh Dashboard**
+
+   Once the installation is complete, you can access your Ptah.sh Dashboard by navigating to:
+
+   ```
+   http://your_public_ip/dashboard
+   ```
+
+   Replace `your_public_ip` with the public IP address you selected during the installation.
+
+## Conclusion
+
+You have now successfully installed the Ptah.sh Panel on your VPS. You can log in to your dashboard using the provided admin email (typically `self-hosted@localhost`) and the generated password.
+
+Remember to change your password after your first login for security reasons.
