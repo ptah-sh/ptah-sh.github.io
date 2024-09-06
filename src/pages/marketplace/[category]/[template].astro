@@ -36,19 +36,18 @@ const tags = template?.data.tags.map((tag: any) => {
 ---
 
 <MarketplacePage
-    title={"1-Click Apps: " +category.data.name + ' - ' + template.data.name}
-    description={"Deploy fully configured " + template.data.name + " in seconds with 1-click apps."}
+    title={"1-Click Apps: " +category?.data.name + ' - ' + template?.data.name}
+    description={"Deploy fully configured " + template?.data.name + " in seconds with 1-click apps."}
     showCategories={false}
     tags={tags}
 >
     <dl>
         <dt>Info</dt>
-        <dd>{template.data.description}
-        </dd>
+        <dd>{template.data.description}</dd>
         <dt>About {template.data.name}</dt>
         <dd>{template.data.about}</dd>
         <dt>Website</dt>
-        <dd><a href={template.data.url} rel="noopener noreferrer nofollow" target="_blank">{template.data.url}</a></dd>
+        <dd><a href={template?.data.url} rel="noopener noreferrer nofollow" target="_blank">{template?.data.url}</a></dd>
         <dt>Extends</dt>
         <dd>
             {extendsApps.length === 0 && <i>None</i>}
@@ -72,6 +71,22 @@ const tags = template?.data.tags.map((tag: any) => {
             </ul>
         </dd>
     </dl>
+
+    {template?.data.thirdParty && template.data.thirdParty.length > 0 && (
+        <div class="my-6 bg-gray-50 p-4 rounded-lg">
+            <h2 class="text-xl font-bold mb-3">Third-Party Requirements</h2>
+            <ul class="list-disc pl-5">
+                {template.data.thirdParty.map((requirement: any) => (
+                    <li class="mb-2">
+                        <a href={requirement.url} class="font-semibold text-blue-600 hover:underline" rel="noopener noreferrer nofollow" target="_blank">{requirement.name}</a>
+                        {requirement.description && (
+                            <span class="text-gray-700"> - {requirement.description}</span>
+                        )}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    )}
 
     <h2>Processes</h2>
     <ul class="list-none p-0 grid gap-4 md:grid-cols-2">

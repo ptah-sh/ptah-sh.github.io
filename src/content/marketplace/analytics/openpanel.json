@@ -1,0 +1,169 @@
+{
+    "extends": [
+        {
+            "slug": "databases/postgresql"
+        },
+        {
+            "slug": "databases/redis"
+        },
+        {
+            "slug": "databases/clickhouse"
+        },
+        {
+            "slug": "networks/observabilitystack-geoip-api"
+        }
+    ],
+
+    "name": "OpenPanel",
+    "slug": "analytics/openpanel",
+    "description": "The power of Mixpanel, the ease of Plausible.",
+    "about": "An open-source alternative to Mixpanel/Google Analytics/Plausible. The power of Mixpanel, the ease of Plausible and nothing from Google Analytics 😉.",
+    "url": "https://openpanel.dev/",
+    "thirdParty": [
+        {
+            "name": "Clerk",
+            "url": "https://clerk.com/",
+            "description": "User Management Platform (free tier is more than enough for most use cases)."
+        }
+    ],
+    "tags": ["analytics-platform"],
+    "form": {
+        "type": "v-stack",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Domain",
+                        "name": "domain",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            },
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Clerk Public Key",
+                        "name": "clerkPublicKey",
+                        "format": "string",
+                        "required": true
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Clerk Secret Key",
+                        "name": "clerkSecretKey",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            },
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Clerk Signing Secret",
+                        "name": "clerkSigningSecret",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            }
+        ]
+    },
+    "processes": [
+        {
+            "name": "API",
+            "description": "The OpenPanel API",
+            "url": "https://github.com/Openpanel-dev/openpanel",
+            "data": {
+                "name": "openpanel-api",
+                "dockerImage": "lindesvard/openpanel-api:latest",
+                "releaseCommand": "pnpm -r run migrate:deploy && pnpm start",
+                "envVars": [
+                    { "name": "NODE_ENV", "value": "production" },
+                    { "name": "GEO_IP_HOST", "value": "geoip.{{service/internalDomainName}}" },
+                    { "name": "NEXT_PUBLIC_DASHBOARD_URL", "value": "https://{{domain}}" },
+                    { "name": "BATCH_SIZE", "value": "5000" },
+                    { "name": "CLICKHOUSE_URL", "value": "clickhouse.{{service/internalDomainName}}" },
+                    { "name": "CLICKHOUSE_DB", "value": "default" },
+                    { "name": "CLICKHOUSE_USER", "value": "{{databases/clickhouse/user}}" },
+                    { "name": "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "value": "{{clerkPublicKey}}" },
+                    { "name": "DOMAIN_NAME", "value": "{{domain}}" }
+                ],
+                "secretVars": {
+                    "vars": [
+                        { "name": "REDIS_URL", "value": "redis://default:{{databases/redis/password}}@redis.{{service/internalDomainName}}:6379" },
+                        { "name": "CLERK_SECRET_KEY", "value": "{{clerkSecretKey}}" },
+                        { "name": "CLERK_SIGNING_SECRET", "value": "{{clerkSigningSecret}}" },
+                        { "name": "CLICKHOUSE_PASSWORD", "value": "{{databases/clickhouse/password}}" },
+                        { "name": "DATABASE_URL", "value": "postgresql://{{databases/postgresql/user}}:{{databases/postgresql/password}}@pgbouncer.{{service/internalDomainName}}/{{databases/postgresql/database}}" },
+                        { "name": "DATABASE_URL_DIRECT", "value": "postgresql://{{databases/postgresql/user}}:{{databases/postgresql/password}}@pg.{{service/internalDomainName}}/{{databases/postgresql/database}}" }
+                    ]
+                },
+                "caddy": [
+                    {
+                        "targetProtocol": "http",
+                        "targetPort": "3000",
+                        "publishedPort": "443",
+                        "domain": "{{domain}}",
+                        "path": "/api/*"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Worker",
+            "description": "The OpenPanel worker",
+            "url": "https://github.com/Openpanel-dev/openpanel",
+            "data": {
+                "name": "openpanel-worker",
+                "dockerImage": "lindesvard/openpanel-worker:latest",
+                "envVars": [
+                    { "name": "NODE_ENV", "value": "production" },
+                    { "name": "SELF_HOSTED", "value": "true" }
+                ],
+                "secretVars": {
+                    "vars": []
+                }
+            }
+        },
+        {
+            "name": "Dashboard",
+            "description": "The OpenPanel dashboard",
+            "url": "https://github.com/Openpanel-dev/openpanel",
+            "data": {
+                "name": "openpanel-dashboard",
+                "dockerImage": "lindesvard/openpanel-dashboard:latest",
+                "envVars": [
+                    { "name": "NEXT_PUBLIC_DASHBOARD_URL", "value": "https://{{domain}}" },
+                    { "name": "NEXT_PUBLIC_API_URL", "value": "https://{{domain}}/api" },
+                    { "name": "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "value": "{{clerkPublicKey}}" },
+                    { "name": "NEXT_PUBLIC_CLERK_SIGN_IN_URL", "value": "https://{{domain}}/login" },
+                    { "name": "NEXT_PUBLIC_CLERK_SIGN_UP_URL", "value": "https://{{domain}}/register" },
+                    { "name": "NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL", "value": "https://{{domain}}/" },
+                    { "name": "NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL", "value": "https://{{domain}}/" }
+                ],
+                "secretVars": {
+                    "vars": [
+                        { "name": "CLERK_SECRET_KEY", "value": "{{clerkSecretKey}}" },
+                        { "name": "REDIS_URL", "value": "redis://default:{{databases/redis/password}}@redis.{{service/internalDomainName}}:6379" },
+                        { "name": "DATABASE_URL", "value": "postgresql://{{databases/postgresql/user}}:{{databases/postgresql/password}}@pgbouncer.{{service/internalDomainName}}/{{databases/postgresql/database}}" }                    ]
+                },
+                "caddy": [
+                    {
+                        "targetProtocol": "http",
+                        "targetPort": "3000",
+                        "publishedPort": "443",
+                        "domain": "{{domain}}",
+                        "path": "/*"
+                    }
+                ]
+            }
+        }
+    ]
+}
