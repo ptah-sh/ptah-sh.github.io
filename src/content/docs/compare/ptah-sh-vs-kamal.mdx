@@ -1,0 +1,109 @@
+---
+title: "Ptah.sh vs Kamal"
+description: "A comprehensive comparison of Ptah.sh and Kamal for application deployment and management."
+---
+
+# Ptah.sh vs Kamal: Choosing the Right Platform for Your Application
+
+Ptah.sh and Kamal are both modern platforms designed for deploying and managing applications. While they share some similarities in their approach to containerization, there are key differences that may influence your choice. This comparison will help you decide which platform is best suited for your project.
+
+## Deployment Model
+
+### Ptah.sh
+- Container-based platform using Docker and Docker Swarm
+- Supports both self-hosted and cloud options
+- Provides a web-based UI for management
+
+### Kamal
+- Container-based deployment tool using Docker
+- Command-line interface (CLI) for deployments
+- Designed for simplicity and ease of use
+
+## Target Audience
+
+### Ptah.sh
+- Suitable for a wide range of applications and languages
+- Caters to developers and teams looking for a managed platform
+
+### Kamal
+- Primarily targets Ruby on Rails applications
+- Ideal for developers comfortable with CLI tools
+
+## Features Comparison
+
+| Feature | Ptah.sh | Kamal |
+|---------|---------|-------|
+| Container-based | Yes | Yes |
+| Web UI | Yes | No |
+| CLI support | Limited | Yes |
+| Multi-language support | Yes | Limited (Ruby-focused) |
+| Built-in load balancing | Yes (Docker Swarm) | No |
+| Zero-downtime deployments | Yes | Yes |
+| Rolling updates | Yes | Yes |
+| Automated SSL management | Yes | Yes |
+| Database management | Yes | Limited |
+| Custom deployment scripts | Yes | Yes |
+| Self-hosted option | Yes | Yes (by design) |
+
+## Scalability
+
+### Ptah.sh
+- Horizontal scaling using Docker Swarm
+- Built-in load balancing
+- Easy addition of new nodes to the cluster
+
+### Kamal
+- Manual scaling by deploying to multiple servers
+- Requires additional setup for load balancing
+
+## Ease of Use
+
+### Ptah.sh
+- User-friendly web interface
+- Simplified management of complex deployments
+- May require some Docker knowledge for advanced usage
+
+### Kamal
+- Simple CLI commands for deployment
+- Requires more manual configuration
+- Steeper learning curve for non-Ruby developers
+
+## Customization and Flexibility
+
+### Ptah.sh
+- Supports custom Docker containers
+- Flexible infrastructure choices
+- Opinionated but customizable
+
+### Kamal
+- Highly customizable through configuration files
+- Allows for fine-grained control over deployments
+- More flexibility, but requires more manual setup
+
+## Community and Support
+
+### Ptah.sh
+- Growing community
+- Commercial support options
+- [Fair source model](/blog/2024-08-09-we-use-fair-source/) for sustainable development
+
+### Kamal
+- Open-source project
+- Community-driven support
+- Backed by the Ruby on Rails community
+
+## Conclusion
+
+Choose Ptah.sh if you:
+- Prefer a managed platform with a web-based UI
+- Need built-in load balancing and easy scaling
+- Want support for a wide range of applications and languages
+- Require simplified management of complex deployments
+
+Choose Kamal if you:
+- Are primarily working with Ruby on Rails applications
+- Prefer a CLI-based workflow
+- Want fine-grained control over your deployment process
+- Are comfortable with more manual configuration and setup
+
+Both platforms leverage containerization for deployments, but they cater to different preferences in terms of management and workflow. Ptah.sh offers a more comprehensive platform with a user-friendly interface, while Kamal provides a lightweight, flexible tool for developers who prefer command-line control. Consider your team's expertise, project requirements, and desired level of management when making your decision.
