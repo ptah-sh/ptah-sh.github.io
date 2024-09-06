@@ -113,6 +113,12 @@
                         "domain": "{{domain}}",
                         "path": "/api/*"
                     }
+                ],
+                "rewriteRules": [
+                    {
+                        "pathFrom": "/api/(.*)",
+                        "pathTo": "/$1"
+                    }
                 ]
             }
         },
@@ -125,10 +131,17 @@
                 "dockerImage": "lindesvard/openpanel-worker:latest",
                 "envVars": [
                     { "name": "NODE_ENV", "value": "production" },
-                    { "name": "SELF_HOSTED", "value": "true" }
+                    { "name": "SELF_HOSTED", "value": "true" },
+                    { "name": "CLICKHOUSE_URL", "value": "clickhouse.{{service/internalDomainName}}" },
+                    { "name": "CLICKHOUSE_DB", "value": "default" },
+                    { "name": "CLICKHOUSE_USER", "value": "{{databases/clickhouse/user}}" },
                 ],
                 "secretVars": {
-                    "vars": []
+                    "vars": [
+                        { "name": "REDIS_URL", "value": "redis://default:{{databases/redis/password}}@redis.{{service/internalDomainName}}:6379" },
+                        { "name": "DATABASE_URL", "value": "postgresql://{{databases/postgresql/user}}:{{databases/postgresql/password}}@pgbouncer.{{service/internalDomainName}}/{{databases/postgresql/database}}" },
+                        { "name": "CLICKHOUSE_PASSWORD", "value": "{{databases/clickhouse/password}}" }
+                    ]
                 }
             }
         },
@@ -140,6 +153,7 @@
                 "name": "openpanel-dashboard",
                 "dockerImage": "lindesvard/openpanel-dashboard:latest",
                 "envVars": [
+                    { "name": "NODE_ENV", "value": "production" },
                     { "name": "NEXT_PUBLIC_DASHBOARD_URL", "value": "https://{{domain}}" },
                     { "name": "NEXT_PUBLIC_API_URL", "value": "https://{{domain}}/api" },
                     { "name": "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "value": "{{clerkPublicKey}}" },
