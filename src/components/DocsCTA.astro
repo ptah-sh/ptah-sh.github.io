@@ -1,0 +1,20 @@
+---
+interface Props {
+  productName?: string;
+}
+
+const { productName = "Ptah.sh" } = Astro.props;
+---
+
+<div class="not-content bg-gray-100 rounded-lg p-6 mt-8">
+  <h2 class="text-2xl font-bold mb-4">Try Ptah.sh Today</h2>
+  <p class="mb-4">
+    Ready to experience the simplicity and efficiency of Ptah.sh? Start your <strong>free 14-day trial</strong> now and see how Ptah.sh can streamline your application deployment process.
+  </p>
+  <a href="http://ctl.ptah.sh/register" class="inline-block bg-blue-600 text-white font-bold py-3 px-6 rounded hover:bg-blue-700 transition-colors">
+    Start Your Free Trial
+  </a>
+  <p class="text-sm text-gray-600 mt-2">
+    Discover why businesses choose Ptah.sh for their self-hosted application needs.
+  </p>
+</div>
