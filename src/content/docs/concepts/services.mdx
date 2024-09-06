@@ -12,38 +12,390 @@ The services are represented by the "processes" in the system. Each process defi
 
 For example, the PostgreSQL service may be defined as two processes: PostgreSQL server itself and pgpool to run as a sidecar container.
 
+### Docker Images
+
+Each process must specify a Docker image to use. Ptah.sh handles this in two ways:
+
+1. For public registries:
+   - Specify the full form of the Docker image name (e.g., `ghcr.io/ptah-sh/ptah-server:latest`).
+   - No pre-configuration is needed for public registries.
+
+2. For private registries:
+   - Pre-configure your private registries in the Ptah.sh dashboard.
+   - When setting up a process, select the appropriate private registry from a dropdown in the configuration form.
+   - Specify the image name and tag for your process.
+
+This approach streamlines the use of private registries and enhances security by centralizing credential management for private images.
+
+For more detailed information on working with Docker registries in Ptah.sh, including how to pre-configure private registries, see the [Docker Registries](/concepts/docker-registries/) page.
+
 ### Workers
 
 Additionally, each process may have additional workers (sidecar containers) that are used to run additional processes or services that are not part of the main process. They maintain the same environment variables and configuration files as the main process.
 
+Workers are particularly useful for running background tasks, queue processors, or additional services that complement the main application. Here are some examples of how workers can be used:
+
+1. Queue Processors:
+   - For Laravel applications, you can use a worker to run the queue processor:
+     ```
+     php artisan queue:work
+     ```
+
+2. WebSocket Server:
+   - Run Laravel Reverb (WebSocket server) as a separate worker:
+     ```
+     php artisan reverb:start
+     ```
+
+3. Scheduled Tasks:
+   - Run a worker for Laravel's scheduler:
+     ```
+     php artisan schedule:work
+     ```
+
+4. Background Job Processing:
+   - For Ruby on Rails applications, run Sidekiq as a worker:
+     ```
+     bundle exec sidekiq
+     ```
+
+5. Asynchronous Task Processing:
+   - Run Celery workers for Django applications:
+     ```
+     celery -A myproject worker -l info
+     ```
+
+6. Real-time Updates:
+   - Run a Node.js worker for real-time updates using Socket.io:
+     ```
+     node socket-server.js
+     ```
+
+By utilizing workers, you can separate concerns and improve the scalability and performance of your application by offloading specific tasks to dedicated processes.
+
 ### Release Command
 
-Each process may also have a release command that is executed when the service is started.
+Each process may have a release command that is executed when the service is started, before the default command of the container runs. This feature is particularly useful for performing setup tasks, running migrations, or other initialization processes that need to occur before the main application starts.
+
+Release commands are typically used for:
+
+1. Database migrations: Updating the database schema before starting the application.
+2. Asset compilation: Building or compiling assets required by the application.
+3. Configuration updates: Modifying configuration files based on environment variables.
+4. Dependency checks: Ensuring all required services are available before starting the main process.
+
+Examples of release commands:
+
+1. Running database migrations for a Rails application:
+   ```
+   bundle exec rails db:migrate
+   ```
+
+2. Running multiple commands in sequence:
+   ```
+   python manage.py collectstatic --noinput && python manage.py migrate
+   ```
+
+To use a release command in Ptah.sh:
+1. When configuring your service, locate the "Release Command" field in the process settings.
+2. Enter the command or script you want to run before the main container process starts.
+3. Ensure that any necessary dependencies or scripts are included in your Docker image.
+
+By utilizing release commands, you can ensure that your application environment is properly prepared before the main process begins, leading to smoother deployments and reducing potential startup issues.
 
 ### Backup Command
 
-Each process may also have a backup command that is executed when the service is stopped.
+Each process may also have a backup command that is executed when the service is stopped. The backup command is designed to create a snapshot of important data before the container is terminated.
+
+Key points about the backup command:
+
+1. Execution context: The command runs within the container, similar to using `docker exec`.
+2. Purpose: It's used to create backups of critical data, configurations, or state information.
+3. Output handling: The backup file should be created in the current working directory. It will then be automatically compressed (gzipped) and uploaded to the specified S3 Storage.
+
+Examples of backup commands:
+
+1. For a PostgreSQL database:
+   ```
+   pg_dump -U username -d database_name > ./database_backup.sql
+   ```
+
+2. For a Redis instance:
+   ```
+   redis-cli save && cp /var/lib/redis/dump.rdb ./redis_backup.rdb
+   ```
+
+3. For a custom application data directory:
+   ```
+   tar -czf ./app_data.tar.gz /app/data
+   ```
+
+To use a backup command in Ptah.sh:
+1. When configuring your service, locate the "Backup Command" field in the process settings.
+2. Enter the command or script you want to run when the container is about to stop.
+3. Ensure that your command saves the backup file in the current working directory.
+4. Ensure that you have configured an S3 Storage destination for your backups.
+
+By utilizing backup commands, you can ensure that critical data is safely preserved before a container is terminated, facilitating easier recovery and data management. Remember that the backup file created in the current working directory will be automatically handled by Ptah.sh for compression and upload to S3 storage.
+
+For more information on configuring and using S3 storage for backups, including setup instructions and restoration processes, see the [S3 Storages](/concepts/s3-storages/) page.
 
 ### Volumes
 
-Each process may also have a list of volumes that are mounted to the container.
+Each process may also have a list of volumes that are mounted to the container. These volumes are Docker Swarm volumes, which provide persistent storage for your services.
+
+Docker Swarm volumes offer several benefits:
+- Data persistence across container restarts
+- Easy sharing of data between containers
+- Improved performance compared to bind mounts
+
+Volumes can be configured with different drivers, including local storage or network-attached storage solutions. Additionally, Ptah.sh supports backing up these volumes to S3-compatible storage, ensuring data durability and facilitating disaster recovery.
+
+For more information on S3 storage integration, see the [S3 Storages](/concepts/s3-storages/) page.
 
 ### Environment Variables
 
 Each process may also have a list of environment variables that are set on the container.
 
-### Configuration Files
+Environment variables are key-value pairs that are part of the process's runtime environment. They are used to configure applications and pass information into containers at runtime. This approach aligns with the [Twelve-Factor App methodology](https://12factor.net/config), which recommends storing configuration in the environment.
 
-Each process may also have a list of configuration files that are mounted to the container.
+Common uses for environment variables include:
+- Setting database connection strings
+- Configuring API keys and secrets
+- Specifying runtime modes (e.g., development, production)
+- Adjusting application behavior without changing code
 
-### Port and Endpoint Configuration
+By using environment variables, you can easily manage different configurations across various deployment environments and keep sensitive information out of your codebase.
 
-Each process may also have a list of ports and endpoints that are exposed to the server node / internet.
+### Secret Variables
+
+In addition to regular environment variables, Ptah.sh supports secret variables. These are similar to environment variables but offer enhanced security features:
+
+1. Storage: Secret variables are stored solely on the Docker Swarm cluster.
+2. Encryption: The data is encrypted with a Docker Swarm cluster's key while it is stored in the task execution queue.
+3. Access: Secrets are only decrypted and made available to the container at runtime.
+
+Secret variables are ideal for storing sensitive information such as:
+- API keys
+- Database passwords
+- OAuth tokens
+- SSL certificates
+
+To use secret variables in Ptah.sh:
+1. When configuring your service, locate the "Secret Variables" section in the process settings.
+2. Add your secret key-value pairs.
+3. Reference these secrets in your application code as you would with regular environment variables.
+
+By utilizing secret variables, you can ensure that sensitive data is kept secure and separate from your regular configuration, reducing the risk of accidental exposure or unauthorized access.
+
+### Config Files
+
+Each process may also have a list of config files that are mounted to the container. Users can specify:
+
+1. Path: The location where the file should be mounted in the container
+2. File Contents: The actual content of the configuration file
+
+This allows for easy management and deployment of configuration files alongside your services.
+
+Examples:
+
+1. Nginx configuration:
+   - Path: `/etc/nginx/nginx.conf`
+   - File Contents:
+     ```nginx
+     user nginx;
+     worker_processes auto;
+     error_log /var/log/nginx/error.log;
+     pid /run/nginx.pid;
+
+     events {
+         worker_connections 1024;
+     }
+
+     http {
+         server {
+             listen 80;
+             server_name example.com;
+             location / {
+                 proxy_pass http://backend:8080;
+             }
+         }
+     }
+     ```
+
+2. PHP configuration:
+   - Path: `/usr/local/etc/php/php.ini`
+   - File Contents:
+     ```ini
+     memory_limit = 256M
+     upload_max_filesize = 20M
+     post_max_size = 20M
+     max_execution_time = 120
+     ```
+
+3. Application-specific configuration:
+   - Path: `/app/config.json`
+   - File Contents:
+     ```json
+     {
+       "database": {
+         "host": "db.example.com",
+         "port": 5432,
+         "name": "myapp"
+       },
+       "cache": {
+         "driver": "redis",
+         "host": "redis.example.com"
+       },
+       "logging": {
+         "level": "info",
+         "file": "/var/log/myapp.log"
+       }
+     }
+     ```
+
+These examples demonstrate how you can use config files to manage various types of configurations, from web server settings to application-specific options, directly within your Ptah.sh service definition.
+
+### Secret Files
+
+In addition to config files, Ptah.sh supports secret files. These are similar to config files but offer enhanced security features:
+
+1. Storage: Secret files are stored solely on the Docker Swarm cluster.
+2. Encryption: The file contents are encrypted with a Docker Swarm cluster's key while stored in the task execution queue.
+3. Access: Secrets are only decrypted and made available to the container at runtime.
+4. Confidentiality: The contents of secret files cannot be read by the Ptah.sh panel.
+
+Secret files are ideal for storing sensitive information that needs to be mounted as a file in the container, such as:
+- SSL certificates and private keys
+- OAuth client secrets
+- API configuration files with sensitive data
+- Database connection files
+
+To use secret files in Ptah.sh:
+1. When configuring your service, locate the "Secret Files" section in the process settings.
+2. Specify the path where the file should be mounted in the container.
+3. Provide the contents of the secret file.
+
+Examples:
+
+1. SSL Certificate:
+   - Path: `/etc/ssl/private/example.com.pem`
+   - File Contents: (The actual SSL certificate and private key)
+
+2. Database Connection File:
+   - Path: `/app/db-credentials.json`
+   - File Contents:
+     ```json
+     {
+       "host": "db.internal",
+       "port": 5432,
+       "username": "app_user",
+       "password": "super_secret_password",
+       "database": "myapp_production"
+     }
+     ```
+
+3. OAuth Client Secret:
+   - Path: `/app/oauth_secret.txt`
+   - File Contents: (The actual OAuth client secret)
+
+4. API Configuration:
+   - Path: `/app/api_config.yml`
+   - File Contents:
+     ```yaml
+     api_key: "your_very_secret_api_key"
+     endpoint: "https://api.example.com/v2"
+     rate_limit: 1000
+     ```
+
+By utilizing secret files, you can securely manage sensitive data that needs to be mounted as files in your containers, ensuring that this information remains encrypted and inaccessible to the Ptah.sh panel or unauthorized users.
+
+### Public Access Over the Internet
+
+Each process can be configured for public access over the internet using either direct port publishing or Caddy endpoints.
+
+#### Ports
+
+When publishing ports directly, users can specify two port numbers:
+1. The published port on the node (available from the internet)
+2. The target port on the container
+
+This allows for flexible port mapping between the host and the container, enabling you to expose services on specific ports while potentially using different internal port numbers.
+
+#### Caddy
+
+Users can also specify Caddy endpoints to map services to HTTP and HTTPS. When configuring a Caddy endpoint, you need to provide the following information:
+
+1. Container Protocol: Currently, either HTTP or FCGI
+2. Container Port: The port your service is listening on inside the container
+3. Published Port: Either HTTP (80) or HTTPS (443)
+4. Domain: The domain name for the service
+5. Path: The URL path to listen on, which can include placeholders (e.g., `/*` listens at any request path starting from the root)
+
+This configuration allows for flexible and powerful routing of HTTP/HTTPS traffic to your services, including support for multiple domains and path-based routing.
+
+#### Redirect Rules
+
+Redirect Rules allow users to specify URL redirects. When configuring a redirect, you need to provide:
+
+1. Domain From: The source domain
+2. Domain To: The destination domain
+3. Status: The HTTP redirect status code (301, 302, 307, or 308)
+4. Path From: The source path (supports regular expressions)
+5. Path To: The destination path
+
+Redirects are useful for scenarios such as domain changes, HTTP to HTTPS redirects, or URL structure changes.
+
+Examples:
+
+1. Blog migration:
+   - Domain From: `old-domain.com`
+   - Domain To: `new-domain.com`
+   - Status: 301
+   - Path From: `/blog/(.*)`
+   - Path To: `/articles/$1`
+
+   This would permanently redirect all blog posts from the old domain to the articles section on the new domain.
+
+2. www to non-www redirect:
+   - Domain From: `www.example.com`
+   - Domain To: `example.com`
+   - Status: 301
+   - Path From: `/(.*)`
+   - Path To: `/$1`
+
+   This would permanently redirect all requests from the www subdomain to the root domain, maintaining the same path and query parameters.
+
+These examples demonstrate how Redirect Rules can be used to manage common URL redirection scenarios in Ptah.sh.
+
+#### Rewrite Rules
+
+Rewrite Rules allow users to modify URLs internally without changing what the user sees in their browser. When configuring a rewrite, you need to provide:
+
+1. Path From: The source path (supports regular expressions)
+2. Path To: The destination path
+
+Rewrites are useful for implementing clean URLs, content organization, or URL structures that don't directly map to your file system.
+
+Example:
+- Path From: `/products/(.*)/(.*)`
+- Path To: `/products.php?category=$1&item=$2`
+
+This would internally rewrite a URL like `/products/electronics/smartphone` to `/products.php?category=electronics&item=smartphone`, allowing for a cleaner URL structure.
+
+These powerful routing features in Ptah.sh enable you to create sophisticated URL handling schemes without modifying your application code, improving both SEO and user experience.
 
 ## 1-Click Apps
 
-1-Click Apps are preconfigured applications that are deployed to the server node. They can be used to deploy any service or process that is not part of the system. We recommend using 1-Click Apps to deploy any service that is not part of the system.
+1-Click Apps are preconfigured applications that can be quickly deployed to your server node. They provide a streamlined way to set up common services or processes without the need for manual configuration.
 
-<iframe style="width: 560px; height: 315px;" width="560" height="315" src="https://www.youtube.com/embed/2u-o20JsX1Q?si=NRwWmel9ZwlQAVRI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+To use a 1-Click App when creating a service:
+1. Navigate to the service creation page.
+2. Select the desired 1-Click App from the available templates.
+3. Click "Use template" to apply the 1-Click App configuration to your new service.
+
+We recommend using 1-Click Apps to deploy any service that is not part of your core system, as they come preconfigured with best practices and can save significant setup time.
+
+For more detailed information on 1-Click Apps, including how to use them and their benefits, see the [1-Click Apps](/concepts/1-click-apps/) page.
 
 You can browse all available 1-Click Apps in the [Marketplace page](/marketplace/).

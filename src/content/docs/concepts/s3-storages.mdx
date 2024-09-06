@@ -1,0 +1,41 @@
+---
+title: S3 Storages
+description: "Understanding S3 storage integration in Ptah.sh"
+---
+
+S3 (Simple Storage Service) is a widely-used object storage solution that provides scalable, durable, and secure storage for various types of data. Ptah.sh integrates with S3-compatible storage services to enhance data management and backup capabilities for your services.
+
+## Benefits of S3 Storage Integration
+
+1. **Data Backup**: Automatically back up your Docker Swarm volumes to S3 storage, ensuring data durability and facilitating disaster recovery.
+2. **Scalability**: S3 storage can easily scale to accommodate growing data needs without requiring changes to your application.
+3. **Cost-effective**: Pay only for the storage you use, with various storage classes available to optimize costs based on access patterns.
+4. **Compatibility**: Works with various S3-compatible storage providers, including Amazon S3, MinIO, and others.
+
+## Configuring S3 Storage
+
+To configure S3 storage for your Ptah.sh services:
+
+1. Set up an S3-compatible storage account with your preferred provider.
+2. Obtain the necessary credentials (access key, secret key) and endpoint information.
+3. Configure the S3 storage settings in your Ptah.sh dashboard.
+
+## Backing Up Volumes to S3
+
+Once S3 storage is configured, you can set up automated backups for your Docker Swarm volumes:
+
+1. In your service configuration, specify which volumes should be backed up.
+2. Configure backup schedules and retention policies.
+3. Ptah.sh will handle the rest, ensuring your data is regularly backed up to the configured S3 storage.
+
+Additionally, you can use the Backup Command feature to create custom backups of your service data. This feature allows you to define specific commands that will be executed to create backup files, which are then automatically uploaded to your configured S3 storage. For more information on using Backup Commands, see the [Services - Backup Command](/concepts/services/#backup-command) section.
+
+## Restoring from S3 Backups (soon)
+
+In case of data loss or when migrating services:
+
+1. Access the backup management interface in Ptah.sh.
+2. Select the desired backup version for the volume you want to restore.
+3. Initiate the restore process, and Ptah.sh will handle retrieving the data from S3 and restoring it to the appropriate volume.
+
+By leveraging S3 storage integration, you can ensure that your critical data is protected and easily recoverable, enhancing the overall reliability and resilience of your Ptah.sh-managed services.

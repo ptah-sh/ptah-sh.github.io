@@ -1,0 +1,50 @@
+---
+title: Docker Registries
+description: "Understanding and using Docker registries with Ptah.sh"
+---
+
+Docker registries are repositories for storing and distributing Docker images. Ptah.sh supports both public and private registries, giving you flexibility in managing your container images.
+
+## Types of Registries
+
+### Public Registries
+
+Public registries, such as Docker Hub, are freely accessible and don't require authentication for pulling images. They're ideal for open-source projects and publicly available images.
+
+### Private Registries
+
+Private registries require authentication and are used for storing proprietary or sensitive images. They offer better control over who can access your images.
+
+## Using Registries with Ptah.sh
+
+Ptah.sh allows users to pre-configure private Docker registries for use across their services. This approach simplifies the process of working with private registries and enhances security by centralizing credential management.
+
+### Pre-configuring Private Registries
+
+1. Navigate to the Docker Registries settings in your Ptah.sh dashboard.
+2. Add your private registries, providing necessary details such as:
+   - Registry URL
+   - Authentication credentials
+   - A friendly name for easy identification
+
+### Using Public Registries
+
+For public registries, no pre-configuration is needed. When using a public registry image, simply specify the full form of the Docker image name in your process configuration, for example:
+
+### Selecting a Registry for a Process
+
+When defining a process in Ptah.sh:
+
+1. In the process configuration form, you'll find a dropdown to select from your pre-configured registries.
+2. Choose the appropriate registry for your image.
+3. Specify the image name and tag.
+
+This method ensures that you don't need to input registry credentials each time you configure a process, streamlining your workflow and reducing the risk of credential exposure.
+
+## Best Practices
+
+- Use private registries for sensitive or proprietary images
+- Regularly update your images to include security patches
+- Use specific image tags rather than 'latest' to ensure consistency
+
+For more information on how to specify Docker images in your services, see the [Services](/concepts/services/#docker-images) page.
