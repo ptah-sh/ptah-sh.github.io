@@ -83,7 +83,9 @@
             "data": {
                 "name": "openpanel-api",
                 "dockerImage": "lindesvard/openpanel-api:latest",
-                "releaseCommand": "pnpm -r run migrate:deploy && pnpm start",
+                "releaseCommand": {
+                    "command": "pnpm -r run migrate:deploy && pnpm start"
+                },
                 "envVars": [
                     { "name": "NODE_ENV", "value": "production" },
                     { "name": "GEO_IP_HOST", "value": "geoip.{{service/internalDomainName}}" },
