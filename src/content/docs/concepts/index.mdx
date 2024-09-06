@@ -3,6 +3,52 @@ title: "Overview"
 description: "Ptah.sh service concepts"
 ---
 
-**Incomplete page**
+This section describes the key concepts implemented in Ptah.sh, providing an overview of the platform's architecture and functionality.
 
-This section describes concepts implemented in Ptah.sh.
+## Core Concepts
+
+### Nodes
+
+Nodes are the fundamental building blocks of the Ptah.sh platform. They represent physical or virtual servers that host services and are managed by Docker Swarm. For more details, see the [Nodes](/concepts/nodes/) page.
+
+### Services
+
+Services are the main functional units in Ptah.sh. They define the configuration and behavior of your applications. Each service consists of one or more processes. Learn more on the [Services](/concepts/services/) page.
+
+### Docker Registries
+
+Ptah.sh supports both public and private Docker registries for storing and distributing container images. Understanding how to work with registries is crucial for managing your services effectively. Explore more on the [Docker Registries](/concepts/docker-registries/) page.
+
+### S3 Storages
+
+S3-compatible storage integration enhances data management and backup capabilities in Ptah.sh. This feature allows for scalable and secure storage solutions. Dive deeper into this topic on the [S3 Storages](/concepts/s3-storages/) page.
+
+### 1-Click Apps
+
+1-Click Apps provide pre-configured application templates that can be quickly deployed, saving time and ensuring best practices. Learn how to leverage this feature on the [1-Click Apps](/concepts/1-click-apps/) page.
+
+## Platform Architecture
+
+Ptah.sh is built on a robust architecture that leverages Docker Swarm for orchestration, providing:
+
+- High availability and fault tolerance
+- Easy scaling of services
+- Efficient resource utilization
+- Simplified deployment and management
+
+## Key Features
+
+- **Automated Deployments**: Streamline your CI/CD pipeline with Ptah.sh's automated deployment capabilities.
+- **Monitoring and Logging**: Keep track of your services' health and performance with built-in monitoring and logging tools.
+- **Load Balancing**: Automatically distribute traffic across your services for optimal performance.
+- **Security**: Implement best practices in security with features like secret management and isolated networks.
+
+## Getting Started
+
+To begin using Ptah.sh effectively, we recommend:
+
+1. Familiarizing yourself with the core concepts outlined in this section.
+2. Exploring the detailed documentation for each concept.
+3. Setting up your first node and deploying a simple service to get hands-on experience.
+
+By understanding these fundamental concepts, you'll be well-equipped to leverage the full power of Ptah.sh for your application deployment and management needs.
