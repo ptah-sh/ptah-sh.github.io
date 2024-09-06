@@ -3,7 +3,7 @@
     "slug": "networks/observabilitystack-geoip-api",
     "description": "An API for Maxmind GeoIP databases",
     "about": "The GeoIP API is a RESTful API that provides access to the GeoIP database. It is used to determine the location of an IP address.",
-    "url": "https://github.com/observability-stack/geoip-api",
+    "url": "https://github.com/observabilitystack/geoip-api",
     "tags": ["geoip"],
     "form": {
         "type": "v-stack",
@@ -13,7 +13,7 @@
         {
             "name": "GeoIP API",
             "description": "GeoIP API",
-            "url": "https://github.com/observability-stack/geoip-api",
+            "url": "https://github.com/observabilitystack/geoip-api",
             "data": {
                 "name": "geoip-api",
                 "dockerImage": "observabilitystack/geoip-api:latest",
