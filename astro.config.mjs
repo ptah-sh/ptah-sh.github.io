@@ -160,24 +160,24 @@ export default defineConfig({
         {
           label: "Tutorial",
           items: [
-            { slug: 'tutorial' },
-            { slug: 'tutorial/vps' },
+            { slug: 'tutorial/' },
+            { slug: 'tutorial/vps/' },
             { label: 'Cloud-Hosted Panel', 
               items: [
-                { slug: 'tutorial/cloud' },
+                { slug: 'tutorial/cloud/' },
               ]
             },
             {
               label: 'Self-Hosted Panel',
               items: [
-                { slug: 'tutorial/self-hosted' },
+                { slug: 'tutorial/self-hosted/' },
               ]
             },
             {
-              slug: 'tutorial/service',
+              slug: 'tutorial/service/',
             },
             {
-              slug: 'tutorial/whats-next',
+              slug: 'tutorial/whats-next/',
             }
           ],
         },
