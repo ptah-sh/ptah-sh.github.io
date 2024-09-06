@@ -91,7 +91,7 @@
                     { "name": "GEO_IP_HOST", "value": "geoip.{{service/internalDomainName}}" },
                     { "name": "NEXT_PUBLIC_DASHBOARD_URL", "value": "https://{{domain}}" },
                     { "name": "BATCH_SIZE", "value": "5000" },
-                    { "name": "CLICKHOUSE_URL", "value": "clickhouse.{{service/internalDomainName}}" },
+                    { "name": "CLICKHOUSE_URL", "value": "http://clickhouse.{{service/internalDomainName}}:8123" },
                     { "name": "CLICKHOUSE_DB", "value": "default" },
                     { "name": "CLICKHOUSE_USER", "value": "{{databases/clickhouse/user}}" },
                     { "name": "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY", "value": "{{clerkPublicKey}}" },
@@ -134,7 +134,7 @@
                 "envVars": [
                     { "name": "NODE_ENV", "value": "production" },
                     { "name": "SELF_HOSTED", "value": "true" },
-                    { "name": "CLICKHOUSE_URL", "value": "clickhouse.{{service/internalDomainName}}" },
+                    { "name": "CLICKHOUSE_URL", "value": "http://clickhouse.{{service/internalDomainName}}:8123" },
                     { "name": "CLICKHOUSE_DB", "value": "default" },
                     { "name": "CLICKHOUSE_USER", "value": "{{databases/clickhouse/user}}" }
                 ],
@@ -162,10 +162,14 @@
                     { "name": "NEXT_PUBLIC_CLERK_SIGN_IN_URL", "value": "https://{{domain}}/login" },
                     { "name": "NEXT_PUBLIC_CLERK_SIGN_UP_URL", "value": "https://{{domain}}/register" },
                     { "name": "NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL", "value": "https://{{domain}}/" },
-                    { "name": "NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL", "value": "https://{{domain}}/" }
+                    { "name": "NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL", "value": "https://{{domain}}/" },
+                    { "name": "CLICKHOUSE_URL", "value": "http://clickhouse.{{service/internalDomainName}}:8123" },
+                    { "name": "CLICKHOUSE_DB", "value": "default" },
+                    { "name": "CLICKHOUSE_USER", "value": "{{databases/clickhouse/user}}" }
                 ],
                 "secretVars": {
                     "vars": [
+                        { "name": "CLICKHOUSE_PASSWORD", "value": "{{databases/clickhouse/password}}" },
                         { "name": "CLERK_SECRET_KEY", "value": "{{clerkSecretKey}}" },
                         { "name": "REDIS_URL", "value": "redis://default:{{databases/redis/password}}@redis.{{service/internalDomainName}}:6379" },
                         { "name": "DATABASE_URL", "value": "postgresql://{{databases/postgresql/user}}:{{databases/postgresql/password}}@pgbouncer.{{service/internalDomainName}}/{{databases/postgresql/database}}" }                    ]
