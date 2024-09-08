@@ -1,18 +1,38 @@
 ---
 import MarketplacePage from '../components/MarketplacePage.astro';
+import DocsCTA from '../components/DocsCTA.astro';
 
-const description = "Explore our 1-Click Apps Marketplace for easy-to-deploy, pre-configured applications and services. Save time and streamline your development process.";
+const description = "Explore our Self-hosted 1-Click Apps Marketplace for easy-to-deploy, pre-configured applications and services. Save time and streamline your development process.";
+
+// Structured data for better SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Self-Hosted Apps Marketplace aka 1-Click Apps",
+  "description": description,
+  "url": "https://ptah.sh/marketplace/"
+};
 ---
 <MarketplacePage 
-  title="1-Click Apps Marketplace" 
-  category=""
+  title="Self-Hosted Apps Marketplace aka 1-Click Apps"
   description={description}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+
   <div class="mb-8">
     <h2 class="text-2xl font-bold mb-4">See How Easy It Is</h2>
     <p class="mb-4">Watch this quick demo of our 1-Click Apps in action:</p>
-    <div class="w-[560px] h-[315px]">
-        <iframe style="width: 560px; height: 315px;" src="https://www.youtube.com/embed/2u-o20JsX1Q?si=oAM2RmGFPUvEi9Br" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <div class="relative w-full not-content" style="padding-top: 56.25%;">
+      <iframe 
+        class="absolute top-0 left-0 w-full h-full"
+        src="https://www.youtube.com/embed/2u-o20JsX1Q?si=oAM2RmGFPUvEi9Br" 
+        title="YouTube video player: 1-Click Apps Demo" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allowfullscreen
+        alt="Demo video of 1-Click Apps deployment process"
+      ></iframe>
     </div>
   </div>
 
@@ -20,4 +40,24 @@ const description = "Explore our 1-Click Apps Marketplace for easy-to-deploy, pr
     <h2 class="text-2xl font-bold mb-4">Why the 1-Click Apps Marketplace is Useful</h2>
     <p class="mb-4">The 1-Click Apps Marketplace is a valuable resource for developers and businesses. It provides a wide range of pre-configured applications and services that can be deployed with a single click. This saves time and effort, allowing users to focus on their core tasks rather than setting up and configuring applications.</p>
   </div>
+
+  <div class="mb-8">
+    <h2 class="text-2xl font-bold mb-4">Why You Should Use Self-Hosted Apps</h2>
+    <p class="mb-6">
+      Self-hosted applications offer numerous advantages that make them an attractive option for businesses and individuals alike:
+    </p>
+    <ul class="list-disc pl-6 mb-4 space-y-2">
+      <li><strong>Data Control and Privacy:</strong> With self-hosted apps, you have complete control over your data. It remains on your servers, reducing the risk of data breaches and ensuring compliance with data protection regulations.</li>
+      <li><strong>Customization and Flexibility:</strong> Self-hosted solutions allow for greater customization to fit your specific needs. You can modify the code, add features, or integrate with other systems more easily.</li>
+      <li><strong>Cost-Effectiveness:</strong> While there may be initial setup costs, self-hosted apps can be more cost-effective in the long run, especially for larger organizations or high-usage scenarios.</li>
+      <li><strong>Performance Control:</strong> You can optimize the hardware and network infrastructure to ensure the best performance for your specific use case.</li>
+      <li><strong>Independence:</strong> Self-hosting reduces reliance on third-party services, protecting you from sudden changes in pricing, features, or even service discontinuation.</li>
+      <li><strong>Learning Opportunity:</strong> For developers and IT professionals, self-hosting provides valuable experience in server management, security, and application deployment.</li>
+    </ul>
+    <p>
+      With Ptah.sh's 1-Click Apps Marketplace, you can enjoy these benefits of self-hosting while significantly reducing the complexity and time typically associated with setting up and managing self-hosted applications.
+    </p>
+  </div>
+
+  <DocsCTA />
 </MarketplacePage>
