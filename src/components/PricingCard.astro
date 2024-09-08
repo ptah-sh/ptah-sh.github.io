@@ -16,10 +16,11 @@ interface Props {
     size?: 'normal' | 'large';
 }
 
-const { name, description, price, singleServer, customErrorPages, roleManagement, dedicatedDiscord, mostPopular, waitlist, size = 'normal' } = Astro.props;
+const { name, description, price, singleServer, customErrorPages, roleManagement, dedicatedDiscord, mostPopular, waitlist } = Astro.props;
+
 ---
 
-<div class={`pricing-card ${mostPopular ? 'relative z-10 md:scale-105 border-2 border-green-600' : ''} bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 md:p-6 flex flex-col ${size === 'large' ? 'md:transform md:scale-105' : ''} my-4`}>
+<div class={`pricing-card ${mostPopular ? 'relative z-10 md:scale-105 border-2 border-green-600 md:transform md:scale-105' : 'border border-gray-200 dark:border-gray-700'} bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 md:p-6 flex flex-col my-4`}>
     <meta itemprop="price" content={price} />
     <meta itemprop="priceCurrency" content="USD" />
     <meta itemprop="name" content={`${name} Plan`} />
