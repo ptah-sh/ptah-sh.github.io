@@ -1,6 +1,4 @@
 ---
-import { Icon } from "@astrojs/starlight/components";
-import FatCheckIcon from "../components/icons/FatCheckIcon.astro";
 import PricingFeature from "./PricingFeature.astro";
 
 interface Props {
@@ -13,10 +11,13 @@ interface Props {
     dedicatedDiscord?: boolean;
     mostPopular?: boolean;
     waitlist?: string;
-    size?: 'normal' | 'large';
+    uptimeMonitoring?: {
+        hint?: string;
+        partial?: boolean;
+    };
 }
 
-const { name, description, price, singleServer, customErrorPages, roleManagement, dedicatedDiscord, mostPopular, waitlist } = Astro.props;
+const { name, description, price, singleServer, customErrorPages, roleManagement, dedicatedDiscord, mostPopular, waitlist, uptimeMonitoring } = Astro.props;
 
 ---
 
@@ -53,6 +54,12 @@ const { name, description, price, singleServer, customErrorPages, roleManagement
         {customErrorPages ? <PricingFeature soon name="Custom Error Pages" hint="Custom Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." /> : <PricingFeature soon name="Standard Error Pages" partial hint="Ptah.sh branded Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." />}
         {dedicatedDiscord ? <PricingFeature name="Dedicated Discord Channel" icon="discord" /> : <PricingFeature name="Community Discord Channel" icon="discord" partial />}
         {roleManagement ? <PricingFeature name="Multiple User Roles" soon /> : <PricingFeature name="Single User Role" partial />}
+        <PricingFeature 
+            name="Uptime Monitoring" 
+            soon 
+            hint={uptimeMonitoring?.hint}
+            partial={uptimeMonitoring?.partial}
+        />
     </ul>
 
     <div class="italic text-xs md:text-sm text-center text-gray-600 dark:text-gray-400 mb-4 text-balance">{description}</div>

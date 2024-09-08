@@ -11,7 +11,7 @@ const {
 } = Astro.props;
 ---
 
-<li class="flex relative group">
+<li class="flex relative group items-center">
     {
         partial ? (
             <Icon name={icon || "approve-check-circle"} />
@@ -25,11 +25,17 @@ const {
             soon ? 'text-gray-400 dark:text-gray-500' : 'text-gray-500 dark:text-gray-400'
         } ms-3`}
     >
-        <span class={hint ? 'border-b border-dotted border-gray-500 dark:border-gray-400 cursor-help' : ''}>{name}</span>{soon && <span class="text-xs whitespace-nowrap ml-1">(soon)</span>}
+        <span class={hint ? 'border-b border-dotted border-gray-500 dark:border-gray-400 cursor-help' : ''}>{name}</span>
     </span>
 
+    {soon && (
+        <span class="ml-2 px-2 py-0.5 text-xs font-medium bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-300 rounded-full">
+            Soon
+        </span>
+    )}
+
     {hint && (
-        <div class="absolute left-0 bottom-full mb-2 hidden group-hover:block bg-gray-800 text-white text-sm rounded p-2 max-w-">
+        <div class="absolute left-0 bottom-full mb-2 hidden group-hover:block bg-gray-800 text-white text-sm rounded p-2 max-w-xs z-10">
             {hint}
         </div>
     )}
