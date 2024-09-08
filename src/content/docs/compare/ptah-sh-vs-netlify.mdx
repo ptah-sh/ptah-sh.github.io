@@ -1,0 +1,98 @@
+---
+title: "Ptah.sh vs Netlify: Choosing the Right Platform for Your Application"
+description: "A comprehensive comparison of Ptah.sh and Netlify for application deployment and management."
+sidebar:
+    label: Ptah.sh vs Netlify
+---
+import DocsCTA from '../../../components/DocsCTA.astro';
+
+Ptah.sh and Netlify are both modern platforms designed for deploying and managing applications, but they cater to different needs and audiences. This comparison will help you understand the key differences and decide which platform is best suited for your project.
+
+## Focus and Target Audience
+
+### Ptah.sh
+- General-purpose application deployment platform
+- Supports a wide range of applications and languages
+- Suitable for both static and dynamic applications
+
+### Netlify
+- Primarily focused on static sites and JAMstack applications
+- Optimized for frontend frameworks and static site generators
+- Emphasizes continuous deployment from Git
+
+## Deployment Model
+
+### Ptah.sh
+- Container-based platform using Docker and Docker Swarm
+- Supports both self-hosted and cloud options
+- Flexible infrastructure choices
+
+### Netlify
+- Integrated CDN for static asset delivery
+- Serverless functions for dynamic functionality
+- Git-based deployment workflow
+
+## Scalability
+
+### Ptah.sh
+- Horizontal scaling using Docker Swarm
+- Built-in load balancing
+- Manual control over resource allocation
+
+### Netlify
+- Automatic scaling for static content delivery
+- Serverless functions scale automatically
+- Limited control over underlying infrastructure
+
+## Pricing
+
+### Ptah.sh
+- Straightforward pricing model
+- Self-hosted option for potential cost savings
+- [Fair source model](/blog/2024-08-09-we-use-fair-source/) for sustainable development
+
+### Netlify
+- Free tier for personal projects
+- Paid plans based on usage and features
+- Additional costs for extra build minutes and serverless function execution
+
+## Features Comparison
+
+| Feature | Ptah.sh | Netlify |
+|---------|---------|---------|
+| Container support | Yes | No |
+| Static site hosting | Yes | Yes |
+| Serverless functions | No | Yes |
+| Custom domains | Yes | Yes |
+| SSL certificates | Yes | Yes |
+| CI/CD integration | Yes | Yes |
+| Database management | Yes | No (requires external service) |
+| Backend services | Yes | Limited |
+| Form handling | No | Yes |
+| Split testing | No | Yes |
+
+## When to Choose Ptah.sh
+
+- You need a flexible, general-purpose deployment platform
+- Your application requires traditional backend services
+- You want more control over your infrastructure
+- You prefer a container-based deployment model
+- You need to self-host your applications
+
+## When to Choose Netlify
+
+- You're primarily working with static sites or JAMstack applications
+- You need built-in form handling and split testing features
+- You want a platform optimized for frontend frameworks and static site generators
+- You prefer a Git-based deployment workflow
+- You need easy integration with third-party services through Netlify Add-ons
+
+## Conclusion
+
+Ptah.sh offers a more flexible, container-based deployment solution that's suitable for a wide range of applications, including those with traditional backend requirements. Its straightforward approach and self-hosting options make it attractive for teams that need more control over their infrastructure.
+
+Netlify, on the other hand, excels in deploying static sites and JAMstack applications, with a focus on simplifying the workflow for frontend developers and providing additional features like form handling and split testing.
+
+Ptah.sh is a good alternative to Netlify for teams and businesses that require more flexibility in their deployment options, need support for traditional backend services, or want the option to self-host their applications. If you're looking for a solution that offers a balance between simplicity and power, with the ability to handle diverse application types beyond static sites, Ptah.sh could be the ideal choice.
+
+<DocsCTA />
