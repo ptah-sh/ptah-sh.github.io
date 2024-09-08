@@ -12,7 +12,7 @@ interface Props {
 const { title, description, listItems = [], link } = Astro.props;
 ---
 
-<div class="m-4 rounded-lg flex flex-col h-full">
+<div class="border rounded-xl p-2 md:p-4 m-2 md:m-4">
   <h3 class="text-lg font-bold mb-2 text-balance text-center">{title}</h3>
   <p class="text-balance text-center">{description}</p>
   {listItems.length > 0 && (

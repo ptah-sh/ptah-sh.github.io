@@ -3,108 +3,73 @@ import { Icon } from "@astrojs/starlight/components";
 import FatCheckIcon from "../components/icons/FatCheckIcon.astro";
 import PricingFeature from "./PricingFeature.astro";
 
-const {
-    name,
-    description,
-    price,
-    singleServer,
-    mostPopular,
-    dedicatedDiscord,
-    roleManagement,
-    waitlist,
-    customErrorPages,
-} = Astro.props;
+interface Props {
+    name: string;
+    description: string;
+    price: string;
+    singleServer?: boolean;
+    customErrorPages?: boolean;
+    roleManagement?: boolean;
+    dedicatedDiscord?: boolean;
+    mostPopular?: boolean;
+    waitlist?: string;
+    size?: 'normal' | 'large';
+}
+
+const { name, description, price, singleServer, customErrorPages, roleManagement, dedicatedDiscord, mostPopular, waitlist, size = 'normal' } = Astro.props;
 ---
 
-<div
-    class:list={[
-        "w-full max-w-sm mt-4 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700",
-        { "border-green-700 border-4": mostPopular },
-    ]}
-    itemscope
-    itemtype="https://schema.org/PriceSpecification"
->
+<div class={`pricing-card ${mostPopular ? 'relative z-10 md:scale-105 border-2 border-green-600' : ''} bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 md:p-6 flex flex-col ${size === 'large' ? 'md:transform md:scale-105' : ''} my-4`}>
     <meta itemprop="price" content={price} />
     <meta itemprop="priceCurrency" content="USD" />
     <meta itemprop="name" content={`${name} Plan`} />
     <meta itemprop="description" content={description} />
-    <div class="flex flex-col items-center">
-        {
-            mostPopular && (
-                <div class="absolute -m-14 -rotate-3 bg-green-600 font-semibold text-white w-44 text-center rounded">
-                    <div class="rotate-2 p-2 font-mono">recommended</div>
-                </div>
-            )
-        }
-        <div class:list={["font-semibold", { "text-2xl": mostPopular }]}>
+    <div class="flex flex-col items-center mb-4 md:mb-6">
+        {mostPopular && (
+            <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 -rotate-3 bg-green-600 text-white w-44 text-center rounded">
+                <div class="rotate-2 p-2 font-mono text-sm">recommended</div>
+            </div>
+        )}
+        <div class={`font-semibold ${mostPopular ? 'text-xl md:text-2xl' : 'text-lg md:text-xl'} mb-2`}>
             {name}
         </div>
-        <div class="items-baseline text-gray-900 dark:text-white">
-            <span class="text-3xl font-semibold">$</span>
-            <span class="text-5xl font-extrabold tracking-tight">{price}</span>
-            <span
-                class="ms-1 text-xl font-normal text-gray-500 dark:text-gray-400"
-            >
-                /mo
-            </span>
+        <div class="flex items-baseline text-gray-900 dark:text-white">
+            <span class="text-2xl md:text-3xl font-semibold">$</span>
+            <span class="text-4xl md:text-5xl font-extrabold tracking-tight">{price}</span>
+            <span class="ml-1 text-lg md:text-xl font-normal text-gray-500 dark:text-gray-400">/mo</span>
         </div>
-        <small class="italic text-gray-400">(price excludes tax)</small>
+        <small class="italic text-gray-400 mt-1">(price excludes tax)</small>
     </div>
-    <ul role="list" class="space-y-5 my-7 ps-0">
+    <ul class="space-y-2 md:space-y-4 mb-4 md:mb-6 flex-grow px-2 md:px-0">
         <li class="flex items-center">
-            <svg
-                class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-            >
-                <path
-                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"
-                ></path>
-            </svg>
-            <span
-                class="leading-tight dark:text-gray-400 ms-3 text-lg text-green-600 font-bold"
-            >
-                Free 14 Days Trial
-            </span>
+            <svg class="w-4 h-4 text-blue-700 dark:text-blue-500 mr-2 md:mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <span class="text-base md:text-lg text-green-600 font-bold">Free 14 Days Trial</span>
         </li>
         <PricingFeature name="Unlimited Apps & Databases" />
         <PricingFeature name="Unlimited Backups" />
         <PricingFeature name="Unlimited Users" />
-
-        {singleServer && <PricingFeature name="Single Server" partial />}
-        {!singleServer && <PricingFeature name="Unlimited Servers" />}
-
-        {customErrorPages && <PricingFeature soon name="Custom Error Pages" hint="Custom Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." />}
-        {!customErrorPages && <PricingFeature soon name="Standard Error Pages" partial hint="Ptah.sh branded Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." />}
-
-        {dedicatedDiscord && <PricingFeature name="Dedicated Discord Channel" icon="discord" />}
-        {!dedicatedDiscord && <PricingFeature name="Community Discord Channel" icon="discord" partial />}
-
-        {roleManagement && <PricingFeature name="Multiple User Roles" soon />}
-        {!roleManagement && <PricingFeature name="Single User Role" partial />}
+        {singleServer ? <PricingFeature name="Single Server" partial /> : <PricingFeature name="Unlimited Servers" />}
+        {customErrorPages ? <PricingFeature soon name="Custom Error Pages" hint="Custom Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." /> : <PricingFeature soon name="Standard Error Pages" partial hint="Ptah.sh branded Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." />}
+        {dedicatedDiscord ? <PricingFeature name="Dedicated Discord Channel" icon="discord" /> : <PricingFeature name="Community Discord Channel" icon="discord" partial />}
+        {roleManagement ? <PricingFeature name="Multiple User Roles" soon /> : <PricingFeature name="Single User Role" partial />}
     </ul>
 
-    <div class="italic text-sm text-center text-balance p-2">{description}</div>
+    <div class="italic text-xs md:text-sm text-center text-gray-600 dark:text-gray-400 mb-4 text-balance">{description}</div>
 
-    {
-        waitlist ? (
-            <button
-                type="button"
-                onclick={"window.open('" + waitlist + "')"}
-                class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center font-medium"
-            >
-                Join the Waitlist!
-            </button>
-        ) : (
-            <a
-                href="https://ctl.ptah.sh/register"
-                style="color: white;"
-                class="no-underline bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-200 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900 rounded-lg text-sm px-5 py-2.5 inline-flex justify-center w-full text-center font-medium"
-            >
-                Start free Trial
-            </a>
-        )
-    }
+    {waitlist ? (
+        <button
+            type="button"
+            onclick={`window.open('${waitlist}')`}
+            class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+            Join the Waitlist!
+        </button>
+    ) : (
+        <a
+            href="https://ctl.ptah.sh/register"
+            class="block w-full text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
+            Start free Trial
+        </a>
+    )}
 </div>

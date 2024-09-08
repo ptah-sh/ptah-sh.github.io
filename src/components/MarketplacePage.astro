@@ -35,7 +35,7 @@ const defaultDescription = "Deploy ready to use " + categories.slice(0, 3).map(c
     {showCategories && (
         <div>
             <h2>Categories</h2>
-            <ul class="my-8 p-0 list-none grid gap-4 grid-cols-4">
+            <ul class="my-8 p-0 list-none grid gap-4 grid-cols-4 not-content">
                 {categories.map(category => (
                     <li class="w-full">
                         <a href={`/marketplace/${category.id}/`}

@@ -14,16 +14,12 @@ hero:
     </span>
   tagline: <strong>With SSL and Backups</strong>. <span class="block text-balance">Flexible, <a href="/blog/2024-08-09-we-use-fair-source/">fair source</a> (<a href="https://r.ptah.sh/github" rel="nofollow" target="_blank">on GitHub</a>) alternative to Heroku which puts you in control of your expenses.</span>
   image:
-    html: |
-      <iframe width="400" height="315" src="https://www.youtube.com/embed/k34Zdwcsm6I?si=h4f0rll8KbHceFS0" title="Deploy WordPress with Docker to VPS in Seconds!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    file: ../../assets/hero.svg
   actions:
     - text: Start Free 14 Days Trial
       link: https://ctl.ptah.sh/register
       icon: right-arrow
       variant: primary
-    # - text: Read the Starlight docs
-    #   link: https://starlight.astro.build
-    #   icon: external
     - text: Case Studies
       link: /case-studies/
       icon: rocket
@@ -33,100 +29,77 @@ import { Card, CardGrid, Icon } from '@astrojs/starlight/components';
 import PricingCard from '../../components/PricingCard.astro';
 import Twitter from '../../components/Twitter.astro';
 import FeatureCard from '../../components/FeatureCard.astro';
+import DocsCTA from '../../components/DocsCTA.astro';
 
-<div class="text-center">
-  ## Save up to 82% costs on hosting your services
+<div class="text-center max-w-3xl mx-auto">
+  <h2 class="text-balance">Deploy and Scale with Ease, Save up to 82% on Hosting Costs</h2>
 
-  <div class="text-center flex justify-center items-center">
-    <span class="text-[96px] italic text-gray-200">«</span>
-    <blockquote class="max-w-[650px] inline-block p-4 italic" style="border-inline-start: 0;">
+  <div class="flex flex-col md:flex-row justify-center items-center bg-gray-100 dark:bg-gray-800 rounded-lg p-4 my-6">
+    <span class="hidden md:inline-block text-4xl md:text-5xl italic text-gray-400 mr-2">&laquo;</span>
+    <blockquote class="max-w-[550px] text-sm md:text-base italic px-4" style="border-inline-start: 0;">
       Yearly <strong>expenses decreased from $4,300 to $768</strong>, a remarkable 82% reduction. This substantial saving over the course of a year provided E-Sportstats.com with significant financial flexibility.
 
-        <Twitter class="text-sm w-full justify-end inline-flex" handle="b_shulha" name="Bohdan Shulha, CTO of E-Sportstats.com" />
-
+      <Twitter class="text-xs w-full justify-end inline-flex mt-2" handle="b_shulha" name="Bohdan Shulha, CTO of E-Sportstats.com" />
     </blockquote>
-    <span class="text-[96px] italic text-gray-200">»</span>
+    <span class="hidden md:inline-block text-4xl md:text-5xl italic text-gray-400 ml-2">&raquo;</span>
   </div>
 
+<div class="not-content">
   <a href="/case-studies/e-sportstats/"
-    style="color: white"
-    class="border m-2 py-2 px-4 inline-block rounded-xl bg-green-600 font-semibold hover:bg-green-900"
+    class="inline-block py-2 px-4 rounded-xl bg-green-600 text-white font-semibold hover:bg-green-700 transition-colors"
   >
     Read E-Sportstats Case Study
   </a>
+  </div>
 </div>
 
+<div class="my-8 max-w-3xl mx-auto">
+  <h2 class="text-2xl font-semibold mb-4 text-center">See Ptah.sh in Action</h2>
+  <div class="relative" style="padding-bottom: 56.25%;">
+    <iframe 
+      src="https://www.youtube.com/embed/k34Zdwcsm6I" 
+      title="Deploy WordPress with Docker to VPS in Seconds!"
+      frameborder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowfullscreen
+      class="absolute top-0 left-0 w-full h-full"
+      style="height: 100%; width: 100%;"
+    ></iframe>
+  </div>
+</div>
 
-## Why Ptah.sh?
+## Why Choose Ptah.sh?
 
 <CardGrid stagger>
-	<Card title="Easy to Use" icon="pencil">
-		Ptah.sh is a SaaS for indie and small to medium businesses. It requires us to create the easiest hosting platform.
+	<Card title="User-Friendly" icon="pencil">
+		Designed for indie developers and SMBs, Ptah.sh offers the simplest hosting experience.
 	</Card>
-	<Card title="Host on your own VPS" icon="setting">
-		Ptah.sh provides VPS management service. Pick any cloud provider you want - AWS, DigitalOcean, <a href="https://r.ptah.sh/hetzner" rel="nofollow">Hetzner</a> and we'll deploy your software there.
+	<Card title="Your Infrastructure, Your Control" icon="setting">
+		Deploy on your preferred VPS - AWS, <a href="https://r.ptah.sh/digitalocean" rel="nofollow">DigitalOcean</a>, <a href="https://r.ptah.sh/hetzner" rel="nofollow">Hetzner</a>, and more.
 	</Card>
-	<Card title="Focus on What Matters" icon="add-document">
-		Deploy fully functional apps backed with databases and queues with our <a href="/marketplace/">1-Click Apps Marketplace</a>. Get your complex applications up and running in minutes, not hours.
+	<Card title="Rapid Deployment" icon="rocket">
+		Launch complex apps with databases and queues using our <a href="/marketplace/">1-Click Apps Marketplace</a>.
 	</Card>
-	<Card title="Secure by Default" icon="approve-check">
-	 <ul>
-	  <li>Ptah.sh doesn't require you to have any ports open. You can even manage intranet infrastructure with our cloud option.</li>
-		<li>Web requests are served by Caddy, so you're getting HTTPS for free and built-in.</li>
-		</ul>
+	<Card title="Security First" icon="approve-check">
+		No open ports required. HTTPS by default with Caddy. Manage even intranet infrastructure securely.
 	</Card>
-	<Card title="Powered by Docker Swarm" icon="setting">
-		We decided to not invent the wheel and we use the power of Docker Swarm, which is a proven technology by thousands of businesses.
-	</Card>
-	<Card title="Private Cloud" icon="rocket">
-    Create your own private cloud infrastructure. Perfect for businesses with specific security or compliance requirements.
-  </Card>
 </CardGrid>
 
-<div class="md:grid grid-cols-2 py-8 gap-4">
-  <div>
-    <h2 class="text-center mb-4">
-      😰 Before
-    </h2>
-    <div style="margin-top: 0" class="border rounded-xl p-4 m-4 border-red-500 border-2">
-      <ul>
-        <li>Spend <strong>$ * hours</strong> on configuration</li>
-        <li>Fight the limitations of managed services</li>
-        <li>Live with low-performance instances</li>
-        <li>Pay for every tiny feature <span class="italic text-sm text-gray-500">(including backups!)</span></li>
-        <li>Be afraid of quotas and enormous bills <span class="italic text-sm text-gray-500">(hey, Vercel!)</span></li>
-      </ul>
-      <div class="text-right">
-        <small class="italic text-xs text-gray-500">* with cloud or self-managed VPS</small>
-      </div>
-    </div>
-  </div>
+## How It Works
 
-  <div style="margin-top: 0" class="h-full">
-      <h2 class="text-center mb-4">
-        😌 After
-      </h2>
-      <div style="margin-top: 0" class="border rounded-xl p-4 m-4 border-green-600 border-4">
-        <ul>
-          <li>Configure services in seconds<br/><span class="italic text-sm text-gray-500">(and save bags of 💲 and hours of time)</span></li>
-          <li>Adjust as you need</li>
-          <li>High-performant, high-memory, high-storage instances<br/><span class="italic text-sm text-gray-500">(bring your own servers)</span></li>
-          <li>Simple pricing model <span class="italic text-sm text-gray-500">(free backups!)</span></li>
-          <li>No unexpected bills <span class="italic text-sm text-gray-500">(hey, Vercel!)</span></li>
-        </ul>
-        <div class="text-right">
-          <small class="italic text-xs text-gray-500">* with ptah.sh cloud option</small>
-        </div>
-      </div>
-    </div>
-</div>
+1. **Choose Your Server**: Select your preferred VPS provider.
+2. **Connect**: Link your server to Ptah.sh.
+3. **Deploy**: Use our 1-click marketplace or custom Docker images.
+4. **Manage**: Monitor and scale your apps with ease.
+
+<DocsCTA />
 
 <div id="pricing">
 ## Simple pricing for projects of any size
 
   <p>Are you an indie hacker? Small startup? Established business? We've got your back!</p>
 
-  <div class="md:flex gap-12">
+  <div class="flex flex-col md:flex-row justify-center items-stretch gap-0 not-content">
     <PricingCard name="Hobby" description="Perfect plan to try the service or host non-critical applications" price="9" singleServer />
     <PricingCard name="Startup" description="Need more power or an improved stability? This is your choice!" price="19"
       customErrorPages
@@ -154,32 +127,33 @@ You can self-host the service by clonning the <a href="https://r.ptah.sh/github"
 
 <div class="grid md:grid-cols-3 gap-4 py-8">
   <FeatureCard
-    title="Any Language, Any Framework"
-    description="Run services in Ruby, Nodejs, PHP, Python, Java, and more."
+    title="Language Agnostic"
+    description="Run services in Ruby, Node.js, PHP, Python, Java, and more."
     listItems={[
-      "Ruby on Rails? No problem.",
-      "Spring Boot? As you wish.",
-      "Laravel? What a pleasure!",
-      "Wordpress? Oh, ok..."
+      "Ruby on Rails",
+      "Spring Boot",
+      "Laravel",
+      "And many others..."
     ]}
   />
 
   <FeatureCard
-    title="Any Database"
-    description="MySQL, PostgreSQL, MongoDB, Supabase! We'll launch anything!"
+    title="Database Flexibility"
+    description="Launch and manage MySQL, PostgreSQL, MongoDB, and more."
     listItems={[
-      "Automated backups.",
-      "Disk Space Monitoring <small>(soon)</small>."
+      "Automated backups",
+      "Easy scaling",
+      "Performance monitoring"
     ]}
   />
 
   <FeatureCard
-    title="Any Docker Image"
-    description="Run exotic images with ease."
+    title="Docker-Powered"
+    description="Run any Docker image with advanced customization options."
     listItems={[
-      "Custom Healthchecks.",
-      "Custom Startup Commands.",
-      "Custom Storage Options."
+      "Custom healthchecks",
+      "Flexible startup commands",
+      "Volume management"
     ]}
   />
 
@@ -211,6 +185,17 @@ You can self-host the service by clonning the <a href="https://r.ptah.sh/github"
       url: "/marketplace/"
     }}
   />
+</div>
+
+## Trusted By Developers
+
+<div class="flex flex-wrap justify-center items-center gap-8 py-8 not-content">
+  <a href="https://openpanel.dev" target="_blank" rel="nofollow">
+    <img src="/logos/openpanel.svg" alt="OpenPanel" class="h-8 w-auto" />
+  </a>
+  <a href="https://e-sportstats.com" target="_blank" rel="nofollow">
+    <img src="/logos/e-sportstats.svg" alt="E-Sportstats" class="h-8 w-auto" />
+  </a>
 </div>
 
 ## Support & Contact
@@ -329,3 +314,5 @@ You can self-host the service by clonning the <a href="https://r.ptah.sh/github"
     </div>
   </div>
 </div>
+
+<DocsCTA />

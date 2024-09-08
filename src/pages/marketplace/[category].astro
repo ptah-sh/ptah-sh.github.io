@@ -26,7 +26,7 @@ const templates = await getCollection('marketplace', entry => entry.id.startsWit
 >
     <h2>{category.data.description}</h2>
 
-    <ul class="my-8 p-0 list-none grid gap-4 grid-cols-4">
+    <ul class="my-8 p-0 list-none grid gap-4 grid-cols-4 not-content">
         {templates.map(template => (
             <li class="w-full">
                 <a href={`/marketplace/${template.id}/`}
