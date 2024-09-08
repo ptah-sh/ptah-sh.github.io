@@ -54,12 +54,12 @@ const { name, description, price, singleServer, customErrorPages, roleManagement
             <PricingFeature 
                 name="Single Server" 
                 partial 
-                hint="Users provide their own server. We offer the PaaS control layer."
+                hint="You provide your own server. We offer the PaaS control layer."
             />
         ) : (
             <PricingFeature 
                 name="Unlimited Servers" 
-                hint="Users provide their own servers. We offer the PaaS control layer for multiple servers."
+                hint="You provide your own servers. We offer the PaaS control layer for multiple servers."
             />
         )}
         {customErrorPages ? <PricingFeature soon name="Custom Error Pages" hint="Custom Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." /> : <PricingFeature soon name="Standard Error Pages" partial hint="Ptah.sh branded Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." />}
