@@ -51,7 +51,7 @@ const tags = template?.data.tags.map((tag: any) => {
         <dt>About {template.data.name}</dt>
         <dd>{template.data.about}</dd>
         <dt>Website</dt>
-        <dd><a href={template?.data.url} rel="noopener noreferrer nofollow" target="_blank">{template?.data.url}</a></dd>
+        <dd><a href={template?.data.url} rel="noopener nofollow" target="_blank">{template?.data.url}</a></dd>
         <dt>Extends</dt>
         <dd>
             {extendsApps.length === 0 && <i>None</i>}
@@ -81,12 +81,12 @@ const tags = template?.data.tags.map((tag: any) => {
             <ul class="list-disc pl-5">
                 {template.data.thirdParty.map((requirement: any) => (
                     <li class="mb-2">
-                        <a href={requirement.url} class="font-semibold text-blue-600 hover:underline" rel="noopener noreferrer nofollow" target="_blank">{requirement.name}</a>
+                        <a href={requirement.url} class="font-semibold text-blue-600 hover:underline" rel="noopener nofollow" target="_blank">{requirement.name}</a>
                         {requirement.description && (
                             <span class="text-gray-700"> - {requirement.description}</span>
                         )}
                         {requirement.instructionsUrl && (
-                            <span> (<a href={requirement.instructionsUrl} class="text-blue-600 hover:underline" rel="noopener noreferrer nofollow" target="_blank">Setup instructions</a>)</span>
+                            <span> (<a href={requirement.instructionsUrl} class="text-blue-600 hover:underline" rel="noopener nofollow" target="_blank">Setup instructions</a>)</span>
                         )}
                     </li>
                 ))}
@@ -109,7 +109,7 @@ const tags = template?.data.tags.map((tag: any) => {
                 </div>
 
                 <div class="px-4 text-sm">
-                    <a href={process.url} rel="noopener noreferrer nofollow" target="_blank">Documentation</a>
+                    <a href={process.url} rel="noopener nofollow" target="_blank">Documentation</a>
                 </div>
             </li>
         ))}
