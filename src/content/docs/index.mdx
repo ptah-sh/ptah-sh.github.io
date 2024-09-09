@@ -26,6 +26,8 @@ hero:
 ---
 
 import { Card, CardGrid, Icon } from '@astrojs/starlight/components';
+import { YouTube } from '@astro-community/astro-embed-youtube';
+
 import PricingCard from '../../components/PricingCard.astro';
 import Twitter from '../../components/Twitter.astro';
 import FeatureCard from '../../components/FeatureCard.astro';
@@ -55,16 +57,8 @@ import DocsCTA from '../../components/DocsCTA.astro';
 
 <div class="my-8 max-w-3xl mx-auto">
   <h2 class="text-2xl font-semibold mb-4 text-center">See Ptah.sh in Action</h2>
-  <div class="relative" style="padding-bottom: 56.25%;">
-    <iframe 
-      src="https://www.youtube.com/embed/k34Zdwcsm6I" 
-      title="Deploy WordPress with Docker to VPS in Seconds!"
-      frameborder="0" 
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-      allowfullscreen
-      class="absolute top-0 left-0 w-full h-full"
-      style="height: 100%; width: 100%;"
-    ></iframe>
+  <div class="relative">
+    <YouTube id="k34Zdwcsm6I" title="Deploy WordPress with Docker to VPS in Seconds!" />
   </div>
 </div>
 
