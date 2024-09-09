@@ -2,7 +2,7 @@
 import type { GetStaticPaths } from "astro";
 import MarketplacePage from "../../../components/MarketplacePage.astro";
 import { getCollection, getEntry } from 'astro:content';
-
+import { Aside } from '@astrojs/starlight/components';
 
 export const getStaticPaths = (async () => {
     const apps = await getCollection('marketplace', entry => entry.id.includes('/'));
@@ -21,6 +21,10 @@ export const getStaticPaths = (async () => {
 
 const category = await getEntry('marketplace', Astro.params.category);
 const template = await getEntry('marketplace', `${Astro.params.category}/${Astro.params.template}`);
+
+if (!template) {
+    return Astro.redirect('/404');
+}
 
 const extendsApps = await getCollection('marketplace', entry => template.data.extends?.map((e: any) => e.slug).includes(entry.id));
 const usedByApps = await getCollection('marketplace', entry => entry.data.extends?.map((e: any) => e.slug).includes(template.id));
@@ -73,8 +77,7 @@ const tags = template?.data.tags.map((tag: any) => {
     </dl>
 
     {template?.data.thirdParty && template.data.thirdParty.length > 0 && (
-        <div class="my-6 bg-gray-50 p-4 rounded-lg">
-            <h2 class="text-xl font-bold mb-3">Third-Party Requirements</h2>
+        <Aside type="note" title="Third-Party Requirements">
             <ul class="list-disc pl-5">
                 {template.data.thirdParty.map((requirement: any) => (
                     <li class="mb-2">
@@ -82,10 +85,13 @@ const tags = template?.data.tags.map((tag: any) => {
                         {requirement.description && (
                             <span class="text-gray-700"> - {requirement.description}</span>
                         )}
+                        {requirement.instructionsUrl && (
+                            <span> (<a href={requirement.instructionsUrl} class="text-blue-600 hover:underline" rel="noopener noreferrer nofollow" target="_blank">Setup instructions</a>)</span>
+                        )}
                     </li>
                 ))}
             </ul>
-        </div>
+        </Aside>
     )}
 
     <h2>Processes</h2>
@@ -115,6 +121,6 @@ const tags = template?.data.tags.map((tag: any) => {
 
     {tags.map((tag: { data: { question?: string, name: string, description: string } }) => (
         <h2>{tag.data.question || `Why use ${tag.data.name}?`}</h2>
-        <p>{tag.data.description}</p>
+        <p set:html={tag.data.description} />
     ))}
 </MarketplacePage>

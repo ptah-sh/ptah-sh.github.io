@@ -1,0 +1,169 @@
+{
+    "extends": [
+        {
+            "slug": "databases/postgresql"
+        },
+        {
+            "slug": "databases/redis"
+        }
+    ],
+
+    "name": "Plunk",
+    "slug": "marketing/useplunk",
+    "description": "Plunk is an E-Mail marketing and automation tool.",
+    "about": "Plunk is the open-source, affordable email platform that brings together marketing, transactional and broadcast emails into one single, complete solution.",
+    "url": "https://useplunk.com/",
+    "tags": ["e-mail"],
+    "thirdParty": [
+        {
+            "name": "AWS SES",
+            "url": "https://aws.amazon.com/ses/",
+            "description": "AWS SES is a cloud-based email service that provides a reliable and scalable email delivery service.",
+            "instructionsUrl": "https://docs.useplunk.com/getting-started/self-hosting#1-configuring-aws"
+        }
+    ],
+    "form": {
+        "type": "v-stack",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Domain",
+                        "name": "domain",
+                        "format": "string",
+                        "required": true
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "JWT Secret",
+                        "name": "jwtSecret",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            },
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "AWS Region",
+                        "name": "awsRegion",
+                        "format": "string",
+                        "required": true
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "AWS Access Key ID",
+                        "name": "awsAccessKeyId",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            },
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "AWS Secret Access Key",
+                        "name": "awsSecretAccessKey",
+                        "format": "string",
+                        "required": true
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "AWS SES Configuration Set",
+                        "name": "awsSesConfigurationSet",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            }
+        ]
+    },
+    "processes": [
+        {
+            "name": "Plunk",
+            "description": "Plunk is an E-Mail marketing and automation tool.",
+            "url": "https://github.com/useplunk/plunk/",
+            "data": {
+                "name": "plunk",
+                "dockerImage": "driaug/plunk:latest",
+                "envVars": [
+                    {
+                        "name": "DISABLE_SIGNUPS",
+                        "value": "false"
+                    },
+                    {
+                        "name": "NODE_ENV",
+                        "value": "production"
+                    },
+                    {
+                        "name": "NEXT_PUBLIC_API_URI",
+                        "value": "https://{{domain}}/api"
+                    },
+                    {
+                        "name": "API_URI",
+                        "value": "https://{{domain}}/api"
+                    },
+                    {
+                        "name": "APP_URI",
+                        "value": "https://{{domain}}"
+                    },
+                    {
+                        "name": "AWS_ACCESS_KEY_ID",
+                        "value": "{{awsAccessKeyId}}"
+                    },
+                    {
+                        "name": "AWS_SES_CONFIGURATION_SET",
+                        "value": "{{awsSesConfigurationSet}}"
+                    },
+                    {
+                        "name": "AWS_REGION",
+                        "value": "{{awsRegion}}"
+                    }
+                ],
+                "secretVars": {
+                    "vars": [
+                        {
+                            "name": "REDIS_URL",
+                            "value": "redis://default:{{databases/redis/password}}@redis.{{service/internalDomainName}}:6379"
+                        },
+                        {
+                            "name": "DATABASE_URL",
+                            "value": "postgresql://{{databases/postgresql/user}}:{{databases/postgresql/password}}@pgbouncer.{{service/internalDomainName}}/{{databases/postgresql/database}}"
+                        },
+                        {
+                            "name": "JWT_SECRET",
+                            "value": "{{jwtSecret}}"
+                        },
+                        {
+                            "name": "AWS_SECRET_ACCESS_KEY",
+                            "value": "{{awsSecretAccessKey}}"
+                        }
+                    ]
+                },
+                "volumes": [],
+                "caddy": [
+                    {
+                        "targetProtocol": "http",
+                        "targetPort": "4000",
+                        "publishedPort": "443",
+                        "domain": "{{domain}}",
+                        "path": "/api/*"
+                    },
+                    {
+                        "targetProtocol": "http",
+                        "targetPort": "5000",
+                        "publishedPort": "443",
+                        "domain": "{{domain}}",
+                        "path": "/*"
+                    }
+                ]
+            }
+        }
+    ]
+}

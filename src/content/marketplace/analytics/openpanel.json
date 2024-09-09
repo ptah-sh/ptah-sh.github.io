@@ -23,7 +23,8 @@
         {
             "name": "Clerk",
             "url": "https://clerk.com/",
-            "description": "User Management Platform (free tier is more than enough for most use cases)."
+            "description": "User Management Platform (free tier is more than enough for most use cases).",
+            "instructionsUrl": "https://docs.openpanel.dev/docs/self-hosting#clerkcom"
         }
     ],
     "tags": ["analytics-platform"],
