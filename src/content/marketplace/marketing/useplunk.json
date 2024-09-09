@@ -162,6 +162,12 @@
                         "domain": "{{domain}}",
                         "path": "/*"
                     }
+                ],
+                "rewriteRules": [
+                    {
+                        "pathFrom": "/api/(.*)",
+                        "pathTo": "/$1"
+                    }
                 ]
             }
         }
