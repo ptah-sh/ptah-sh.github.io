@@ -1,0 +1,123 @@
+---
+title: Docker Swarm Cluster
+description: "Understanding Docker Swarm Clusters in Ptah.sh"
+---
+
+Docker Swarm is a native clustering and orchestration solution for Docker. In Ptah.sh, Docker Swarm clusters play a crucial role in managing and orchestrating containers across multiple nodes.
+
+## What is a Docker Swarm Cluster?
+
+A Docker Swarm cluster consists of multiple Docker hosts that run in swarm mode and act as managers (to manage membership and delegation) and workers (which run swarm services). A given Docker host can be a manager, a worker, or perform both roles.
+
+## Key Components
+
+### Nodes
+
+Nodes are instances of the Docker engine participating in the swarm. There are two types of nodes:
+
+- **Manager Nodes**: Responsible for cluster management tasks and maintaining the desired state of the swarm.
+- **Worker Nodes**: Execute containers as instructed by manager nodes.
+
+### Services
+
+A service is the definition of the tasks to execute on the manager or worker nodes. It is the central structure of the swarm system and the primary root of user interaction with the swarm.
+
+### Tasks
+
+A task is a running container which is part of a swarm service and managed by a swarm manager, as opposed to a standalone container.
+
+## Benefits of Docker Swarm in Ptah.sh
+
+1. **High Availability**: Swarm manager nodes implement Raft consensus algorithm to maintain a consistent distributed state of the cluster.
+2. **Load Balancing**: Swarm managers automatically distribute service containers between nodes.
+3. **Scaling**: Easily scale up or down the number of tasks for a service.
+4. **Desired State Reconciliation**: Swarm constantly monitors the cluster state and reconciles any differences between the actual and desired state.
+5. **Multi-host Networking**: Overlay networks to enable secure communication between containers across nodes.
+6. **Service Discovery**: Built-in DNS for easy service discovery and load balancing.
+
+## Using Docker Swarm in Ptah.sh
+
+In Ptah.sh, Docker Swarm is used as the underlying orchestration layer. When you deploy a service in Ptah.sh, it's actually being deployed as a Docker Swarm service. This abstraction allows Ptah.sh to provide a user-friendly interface while leveraging the power and flexibility of Docker Swarm.
+
+### Selecting a Placement Node
+
+When creating a service via the Ptah.sh panel, users need to select a "placement node" for their service. This selection is a strict directive that determines which node in the Docker Swarm cluster will run the service. Here are some considerations when choosing a placement node:
+
+1. **Resource Availability**: Consider the available CPU, memory, and storage on each node.
+2. **Network Access**: For public-facing services, choose nodes with appropriate network exposure.
+3. **Security**: For sensitive services like databases, select nodes that are not directly exposed to the internet.
+4. **Load Balancing**: Distribute services across multiple nodes to balance the load.
+5. **Service Dependencies**: Place related services on the same or nearby nodes to minimize network latency.
+
+It's important to note that this placement directive is strictly followed by Docker Swarm. Unlike some other orchestration systems, Docker Swarm will not automatically move the service to a different node for load balancing or in case of node failure, unless you've explicitly configured such behavior.
+
+For more information on how services are deployed and managed in Ptah.sh, see the [Services](/concepts/services/) page.
+
+## Best Practices
+
+1. Use multiple manager nodes for high availability (typically 3 or 5).
+2. Distribute manager nodes across different availability zones if possible.
+3. Use node labels to control service placement.
+4. Regularly backup your swarm configuration.
+
+## Should I Use a Single Node or Multiple Nodes?
+
+The decision between using a single node or multiple nodes in your Docker Swarm cluster depends on your specific needs, budget, and the nature of your applications. Here are some considerations:
+
+### Single Node
+
+Pros:
+- Simpler to set up and manage
+- Lower cost (only one server to maintain)
+- Suitable for small projects or development environments
+
+Cons:
+- No high availability or fault tolerance
+- Limited scalability
+- Single point of failure
+
+### Multiple Nodes
+
+Pros:
+- High availability and fault tolerance
+- Better scalability and performance
+- Load balancing across nodes
+- Suitable for production environments and critical applications
+
+Cons:
+- More complex to set up and manage
+- Higher cost (multiple servers to maintain)
+- Requires more careful planning for networking and security
+
+### Recommendations
+
+1. **Development/Testing**: A single node is often sufficient and more cost-effective.
+2. **Small Production Apps**: Start with a single node, but ensure your architecture allows for easy scaling to multiple nodes in the future.
+3. **Critical Production Apps**: Use multiple nodes (at least 3) to ensure high availability and fault tolerance.
+4. **High-Traffic Apps**: Multiple nodes allow for better load distribution and scaling.
+
+Remember, Ptah.sh allows you to start with a single node and scale up as your needs grow. Always consider your application's requirements, expected traffic, and budget when making this decision.
+
+## Security Considerations
+
+### Isolating Database and Non-Public Services
+
+It is strongly recommended to place database servers and other non-public services on standalone nodes that are not exposed to the internet. These nodes should only be accessible from within the private network of the hosting provider. This practice adds an important security layer to prevent unauthorized access to sensitive data.
+
+Benefits of this approach include:
+
+1. **Enhanced Security**: Reduces the attack surface by limiting direct internet access to critical services.
+2. **Data Protection**: Helps safeguard sensitive information stored in databases.
+3. **Compliance**: Assists in meeting various regulatory requirements for data protection.
+4. **Network Segmentation**: Allows for better control and monitoring of traffic between services.
+
+To implement this:
+
+1. Create a separate node (or nodes) for your database and other sensitive services.
+2. Configure these nodes to only accept connections from within your private network.
+3. Ensure that only necessary ports are open between your application nodes and database nodes.
+4. Use VPNs or bastion hosts for administrative access to these protected nodes.
+
+By following this practice, you significantly enhance the security posture of your Docker Swarm cluster in Ptah.sh.
+
+By understanding how Docker Swarm clusters work in Ptah.sh, you can better leverage the platform's capabilities for deploying and managing your applications at scale.
