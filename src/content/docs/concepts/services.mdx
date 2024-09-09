@@ -4,13 +4,19 @@ description: "What are the Services? How to launch them?"
 next: CI/CD introduction
 ---
 
+import { Aside } from '@astrojs/starlight/components';
+
 Services are the main building blocks of the Ptah.sh system.
+
+<Aside type="note">
+  It's important to distinguish between Docker Swarm's "Services" and Ptah.sh's "Services". While Docker Swarm Services are part of the native Docker orchestration system and define tasks to execute on nodes, Ptah.sh Services are higher-level abstractions that can include multiple processes, configurations, and resources. A single Ptah.sh Service may create and manage multiple Docker Swarm services behind the scenes.
+</Aside>
 
 ## Processes
 
-The services are represented by the "processes" in the system. Each process defines its own configuration and behavior.
+In Ptah.sh, services are composed of one or more "processes". Each process represents a Docker Swarm Service and defines its own configuration and behavior.
 
-For example, the PostgreSQL service may be defined as two processes: PostgreSQL server itself and pgpool to run as a sidecar container.
+For example, a PostgreSQL service in Ptah.sh may be defined as two processes: the PostgreSQL server itself and pgpool running as a sidecar container. Each of these processes would correspond to a separate Docker Swarm Service.
 
 ### Docker Images
 
