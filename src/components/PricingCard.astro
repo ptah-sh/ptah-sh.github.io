@@ -15,13 +15,17 @@ interface Props {
         hint?: string;
         partial?: boolean;
     };
+    s3Storage?: {
+        hint?: string;
+        partial?: boolean;
+    };
 }
 
-const { name, description, price, singleServer, customErrorPages, roleManagement, dedicatedDiscord, mostPopular, waitlist, uptimeMonitoring } = Astro.props;
+const { name, description, price, singleServer, customErrorPages, roleManagement, dedicatedDiscord, mostPopular, waitlist, uptimeMonitoring, s3Storage } = Astro.props;
 
 ---
 
-<div class={`pricing-card ${mostPopular ? 'relative z-10 md:scale-105 border-2 border-green-600 md:transform md:scale-105' : 'border border-gray-200 dark:border-gray-700'} bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 md:p-6 flex flex-col my-4`}>
+<div class={`pricing-card ${mostPopular ? 'relative z-10 border-2 border-green-600 md:transform md:scale-105' : 'border border-gray-200 dark:border-gray-700 -md:scale-105'} bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 md:p-6 flex flex-col my-4`}>
     <meta itemprop="price" content={price} />
     <meta itemprop="priceCurrency" content="USD" />
     <meta itemprop="name" content={`${name} Plan`} />
@@ -48,7 +52,7 @@ const { name, description, price, singleServer, customErrorPages, roleManagement
             <span class="text-base md:text-lg text-green-600 font-bold">Free 14 Days Trial</span>
         </li>
         <PricingFeature name="Unlimited Apps & Databases" />
-        <PricingFeature name="Unlimited Backups" />
+        <PricingFeature name="Unlimited Backups" hint="You are free to schedule as many backups as you want and upload them to your own S3-compatible storage." />
         <PricingFeature name="Unlimited Users" />
         {singleServer ? (
             <PricingFeature 
@@ -71,6 +75,11 @@ const { name, description, price, singleServer, customErrorPages, roleManagement
             hint={uptimeMonitoring?.hint}
             partial={uptimeMonitoring?.partial}
         />
+        <PricingFeature name="Cloud Storage for Backups" 
+            hint={"You can opt-in to use a managed cloud storage for your backups. " + (s3Storage?.hint || '')}
+            partial={s3Storage?.partial}
+            soon
+         />
     </ul>
 
     <div class="italic text-xs md:text-sm text-center text-gray-600 dark:text-gray-400 mb-4 text-balance">{description}</div>

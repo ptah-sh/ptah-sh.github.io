@@ -93,12 +93,21 @@ import DocsCTA from '../../components/DocsCTA.astro';
 
   <p>Are you an indie hacker? Small startup? Established business? We've got your back!</p>
 
-  <div class="flex flex-col md:flex-row md:pt-8 justify-center items-stretch gap-0 not-content">
-    <PricingCard name="Hobby" description="Perfect plan to try the service or host non-critical applications" price="9" singleServer uptimeMonitoring={{ partial: true, hint: "Basic uptime monitoring: 1 check every 3 minutes" }} />
-    <PricingCard name="Startup" description="Need more power or an improved stability? This is your choice!" price="19"
+  <div class="flex flex-col md:grid md:grid-cols-3 md:pt-8 justify-center items-stretch gap-2 md:gap-0 not-content">
+    <PricingCard name="Hobby" 
+      description="Perfect plan to try the service or host non-critical applications" 
+      price="9" 
+      singleServer 
+      uptimeMonitoring={{ partial: true, hint: "Basic uptime monitoring: 1 check every 3 minutes" }} 
+      s3Storage={{ hint: "Storage size is 500 MiB with an unlimited traffic", partial: true }}
+    />
+    <PricingCard name="Startup" 
+      description="Need more power or an improved stability? This is your choice!" 
+      price="19"
       customErrorPages
       mostPopular
       uptimeMonitoring={{ partial: true, hint: "Enhanced uptime monitoring: 10 checks every minute" }}
+      s3Storage={{ hint: "Storage size is 5 GiB with an unlimited traffic", partial: true }}
     />
     <PricingCard name="Business"
       description="Your business got traction? We will cover your back!"
@@ -108,6 +117,7 @@ import DocsCTA from '../../components/DocsCTA.astro';
       dedicatedDiscord
       waitlist="https://forms.gle/YFZ8oJuiVvDm2gEU6"
       uptimeMonitoring={{ hint: "Full-featured uptime monitoring: 100 checks every 30 seconds" }}
+      s3Storage={{ hint: "Storage size is 50 GiB with an unlimited traffic", partial: false }}
     />
   </div>
 
