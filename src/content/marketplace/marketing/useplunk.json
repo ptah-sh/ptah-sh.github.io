@@ -22,6 +22,20 @@
             "instructionsUrl": "https://docs.useplunk.com/getting-started/self-hosting#1-configuring-aws"
         }
     ],
+    "alternativeTo": [
+        {
+            "name": "Mailchimp",
+            "url": "https://mailchimp.com/"
+        },
+        {
+            "name": "Sendgrid",
+            "url": "https://sendgrid.com/"
+        },
+        {
+            "name": "Resend",
+            "url": "https://resend.com/"
+        }
+    ],
     "form": {
         "type": "v-stack",
         "items": [

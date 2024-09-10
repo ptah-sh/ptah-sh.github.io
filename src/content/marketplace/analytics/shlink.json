@@ -11,6 +11,16 @@
     "about": "Shlink is a free and open-source URL shortener with a dead simple API.",
     "url": "https://shlink.io/",
     "tags": ["url-shortener"],
+    "alternativeTo": [
+        {
+            "name": "Bitly",
+            "url": "https://bitly.com/"
+        },
+        {
+            "name": "Rebrandly",
+            "url": "https://rebrandly.com/"
+        }
+    ],
     "form": {
         "type": "v-stack",
         "items": [

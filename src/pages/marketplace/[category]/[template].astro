@@ -33,9 +33,10 @@ const allTags = await getCollection('marketplaceTags');
 
 const tags = template?.data.tags.map((tag: any) => {
     const tagEntry = allTags.find((t: any) => t.id === tag);
-
     return tagEntry;
 });
+
+const alternatives = template?.data.alternativeTo || [];
 
 ---
 
@@ -74,6 +75,21 @@ const tags = template?.data.tags.map((tag: any) => {
                 ))}
             </ul>
         </dd>
+
+        {alternatives.length > 0 && (
+            <>
+                <dt>{template.data.name} is a Good Alternative to</dt>
+                <dd>
+                    <ul class="px-4 flex flex-wrap gap-8 not-content">
+                        {alternatives.map((alt: { name: string, url: string }) => (
+                            <li>
+                                <a href={alt.url} rel="noopener nofollow" target="_blank">{alt.name}</a>
+                            </li>
+                        ))}
+                    </ul>
+                </dd>
+            </>
+        )}
     </dl>
 
     {template?.data.thirdParty && template.data.thirdParty.length > 0 && (
