@@ -151,7 +151,7 @@
                     "vars": [
                         { "name": "CLICKHOUSE_URL", "value": "http://{{databases/clickhouse/user}}:{{databases/clickhouse/password}}@clickhouse.{{service/internalDomainName}}:8123" },
                         { "name": "REDIS_URL", "value": "redis://default:{{databases/redis/password}}@redis.{{service/internalDomainName}}:6379" },
-                        { "name": "DATABASE_URL", "value": "postgresql://{{databases/postgresql/user}}:{{databases/postgresql/password}}@pgbouncer.{{service/internalDomainName}}/{{databases/postgresql/database}}" },
+                        { "name": "DATABASE_URL", "value": "postgresql://{{databases/postgresql/user}}:{{databases/postgresql/password}}@pgbouncer.{{service/internalDomainName}}/{{databases/postgresql/database}}" }
                     ]
                 }
             }
