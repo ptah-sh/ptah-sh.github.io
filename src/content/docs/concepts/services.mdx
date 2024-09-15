@@ -91,6 +91,10 @@ When configuring a healthcheck, you need to provide the following information:
 4. Retries: Number of consecutive failures needed to consider the container unhealthy
 5. Start Period: Initial grace period during which failures don't count towards the retry limit (in seconds)
 
+<Aside type="note">
+  The healthcheck command should exit with a non-zero status code if the service is unhealthy. This signals to Docker that the container is in an unhealthy state.
+</Aside>
+
 Examples of healthcheck configurations:
 
 1. For a web server:
