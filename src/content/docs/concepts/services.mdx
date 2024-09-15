@@ -79,6 +79,47 @@ Workers are particularly useful for running background tasks, queue processors, 
 
 By utilizing workers, you can separate concerns and improve the scalability and performance of your application by offloading specific tasks to dedicated processes.
 
+### Healthcheck Configuration
+
+Each process can be configured with a healthcheck to monitor the health and availability of the service. Healthchecks are crucial for maintaining the reliability of your services and enabling automatic recovery from failures.
+
+When configuring a healthcheck, you need to provide the following information:
+
+1. Test: The shell command to run inside the container to check its health
+2. Interval: How often to run the healthcheck (in seconds)
+3. Timeout: Maximum time to wait for the healthcheck to complete (in seconds)
+4. Retries: Number of consecutive failures needed to consider the container unhealthy
+5. Start Period: Initial grace period during which failures don't count towards the retry limit (in seconds)
+
+Examples of healthcheck configurations:
+
+1. For a web server:
+   - Test: `curl -f http://localhost/ || exit 1`
+   - Interval: 30
+   - Timeout: 10
+   - Retries: 3
+   - Start Period: 40
+
+2. For a database:
+   - Test: `pg_isready -U postgres`
+   - Interval: 10
+   - Timeout: 5
+   - Retries: 5
+   - Start Period: 60
+
+3. For a custom application:
+   - Test: `/app/healthcheck.sh`
+   - Interval: 60
+   - Timeout: 30
+   - Retries: 3
+   - Start Period: 120
+
+By configuring healthchecks, you ensure that Docker Swarm can automatically detect and respond to service failures, improving the overall reliability and availability of your application.
+
+<Aside type="note">
+  If you specify a healthcheck command in Ptah.sh, it will override any healthcheck defined in the container's image Dockerfile. This allows you to customize the healthcheck for your specific deployment needs without modifying the original image.
+</Aside>
+
 ### Release Command
 
 Each process may have a release command that is executed when the service is started, before the default command of the container runs. This feature is particularly useful for performing setup tasks, running migrations, or other initialization processes that need to occur before the main application starts.
