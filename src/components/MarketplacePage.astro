@@ -1,17 +1,15 @@
 ---
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-
 import { getCollection, getEntry } from 'astro:content';
 import Breadcrumbs from './Breadcrumbs.astro';
 
-const { title, description, showCategories = true, breadcrumbItems = [], tags = [] } = Astro.props;
+const { title, description, showCategories = true, breadcrumbItems = [], tags = [], category: currentCategory } = Astro.props;
 
 const categories = await getCollection('marketplace', entry => !entry.id.includes('/'));
 
 const counts: Record<string, number> = {};
 for (const category of categories) {
     const templates = await getCollection('marketplace', entry => entry.id.startsWith(category.id) && entry.id.includes('/'));
-
     counts[category.id] = templates.length;
 }
 
@@ -31,7 +29,7 @@ const defaultDescription = "Deploy ready to use " + categories.slice(0, 3).map(c
         <Breadcrumbs items={breadcrumbItems} />
     )} 
 
-    <div class="flex flex-wrap gap-2">
+    <div class="flex flex-wrap gap-2 mb-4">
         {tags.map((tag: any) => (
             <span class="bg-blue-500 text-white text-xs font-semibold py-1 px-2 rounded-full">
                 {tag.data.name}
@@ -40,37 +38,45 @@ const defaultDescription = "Deploy ready to use " + categories.slice(0, 3).map(c
     </div>
 
     {showCategories && (
-        <div>
-            <h2>Categories</h2>
-            <ul class="my-8 p-0 list-none grid gap-4 grid-cols-4 not-content">
+        <div class="mb-8 bg-gray-50 border border-gray-200 rounded-lg p-4 dark:bg-gray-800 dark:border-gray-700">
+            <h3 class="font-semibold mb-2">Filter by Category</h3>
+            <div class="grid gap-2 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                 {categories.map(category => (
-                    <li class="w-full">
-                        <a href={`/marketplace/${category.id}/`}
-                            class:list={[
-                                "no-underline block inline-flex items-center justify-between w-full py-2 px-4 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700",
-                                {
-                                    "border-2 border-blue-500": category.id === Astro.props.category
-                                }
-                            ]}
-                        >
-                            <span class="block">
-                                <span class="block font-medium text-gray-900 dark:text-gray-300">{category.data.name}
-                                    <span class="text-xs font-normal text-gray-500 dark:text-gray-300">({counts[category.id]})</span>
-                                </span>
-                                <span class="text-xs font-normal text-gray-500 dark:text-gray-300">{category.data.description}</span>
-                            </span>
-                        </a>
-                    </li>
+                    <a href={`/marketplace/${category.id}/`}
+                        class:list={[
+                            "no-underline block p-2 bg-white border border-gray-200 rounded-lg text-sm transition-all duration-200 hover:shadow-sm dark:bg-gray-700 dark:border-gray-600",
+                            {
+                                "border-blue-500 shadow-sm bg-blue-50 dark:bg-blue-900": category.id === currentCategory
+                            }
+                        ]}
+                    >
+                        <span class:list={[
+                            "font-medium",
+                            category.id === currentCategory
+                                ? "text-blue-700 dark:text-blue-300"
+                                : "text-gray-900 dark:text-gray-100"
+                        ]}>
+                            {category.data.name}
+                        </span>
+                        <span class:list={[
+                            "text-xs ml-1",
+                            category.id === currentCategory
+                                ? "text-blue-600 dark:text-blue-400"
+                                : "text-gray-500 dark:text-gray-400"
+                        ]}>
+                            ({counts[category.id]})
+                        </span>
+                    </a>
                 ))}
-            </ul>
+            </div>
         </div>
     )}
 
     <slot />
 
-<div class="mt-8">
-    <h2>What are 1-Click Apps?</h2>
-    <p>Instantly deploy pre-configured applications and services with 1-Click Apps, streamlining your project workflow. Explore how they can enhance your projects.</p>
-    <a href="/concepts/services/#1-click-apps" class="btn">Learn About 1-Click Apps</a>
-</div>
+    <div class="mt-8">
+        <h2>What are 1-Click Apps?</h2>
+        <p>Instantly deploy pre-configured applications and services with 1-Click Apps, streamlining your project workflow. Explore how they can enhance your projects.</p>
+        <a href="/concepts/services/#1-click-apps" class="btn">Learn About 1-Click Apps</a>
+    </div>
 </StarlightPage>
