@@ -23,7 +23,13 @@ const templates = await getCollection('marketplace', entry => entry.id.startsWit
     title={"1-Click Apps: " + category.data.name}
     description={"Deploy ready to use " + category.data.name + " - " + category.data.description + " - in seconds."}
     category={Astro.params.category}
+    breadcrumbItems={[
+        { label: "Home", href: "/" },
+        { label: "Marketplace", href: "/marketplace/" },
+        { label: category.data.name },
+    ]}
 >
+
     <h2>{category.data.description}</h2>
 
     <ul class="my-8 p-0 list-none grid gap-4 grid-cols-4 not-content">

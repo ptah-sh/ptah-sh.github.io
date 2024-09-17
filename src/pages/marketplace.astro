@@ -16,6 +16,10 @@ const structuredData = {
 <MarketplacePage 
   title="Self-Hosted Apps Marketplace aka 1-Click Apps"
   description={description}
+  breadcrumbItems={[
+    { label: "Home", href: "/" },
+    { label: "Marketplace" },
+  ]}
 >
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
 

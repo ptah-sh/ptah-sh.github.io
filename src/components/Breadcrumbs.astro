@@ -1,0 +1,36 @@
+---
+interface BreadcrumbItem {
+    label: string;
+    href?: string;
+}
+
+interface Props {
+    items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="flex not-content" aria-label="Breadcrumb">
+    <ol class="inline-flex items-center p-0 space-x-1 md:space-x-3 list-none" itemscope itemtype="https://schema.org/BreadcrumbList">
+        {items.map((item, index) => (
+            <li class="inline-flex items-center gap-1 md:gap-2" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                {index !== 0 && (
+                    <div class="flex items-center">
+                        <svg class="w-2 h-2 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                        </svg>
+                    </div>
+                )}
+                {item.href ? (
+                    <a href={item.href} class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white" itemprop="item">
+                        <span itemprop="name">{item.label}</span>
+                    </a>
+                ) : (
+                    <span class="text-sm font-medium text-gray-500 dark:text-gray-400" itemprop="name">{item.label}</span>
+                )}
+                <meta itemprop="position" content={`${index + 1}`} />
+            </li>
+        ))}
+    </ol>
+</nav>
