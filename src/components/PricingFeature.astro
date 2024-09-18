@@ -8,6 +8,7 @@ const {
     icon = null,
     partial = false,
     soon = false,
+    href = null,
 } = Astro.props;
 ---
 
@@ -25,7 +26,9 @@ const {
             soon ? 'text-gray-400 dark:text-gray-500' : 'text-gray-500 dark:text-gray-400'
         } ms-3`}
     >
-        <span class={hint ? 'border-b border-dotted border-gray-500 dark:border-gray-400 cursor-help' : ''}>{name}</span>
+        <span class={hint ? 'border-b border-dotted border-gray-500 dark:border-gray-400 cursor-help' : ''}>
+            {href ? <a href={href} target="_blank" rel="noopener noreferrer" class="">{name}</a> : name}
+        </span>
     </span>
 
     {soon && (
