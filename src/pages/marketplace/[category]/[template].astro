@@ -22,7 +22,7 @@ export const getStaticPaths = (async () => {
 const category = await getEntry('marketplace', Astro.params.category);
 const template = await getEntry('marketplace', `${Astro.params.category}/${Astro.params.template}`);
 
-if (!template) {
+if (!template || !category) {
     return Astro.redirect('/404');
 }
 
@@ -41,8 +41,8 @@ const alternatives = template?.data.alternativeTo || [];
 ---
 
 <MarketplacePage
-    title={"Self-hosted " + template?.data.name}
-    description={"Deploy fully configured " + template?.data.name + " on your own VPS or dedicated server."}
+    title={"Self-hosted " + template.data.name}
+    description={"Deploy fully configured " + template.data.name + " on your own VPS or dedicated server."}
     showCategories={false}
     tags={tags}
     breadcrumbItems={[
@@ -52,6 +52,14 @@ const alternatives = template?.data.alternativeTo || [];
         { label: template.data.name },
     ]}
 >
+    {template.data.logo && (
+        <img 
+            src={template.data.logo} 
+            alt={`${template.data.name} logo`} 
+            class="float-right w-24 h-24 md:w-36 md:h-36"
+        />
+    )}
+
     <dl>
         <dt>Info</dt>
         <dd>{template.data.description}</dd>

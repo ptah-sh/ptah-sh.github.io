@@ -9,6 +9,7 @@
     "slug": "cms/wordpress",
     "description": "WordPress is a blog management system.",
     "about": "WordPress is a free and open-source content management system (CMS) based on PHP and MySQL.",
+    "logo": "/marketplace/images/cms/wordpress.png",
     "url": "https://wordpress.org/",
     "tags": ["cms"],
     "form": {

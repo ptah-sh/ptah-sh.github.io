@@ -18,6 +18,7 @@
     "slug": "analytics/openpanel",
     "description": "The power of Mixpanel, the ease of Plausible.",
     "about": "An open-source alternative to Mixpanel/Google Analytics/Plausible. The power of Mixpanel, the ease of Plausible and nothing from Google Analytics 😉.",
+    "logo": "/marketplace/images/analytics/openpanel.svg",
     "url": "https://openpanel.dev/",
     "thirdParty": [
         {

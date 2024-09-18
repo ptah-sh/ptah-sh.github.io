@@ -3,6 +3,7 @@
     "slug": "databases/mysql",
     "description": "Single-server MySQL database",
     "about": "MySQL is a powerful, open-source relational database management system that uses SQL language to manage and scale the most complicated data workloads.",
+    "logo": "/marketplace/images/databases/mysql.png",
     "url": "https://www.mysql.com/",
     "tags": ["rdbms"],
     "form": {

@@ -9,6 +9,7 @@
     "slug": "analytics/shlink",
     "description": "Shlink.io url shortener",
     "about": "Shlink is a free and open-source URL shortener with a dead simple API.",
+    "logo": "/marketplace/images/analytics/shlink.svg",
     "url": "https://shlink.io/",
     "tags": ["url-shortener"],
     "alternativeTo": [

@@ -3,6 +3,7 @@
     "slug": "databases/redis",
     "description": "Single-server Redis database",
     "about": "Redis is an open-source, in-memory data structure store used as a database, cache, and message broker. It is particularly useful for handling large volumes of data and for querying data in real-time. Redis offers several advantages over traditional relational databases, including better performance, scalability, and flexibility.",
+    "logo": "/marketplace/images/databases/redis.svg",
     "url": "https://redis.io/",
     "tags": ["nosql", "kv-store", "cache", "message-broker"],
     "form": {

@@ -12,6 +12,7 @@
     "slug": "marketing/useplunk",
     "description": "Plunk is an E-Mail marketing and automation tool.",
     "about": "Plunk is the open-source, affordable email platform that brings together marketing, transactional and broadcast emails into one single, complete solution.",
+    "logo": "/marketplace/images/marketing/useplunk.svg",
     "url": "https://useplunk.com/",
     "tags": ["e-mail"],
     "thirdParty": [
