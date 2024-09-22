@@ -70,15 +70,15 @@
                     },
                     {
                         "name": "WORDPRESS_DATABASE_NAME",
-                        "value": "{{databases/mysql/database}}"
+                        "value": "{{databases.mysql.database}}"
                     },
                     {
                         "name": "WORDPRESS_DATABASE_USER",
-                        "value": "{{databases/mysql/user}}"
+                        "value": "{{databases.mysql.user}}"
                     },
                     {
                         "name": "WORDPRESS_DATABASE_HOST",
-                        "value": "mysql.{{service/internalDomainName}}"
+                        "value": "mysql.{{service.internalDomainName}}"
                     },
                     {
                         "name": "WORDPRESS_DATABASE_PORT_NUMBER",
@@ -93,18 +93,16 @@
                         "value": "{{user}}"
                     }
                 ],
-                "secretVars": {
-                    "vars": [
-                        {
-                            "name": "WORDPRESS_DATABASE_PASSWORD",
-                            "value": "{{databases/mysql/password}}"
-                        },
-                        {
-                            "name": "WORDPRESS_PASSWORD",
-                            "value": "{{password}}"
-                        }
-                    ]
-                },
+                "secretVars": [
+                    {
+                        "name": "WORDPRESS_DATABASE_PASSWORD",
+                        "value": "{{databases.mysql.password}}"
+                    },
+                    {
+                        "name": "WORDPRESS_PASSWORD",
+                        "value": "{{password}}"
+                    }
+                ],
                 "volumes": [
                     {
                         "name": "data",

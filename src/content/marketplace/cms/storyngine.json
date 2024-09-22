@@ -62,30 +62,28 @@
                     { "name": "DB_CONNECTION", "value": "mysql" },
                     {
                         "name": "DB_DATABASE",
-                        "value": "{{databases/mysql/database}}"
+                        "value": "{{databases.mysql.database}}"
                     },
                     {
                         "name": "DB_USERNAME",
-                        "value": "{{databases/mysql/user}}"
+                        "value": "{{databases.mysql.user}}"
                     },
                     {
                         "name": "DB_HOST",
-                        "value": "mysql.{{service/internalDomainName}}"
+                        "value": "mysql.{{service.internalDomainName}}"
                     },
                     { "name": "DB_PORT", "value": "3306" }
                 ],
-                "secretVars": {
-                    "vars": [
-                        {
-                            "name": "APP_KEY",
-                            "value": "base64:{{randomBytes:32|base64}}"
-                        },
-                        {
-                            "name": "DB_PASSWORD",
-                            "value": "{{databases/mysql/password}}"
-                        }
-                    ]
-                },
+                "secretVars": [
+                    {
+                        "name": "APP_KEY",
+                        "value": "base64:{{ base64Encode ( randomBytes length=32 ) }}"
+                    },
+                    {
+                        "name": "DB_PASSWORD",
+                        "value": "{{databases.mysql.password}}"
+                    }
+                ],
                 "caddy": [
                     {
                         "targetProtocol": "http",

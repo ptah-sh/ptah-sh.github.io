@@ -7,7 +7,7 @@
     "url": "https://www.postgresql.org/",
     "tags": ["rdbms"],
     "form": {
-        "type": "v-stack",
+        "type": "collapsible",
         "items": [
             {
                 "type": "h-stack",
@@ -17,14 +17,16 @@
                         "label": "User",
                         "name": "user",
                         "format": "string",
-                        "required": true
+                        "required": true,
+                        "default": "{{ randomUsername }}"
                     },
                     {
                         "type": "text-field",
                         "label": "Password",
                         "name": "password",
                         "format": "string",
-                        "required": true
+                        "required": true,
+                        "default": "{{ randomPassword }}"
                     }
                 ]
             },
@@ -33,7 +35,8 @@
                 "label": "Database",
                 "name": "database",
                 "format": "string",
-                "required": true
+                "required": true,
+                "default": "db"
             }
         ]
     },
@@ -51,12 +54,14 @@
                         "value": "{{user}}"
                     },
                     {
-                        "name": "POSTGRESQL_PASSWORD",
-                        "value": "{{password}}"
-                    },
-                    {
                         "name": "POSTGRESQL_DATABASE",
                         "value": "{{database}}"
+                    }
+                ],
+                "secretVars": [
+                    {
+                        "name": "POSTGRESQL_PASSWORD",
+                        "value": "{{password}}"
                     }
                 ],
                 "volumes": [
@@ -85,16 +90,12 @@
                         "value": "{{user}}"
                     },
                     {
-                        "name": "POSTGRESQL_PASSWORD",
-                        "value": "{{password}}"
-                    },
-                    {
                         "name": "POSTGRESQL_DATABASE",
                         "value": "{{database}}"
                     },
                     {
                         "name": "POSTGRESQL_HOST",
-                        "value": "pg.{{service/internalDomainName}}"
+                        "value": "pg.{{service.internalDomainName}}"
                     },
                     {
                         "name": "PGBOUNCER_PORT",
@@ -104,7 +105,13 @@
                         "name": "PGBOUNCER_DATABASE",
                         "value": "{{database}}"
                     }
-                ]
+                ],
+                "secretVars": [
+                    {
+                        "name": "POSTGRESQL_PASSWORD",
+                        "value": "{{password}}"
+                    }
+                ]                
             }
         }
     ]

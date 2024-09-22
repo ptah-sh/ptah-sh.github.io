@@ -7,7 +7,7 @@
     "url": "https://redis.io/",
     "tags": ["nosql", "kv-store", "cache", "message-broker"],
     "form": {
-        "type": "v-stack",
+        "type": "collapsible",
         "items": [
             {
                 "type": "h-stack",
@@ -17,7 +17,8 @@
                         "label": "Password",
                         "name": "password",
                         "format": "string",
-                        "required": true
+                        "required": true,
+                        "default": "{{ randomPassword }}"
                     }
                 ]
             }
@@ -32,14 +33,12 @@
                 "name": "redis",
                 "dockerImage": "bitnami/redis:7.4",
                 "envVars": [],
-                "secretVars": {
-                    "vars": [
-                        {
-                            "name": "REDIS_PASSWORD",
-                            "value": "{{password}}"
-                        }
-                    ]
-                },
+                "secretVars": [
+                    {
+                        "name": "REDIS_PASSWORD",
+                        "value": "{{password}}"
+                    }
+                ],
                 "volumes": [
                     {
                         "name": "data",

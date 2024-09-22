@@ -1,0 +1,73 @@
+---
+title: Security
+description: An overview of the security measures implemented in Ptah.sh to protect your data and infrastructure.
+---
+
+import DocsCTA from '../../../components/DocsCTA.astro';
+
+At Ptah.sh, we prioritize the security of your data and infrastructure. This document outlines the key security measures we've implemented to ensure the protection of your sensitive information.
+
+## Agent-based Architecture
+
+Ptah.sh utilizes an agent-based software model, which significantly enhances security by eliminating the need for incoming connections to your nodes. This approach substantially reduces the attack surface, making your infrastructure less vulnerable to external threats.
+
+### Key Benefits:
+- No open inbound ports required on your servers
+- Reduced risk of unauthorized access attempts
+- Simplified firewall configuration
+
+## Encryption of Sensitive Data
+
+We employ robust encryption methods to protect all sensitive data within the Ptah.sh ecosystem.
+
+### RSA Key Pair Generation
+- A unique RSA key pair is generated when you initialize your first node.
+- This key pair is used for encrypting and decrypting sensitive information.
+
+### Encryption Process
+1. All sensitive (secret) data is encrypted using the public key of the RSA pair.
+2. The private key is securely stored within your Docker Swarm cluster.
+3. The private key never leaves the cluster, ensuring that decryption can only occur within your controlled environment.
+
+## Client-side Encryption
+
+To further enhance security, Ptah.sh implements client-side encryption for all sensitive data.
+
+### How it works:
+1. Encryption of sensitive data occurs exclusively in the user's browser.
+2. The original, unencrypted data entered by users never reaches Ptah.sh infrastructure.
+3. Only encrypted data is transmitted over the network and potentially stored.
+
+### Benefits:
+- Minimizes the risk of data interception during transmission
+- Ensures that even in the unlikely event of a breach, sensitive data remains protected
+- Provides an additional layer of security beyond transport layer encryption (HTTPS)
+
+## Secure Communication
+
+All communication between your infrastructure and Ptah.sh services is conducted over encrypted channels using industry-standard protocols.
+
+## Regular Security Audits and Updates
+
+We are committed to maintaining the highest security standards:
+
+- Regular security audits of our codebase and infrastructure
+- Prompt application of security patches and updates
+- Continuous monitoring for potential vulnerabilities
+
+## Best Practices for Users
+
+While we implement robust security measures, we also recommend that users follow security best practices:
+
+1. Use strong, unique passwords for your Ptah.sh account
+2. Enable two-factor authentication (2FA) if available
+3. Regularly review and rotate access credentials
+4. Keep your local environment and any CLI tools up to date
+
+By combining these security measures and following our best practices, Ptah.sh provides a robust and secure environment for managing your infrastructure and applications. Our commitment to security ensures that your data remains protected throughout its lifecycle within our ecosystem.
+
+## Reporting Security Issues
+
+If you discover a security vulnerability or have concerns about the security of Ptah.sh, please report it immediately to our security team at contact@ptah.sh.
+
+<DocsCTA />

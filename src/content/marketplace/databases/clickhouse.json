@@ -10,21 +10,28 @@
         "type": "v-stack",
         "items": [
             {
-                "type": "h-stack",
+                "type": "collapsible",
                 "items": [
                     {
-                        "type": "text-field",
-                        "label": "User",
-                        "name": "user",
-                        "format": "string",
-                        "required": true
-                    },
-                    {
-                        "type": "text-field",
-                        "label": "Password",
-                        "name": "password",
-                        "format": "string",
-                        "required": true
+                        "type": "h-stack",
+                        "items": [
+                            {
+                                "type": "text-field",
+                                "label": "User",
+                                "name": "user",
+                                "format": "string",
+                                "required": true,
+                                "default": "{{ randomUsername }}"
+                            },
+                            {
+                                "type": "text-field",
+                                "label": "Password",
+                                "name": "password",
+                                "format": "string",
+                                "required": true,
+                                "default": "{{ randomPassword }}"
+                            }
+                        ]
                     }
                 ]
             }
@@ -44,14 +51,12 @@
                         "value": "{{user}}"
                     }
                 ],
-                "secretVars": {
-                    "vars": [
-                        {
-                            "name": "CLICKHOUSE_ADMIN_PASSWORD",
-                            "value": "{{password}}"
-                        }
-                    ]
-                },
+                "secretVars": [
+                    {
+                        "name": "CLICKHOUSE_ADMIN_PASSWORD",
+                        "value": "{{password}}"
+                    }
+                ],
                 "volumes": [
                     {
                         "name": "data",

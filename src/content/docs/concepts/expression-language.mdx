@@ -1,0 +1,154 @@
+---
+title: Expression Language
+description: Learn about the expression language used in Ptah.sh for dynamic configuration
+---
+
+Ptah.sh uses an expression language based on Handlebars in various areas such as environment variables, secret variables, and Caddy configuration. This feature is particularly useful in 1-click app templates, enabling dynamic and flexible configurations.
+
+## Available Functions
+
+The following Handlebars helpers are available in the expression language:
+
+### base64Encode
+
+Encodes a string to base64.
+
+Usage:
+
+```
+{{ base64Encode "Hello, World!" }}
+```
+
+### randomBytes
+
+Generates random bytes and returns them as a hexadecimal string.
+
+Usage:
+
+```
+{{ randomBytes length=16 }}
+```
+
+The `length` parameter is optional and defaults to 32.
+
+### randomUsername
+
+Generates a random username using a combination of an adjective and a noun.
+
+Usage:
+
+```
+{{ randomUsername }}
+```
+
+Example output: ```happy_dog```
+
+### randomPassword
+
+Generates a random password.
+
+Usage:
+
+```
+{{ randomPassword }}
+```
+
+The `length` parameter is optional and defaults to 42.
+
+Note: Special characters are excluded to ensure compatibility with various systems, such as database URL templates.
+
+### randomString
+
+Generates a random string of specified length using an extended character set with special characters.
+
+Usage:
+
+```
+{{ randomString length=10 }}
+```
+
+The `length` parameter is optional and defaults to 64.
+
+## Special Variables
+
+In addition to the expression language functions, Ptah.sh provides special variables that can be used in expressions.
+
+### service.internalDomainName
+
+This variable represents the internal domain name assigned to the service within the Ptah.sh environment. It's used to reference the service internally, typically for inter-service communication or database connections.
+
+Usage:
+
+```
+pgbouncer.{{ service.internalDomainName }}
+```
+
+Example output: ```pgbouncer.postgresql.local```
+
+## Examples
+
+Here are some examples of using these functions in your configurations:
+
+```
+DATABASE_URL=postgresql://{{ randomUsername }}:{{ randomPassword }}@localhost/mydb
+API_KEY={{ base64Encode (randomBytes length=24) }}
+```
+
+These expressions are evaluated when the configuration is applied, providing unique and secure values for your deployments.
+
+### Usage in 1-Click App Templates
+
+In 1-Click App templates, you can use the expression language to dynamically generate values for configuration options. For example:
+
+```json
+{
+  "ADMIN_PASSWORD": "{{ randomPassword }}",
+  "DATABASE_URL": "postgresql://{{ randomUsername }}:{{ randomPassword }}@pg.{{ service.internalDomainName }}/mydb"
+}
+```
+
+This generates a unique username and password for each deployment, ensuring database security and isolation.
+
+### Advanced Usage
+
+The expression language allows for more complex operations, such as accessing nested properties and combining multiple functions:
+
+```
+{{ base64Encode (randomBytes length=16) }}
+```
+
+This generates 16 random bytes and encodes the result in base64.
+
+While the expression language is powerful, use it judiciously to maintain readability and maintainability in your configurations.
+
+## Real-world Examples from Marketplace Apps
+
+Here are some examples of how the expression language is used in actual marketplace apps:
+
+1. PostgreSQL:
+```json
+{
+  "POSTGRES_PASSWORD": "{{ randomPassword }}",
+  "POSTGRES_USER": "{{ randomUsername }}"
+}
+```
+
+2. WordPress:
+```json
+{
+  "WORDPRESS_DB_PASSWORD": "{{ randomPassword }}",
+  "WORDPRESS_AUTH_KEY": "{{ randomString length=64 }}",
+  "WORDPRESS_SECURE_AUTH_KEY": "{{ randomString length=64 }}",
+  "WORDPRESS_LOGGED_IN_KEY": "{{ randomString length=64 }}",
+  "WORDPRESS_NONCE_KEY": "{{ randomString length=64 }}"
+}
+```
+
+3. Redis:
+```json
+{
+  "REDIS_PASSWORD": "{{ randomPassword }}"
+}
+```
+
+These examples demonstrate how the expression language is used to generate secure, random values for various configuration settings in real applications.

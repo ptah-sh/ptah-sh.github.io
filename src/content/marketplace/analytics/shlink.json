@@ -67,34 +67,32 @@
                     { "name": "DB_DRIVER", "value": "postgres" },
                     {
                         "name": "DB_NAME",
-                        "value": "{{databases/postgresql/database}}"
+                        "value": "{{databases.postgresql.database}}"
                     },
                     {
                         "name": "DB_USER",
-                        "value": "{{databases/postgresql/user}}"
-                    },
-                    {
-                        "name": "DB_PASSWORD",
-                        "value": "{{databases/postgresql/password}}"
+                        "value": "{{databases.postgresql.user}}"
                     },
                     {
                         "name": "DB_HOST",
-                        "value": "pgbouncer.{{service/internalDomainName}}"
+                        "value": "pgbouncer.{{service.internalDomainName}}"
                     },
                     { "name": "DB_PORT", "value": "5432" }
                 ],
-                "secretVars": {
-                    "vars": [
-                        {
-                            "name": "GEOLITE_LICENSE_KEY",
-                            "value": "{{geoLiteKey}}"
-                        },
-                        {
-                            "name": "INITIAL_API_KEY",
-                            "value": "{{apiKey}}"
-                        }
-                    ]
-                },
+                "secretVars": [
+                    {
+                        "name": "DB_PASSWORD",
+                        "value": "{{databases.postgresql.password}}"
+                    },
+                    {
+                        "name": "GEOLITE_LICENSE_KEY",
+                        "value": "{{geoLiteKey}}"
+                    },
+                    {
+                        "name": "INITIAL_API_KEY",
+                        "value": "{{apiKey}}"
+                    }
+                ],
                 "caddy": [
                     {
                         "targetProtocol": "http",

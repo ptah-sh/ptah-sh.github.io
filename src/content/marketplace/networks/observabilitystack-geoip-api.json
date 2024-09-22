@@ -18,9 +18,7 @@
                 "name": "geoip-api",
                 "dockerImage": "observabilitystack/geoip-api:latest",
                 "envVars": [],
-                "secretVars": {
-                    "vars": []
-                },
+                "secretVars": [],
                 "volumes": []
             }
         }

@@ -49,13 +49,6 @@
                         "name": "domain",
                         "format": "string",
                         "required": true
-                    },
-                    {
-                        "type": "text-field",
-                        "label": "JWT Secret",
-                        "name": "jwtSecret",
-                        "format": "string",
-                        "required": true
                     }
                 ]
             },
@@ -94,6 +87,19 @@
                         "name": "awsSesConfigurationSet",
                         "format": "string",
                         "required": true
+                    }
+                ]
+            },
+            {
+                "type": "collapsible",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "JWT Secret",
+                        "name": "jwtSecret",
+                        "format": "string",
+                        "required": true,
+                        "default": "{{ randomPassword }}"
                     }
                 ]
             }
@@ -141,26 +147,24 @@
                         "value": "{{awsRegion}}"
                     }
                 ],
-                "secretVars": {
-                    "vars": [
-                        {
-                            "name": "REDIS_URL",
-                            "value": "redis://default:{{databases/redis/password}}@redis.{{service/internalDomainName}}:6379"
-                        },
-                        {
-                            "name": "DATABASE_URL",
-                            "value": "postgresql://{{databases/postgresql/user}}:{{databases/postgresql/password}}@pgbouncer.{{service/internalDomainName}}/{{databases/postgresql/database}}"
-                        },
-                        {
-                            "name": "JWT_SECRET",
-                            "value": "{{jwtSecret}}"
-                        },
-                        {
-                            "name": "AWS_SECRET_ACCESS_KEY",
-                            "value": "{{awsSecretAccessKey}}"
-                        }
-                    ]
-                },
+                "secretVars": [
+                    {
+                        "name": "REDIS_URL",
+                        "value": "redis://default:{{databases.redis.password}}@redis.{{service.internalDomainName}}:6379"
+                    },
+                    {
+                        "name": "DATABASE_URL",
+                        "value": "postgresql://{{databases.postgresql.user}}:{{databases.postgresql.password}}@pgbouncer.{{service.internalDomainName}}/{{databases.postgresql.database}}"
+                    },
+                    {
+                        "name": "JWT_SECRET",
+                        "value": "{{jwtSecret}}"
+                    },
+                    {
+                        "name": "AWS_SECRET_ACCESS_KEY",
+                        "value": "{{awsSecretAccessKey}}"
+                    }
+                ],
                 "volumes": [],
                 "caddy": [
                     {

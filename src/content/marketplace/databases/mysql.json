@@ -7,7 +7,7 @@
     "url": "https://www.mysql.com/",
     "tags": ["rdbms"],
     "form": {
-        "type": "v-stack",
+        "type": "collapsible",
         "items": [
             {
                 "type": "h-stack",
@@ -17,14 +17,16 @@
                         "label": "User",
                         "name": "user",
                         "format": "string",
-                        "required": true
+                        "required": true,
+                        "default": "{{ randomUsername }}"
                     },
                     {
                         "type": "text-field",
                         "label": "Password",
                         "name": "password",
                         "format": "string",
-                        "required": true
+                        "required": true,
+                        "default": "{{ randomPassword }}"
                     }
                 ]
             },
@@ -33,7 +35,8 @@
                 "label": "Database",
                 "name": "database",
                 "format": "string",
-                "required": true
+                "required": true,
+                "default": "db"
             },
             {
                 "type": "h-stack",
@@ -43,14 +46,16 @@
                         "label": "Root User",
                         "name": "rootUser",
                         "format": "string",
-                        "required": true
+                        "required": true,
+                        "default": "root"
                     },
                     {
                         "type": "text-field",
                         "label": "Root Password",
                         "name": "rootPassword",
                         "format": "string",
-                        "required": true
+                        "required": true,
+                        "default": "{{ randomPassword }}"
                     }
                 ]
             }
@@ -74,22 +79,20 @@
                         "value": "{{database}}"
                     }
                 ],
-                "secretVars": {
-                    "vars": [
-                        {
-                            "name": "MYSQL_ROOT_PASSWORD",
-                            "value": "{{rootUser}}"
-                        },
-                        {
-                            "name": "MYSQL_ROOT_PASSWORD",
-                            "value": "{{rootPassword}}"
-                        },
-                        {
-                            "name": "MYSQL_PASSWORD",
-                            "value": "{{password}}"
-                        }
-                    ]
-                },
+                "secretVars": [
+                    {
+                        "name": "MYSQL_ROOT_PASSWORD",
+                        "value": "{{rootUser}}"
+                    },
+                    {
+                        "name": "MYSQL_ROOT_PASSWORD",
+                        "value": "{{rootPassword}}"
+                    },
+                    {
+                        "name": "MYSQL_PASSWORD",
+                        "value": "{{password}}"
+                    }
+                ],
                 "volumes": [
                     {
                         "name": "data",
