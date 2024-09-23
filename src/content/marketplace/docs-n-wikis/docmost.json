@@ -1,0 +1,90 @@
+{
+    "extends": [
+        {
+            "slug": "databases/postgresql"
+        },
+        {
+            "slug": "databases/redis"
+        }
+    ],
+
+    "name": "Docmost",
+    "slug": "docs-n-wikis/docmost",
+    "description": "Open-source collaborative wiki and documentation software.",
+    "about": "Create, collaborate, and share knowledge seamlessly with Docmost. Ideal for managing your wiki, knowledge-base, documentation and a lot more.",
+    "logo": "/marketplace/images/docs-n-wikis/docmost.png",
+    "url": "https://docmost.com/",
+    "tags": ["wiki", "cms"],
+    "form": {
+        "type": "v-stack",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Domain",
+                        "name": "domain",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            }
+        ]
+    },
+    "processes": [
+        {
+            "name": "Docmost",
+            "description": "Open-source collaborative wiki and documentation software.",
+            "url": "https://github.com/docmost/docmost/",
+            "data": {
+                "name": "docmost",
+                "dockerImage": "docmost/docmost",
+                "envVars": [
+                    {
+                        "name": "PORT",
+                        "value": "3000"
+                    },
+                    {
+                        "name": "JWT_TOKEN_EXPIRES_IN",
+                        "value": "86400"
+                    },
+                    {
+                        "name": "STORAGE_DRIVER",
+                        "value": "local"
+                    }
+                ],
+                "secretVars": [
+                    {
+                        "name": "APP_SECRET",
+                        "value": "{{ base64Encode ( randomBytes length=32 ) }}"
+                    },
+                    {
+                        "name": "DATABASE_URL",
+                        "value": "postgresql://{{databases.postgresql.user}}:{{databases.postgresql.password}}@pgbouncer.{{service.internalDomainName}}/{{databases.postgresql.database}}"
+                    },
+                    {
+                        "name": "REDIS_URL",
+                        "value": "redis://default:{{databases.redis.password}}@redis.{{service.internalDomainName}}:6379"
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "data",
+                        "path": "/app/data/storage",
+                        "backupSchedule": null
+                    }
+                ],
+                "caddy": [
+                    {
+                        "targetProtocol": "http",
+                        "targetPort": "3000",
+                        "publishedPort": "443",
+                        "domain": "{{domain}}",
+                        "path": "/*"
+                    }
+                ]
+            }
+        }
+    ]
+}
