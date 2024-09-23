@@ -5,6 +5,7 @@ interface Props {
     name: string;
     description: string;
     price: string;
+    yearlyPrice?: string;
     singleServer?: boolean;
     customErrorPages?: boolean;
     roleManagement?: boolean;
@@ -21,7 +22,10 @@ interface Props {
     };
 }
 
-const { name, description, price, singleServer, customErrorPages, roleManagement, dedicatedDiscord, mostPopular, waitlist, uptimeMonitoring, s3Storage } = Astro.props;
+const { name, description, price, yearlyPrice, singleServer, customErrorPages, roleManagement, dedicatedDiscord, mostPopular, waitlist, uptimeMonitoring, s3Storage } = Astro.props;
+
+// Split the price into dollars and cents
+const [dollars, cents] = price.split('.');
 
 ---
 
@@ -41,10 +45,18 @@ const { name, description, price, singleServer, customErrorPages, roleManagement
         </div>
         <div class="flex items-baseline text-gray-900 dark:text-white">
             <span class="text-2xl md:text-3xl font-semibold">$</span>
-            <span class="text-4xl md:text-5xl font-extrabold tracking-tight">{price}</span>
+            <span class="text-4xl md:text-5xl font-extrabold tracking-tight">{dollars}</span>
+            {cents && (
+                <span class="text-lg md:text-xl font-normal text-gray-500 dark:text-gray-400">.{cents}</span>
+            )}
             <span class="ml-1 text-lg md:text-xl font-normal text-gray-500 dark:text-gray-400">/mo</span>
         </div>
-        <small class="italic text-gray-400 mt-1">(price excludes tax)</small>
+        {yearlyPrice && (
+            <span class="text-sm md:text-base font-medium text-gray-600 dark:text-gray-300 mt-2 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
+                billed annually at ${yearlyPrice}/year
+            </span>
+        )}
+        <small class="italic text-gray-400 mt-2">(price excludes tax)</small>
     </div>
     <ul class="space-y-2 md:space-y-4 mb-4 md:mb-6 flex-grow px-2 md:px-0">
         <li class="flex items-center">

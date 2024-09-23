@@ -102,14 +102,15 @@ import DocsCTA from '../../components/DocsCTA.astro';
   <div class="flex flex-col md:grid md:grid-cols-3 md:pt-8 justify-center items-stretch gap-2 md:gap-0 not-content">
     <PricingCard name="Hobby" 
       description="Perfect plan to try the service or host non-critical applications" 
-      price="14" 
+      price="4.75"
+      yearlyPrice="57"
       singleServer 
       uptimeMonitoring={{ partial: true, hint: "Basic uptime monitoring: 1 check every 3 minutes" }} 
       s3Storage={{ hint: "Storage size is 500 MiB with an unlimited traffic", partial: true }}
     />
     <PricingCard name="Startup" 
       description="Need more power or an improved stability? This is your choice!" 
-      price="29"
+      price="27"
       customErrorPages
       mostPopular
       uptimeMonitoring={{ partial: true, hint: "Enhanced uptime monitoring: 10 checks every minute" }}
@@ -117,7 +118,7 @@ import DocsCTA from '../../components/DocsCTA.astro';
     />
     <PricingCard name="Business"
       description="Your business got traction? We will cover your back!"
-      price="39"
+      price="???"
       customErrorPages
       roleManagement
       dedicatedDiscord
@@ -319,6 +320,13 @@ You can self-host the service by clonning the <a href="https://r.ptah.sh/github"
           </ul>
           <p>Combining these elements, Ptah.sh symbolizes a "god and patron of DevOps," reflecting our mission to empower developers and system administrators with powerful, easy-to-use tools for managing their infrastructure.</p>
           <p>Also, in Ukrainian "Ptah" means "Bird" and we're trying the best to fly high and help our customers to do the same.</p>
+        </div>
+      </details>
+
+      <details itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+        <summary itemprop="name">Why is the Hobby plan billed annually?</summary>
+        <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+          <p itemprop="text">We offer the Hobby plan as an annual subscription to provide the best value for our users. This pricing model allows us to offer a significant discount compared to monthly billing, making it more affordable for individuals and small projects. The yearly subscription also helps us maintain a stable user base and invest in continuous improvements to our platform.</p>
         </div>
       </details>
     </div>
