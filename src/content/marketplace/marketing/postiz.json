@@ -1,0 +1,317 @@
+{
+    "extends": [
+        {
+            "slug": "databases/postgresql"
+        },
+        {
+            "slug": "databases/redis"
+        }
+    ],
+
+    "name": "Postiz",
+    "slug": "marketing/postiz",
+    "description": "Open-source social media scheduling tool.",
+    "about": "Postiz offers everything you need to manage your social media posts, build an audience, capture leads, and grow your business.",
+    "logo": "/marketplace/images/marketing/postiz.svg",
+    "url": "https://postiz.com/",
+    "tags": ["smm"],
+    "thirdParty": [
+        {
+            "name": "Cloudflare R2",
+            "url": "https://aws.amazon.com/ses/",
+            "description": "Global object storage with zero egress fees.",
+            "instructionsUrl": "https://docs.postiz.com/configuration/r2"
+        }
+    ],
+    "form": {
+        "type": "v-stack",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Domain",
+                        "name": "domain",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            },
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Cloudflare Account ID",
+                        "name": "cloudflareAccountId",
+                        "format": "string",
+                        "required": true
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Cloudflare Access Key",
+                        "name": "cloudflareAccessKey",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            },
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Cloudflare Secret Key",
+                        "name": "cloudflareSecretKey",
+                        "format": "string",
+                        "required": true
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Cloudflare Bucket Name",
+                        "name": "cloudflareBucketName",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            },
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Cloudflare Bucket URL",
+                        "name": "cloudflareBucketUrl",
+                        "format": "string",
+                        "required": true
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Cloudflare Bucket Region",
+                        "name": "cloudflareBucketRegion",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            },
+            {
+                "type": "collapsible",
+                "label": "Resend (optional)",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Resend API Key",
+                        "name": "resendApiKey",
+                        "format": "string",
+                        "required": false
+                    },
+                    {
+                        "type": "h-stack",
+                        "items": [
+                            {
+                                "type": "text-field",
+                                "label": "Sender Email",
+                                "name": "senderEmail",
+                                "format": "string",
+                                "required": false
+                            },
+                            {
+                                "type": "text-field",
+                                "label": "Sender Name",
+                                "name": "senderName",
+                                "format": "string",
+                                "required": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "collapsible",
+                "label": "X (formerly Twitter) (optional)",
+                "items": [
+                    {
+                        "type": "h-stack",
+                        "items": [
+                            {
+                                "type": "text-field",
+                                "label": "X API Key",
+                                "name": "xApiKey",
+                                "format": "string",
+                                "required": false
+                            },
+                            {
+                                "type": "text-field",
+                                "label": "X API Secret",
+                                "name": "xApiSecret",
+                                "format": "string",
+                                "required": false
+                            }
+                        ]
+                    },
+                    {
+                        "type": "h-stack",
+                        "items": [
+                            {
+                    
+                                "type": "text-field",
+                                "label": "X Client ID",
+                                "name": "xClientId",
+                                "format": "string",
+                                "required": false
+                            },
+                            {
+                                "type": "text-field",
+                                "label": "X Client Secret",
+                                "name": "xClientSecret",
+                                "format": "string",
+                                "required": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "collapsible",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "JWT Secret",
+                        "name": "jwtSecret",
+                        "format": "string",
+                        "required": true,
+                        "default": "{{ randomPassword }}"
+                    }
+                ]
+            }
+        ]
+    },
+    "processes": [
+        {
+            "name": "Postiz",
+            "description": "Open-source social media scheduling tool.",
+            "url": "https://github.com/gitroomhq/postiz-app/",
+            "data": {
+                "name": "postiz",
+                "dockerImage": "ghcr.io/gitroomhq/postiz-app:latest",
+                "envVars": [
+                    {
+                        "name": "MAIN_URL",
+                        "value": "https://{{domain}}"
+                    },
+                    {
+                        "name": "FRONTEND_URL",
+                        "value": "https://{{domain}}"
+                    },
+                    {
+                        "name": "NEXT_PUBLIC_BACKEND_URL",
+                        "value": "https://{{domain}}/api"
+                    },
+                    {
+                        "name": "BACKEND_INTERNAL_URL",
+                        "value": "https://api.{{service.internalDomainName}}:3000"
+                    },
+                    {
+                        "name": "IS_GENERAL",
+                        "value": "true"
+                    },
+                    {
+                        "name": "CLOUDFLARE_ACCOUNT_ID",
+                        "value": "{{cloudflareAccountId}}"
+                    },
+                    {
+                        "name": "CLOUDFLARE_ACCESS_KEY",
+                        "value": "{{cloudflareAccessKey}}"
+                    },
+                    {
+                        "name": "CLOUDFLARE_BUCKET_NAME",
+                        "value": "{{cloudflareBucketName}}"
+                    },
+                    {
+                        "name": "CLOUDFLARE_BUCKET_URL",
+                        "value": "{{cloudflareBucketUrl}}"
+                    },
+                    {
+                        "name": "CLOUDFLARE_BUCKET_REGION",
+                        "value": "{{cloudflareBucketRegion}}"
+                    },
+                    {
+                        "name": "EMAIL_FROM_ADDRESS",
+                        "value": "{{senderEmail}}"
+                    },
+                    {
+                        "name": "EMAIL_FROM_NAME",
+                        "value": "{{senderName}}"
+                    },
+                    {
+                        "name": "X_API_KEY",
+                        "value": "{{xApiKey}}"
+                    },
+                    {
+                        "name": "X_CLIENT",
+                        "value": "{{xClientId}}"
+                    }
+                ],
+                "secretVars": [
+                    {
+                        "name": "REDIS_URL",
+                        "value": "redis://default:{{databases.redis.password}}@redis.{{service.internalDomainName}}:6379"
+                    },
+                    {
+                        "name": "DATABASE_URL",
+                        "value": "postgresql://{{databases.postgresql.user}}:{{databases.postgresql.password}}@pgbouncer.{{service.internalDomainName}}/{{databases.postgresql.database}}"
+                    },
+                    {
+                        "name": "JWT_SECRET",
+                        "value": "{{jwtSecret}}"
+                    },
+                    {
+                        "name": "CLOUDFLARE_SECRET_ACCESS_KEY",
+                        "value": "{{cloudflareSecretKey}}"
+                    },
+                    {
+                        "name": "RESEND_API_KEY",
+                        "value": "{{resendApiKey}}"
+                    },
+                    {
+                        "name": "X_API_SECRET",
+                        "value": "{{xApiSecret}}"
+                    },
+                    {
+                        "name": "X_SECRET",
+                        "value": "{{xClientSecret}}"
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "postiz-config",
+                        "path": "/config/"
+                    }
+                ],
+                "caddy": [
+                    {
+                        "targetProtocol": "http",
+                        "targetPort": "3000",
+                        "publishedPort": "443",
+                        "domain": "{{domain}}",
+                        "path": "/api/*"
+                    },
+                    {
+                        "targetProtocol": "http",
+                        "targetPort": "4200",
+                        "publishedPort": "443",
+                        "domain": "{{domain}}",
+                        "path": "/*"
+                    }
+                ],
+                "rewriteRules": [
+                    {
+                        "pathFrom": "/api/(.*)",
+                        "pathTo": "/$1"
+                    }
+                ]
+            }
+        }
+    ]
+}
