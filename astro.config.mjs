@@ -101,7 +101,7 @@ const head = [
     tag: "meta",
     attrs: {
       name: "twitter:description",
-      content: "Save up to 82% costs on hosting your services. A flexible, fair source and independent alternative to Heroku/Vercel which puts you in control of your expenses.",
+      content: "Flexible, fair source and independent alternative to Heroku that puts you in control of your expenses.",
     },
   },
   {
