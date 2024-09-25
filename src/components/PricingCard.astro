@@ -20,9 +20,13 @@ interface Props {
         hint?: string;
         partial?: boolean;
     };
+    serverMonitoring?: {
+        hint?: string;
+        partial?: boolean;
+    };
 }
 
-const { name, description, price, yearlyPrice, singleServer, customErrorPages, roleManagement, dedicatedDiscord, mostPopular, waitlist, uptimeMonitoring, s3Storage } = Astro.props;
+const { name, description, price, yearlyPrice, singleServer, customErrorPages, roleManagement, dedicatedDiscord, mostPopular, waitlist, uptimeMonitoring, s3Storage, serverMonitoring } = Astro.props;
 
 // Split the price into dollars and cents
 const [dollars, cents] = price.split('.');
@@ -78,9 +82,9 @@ const [dollars, cents] = price.split('.');
                 hint="You provide your own servers. We offer the PaaS control layer for multiple servers."
             />
         )}
-        {customErrorPages ? <PricingFeature soon name="Custom Error Pages" hint="Custom Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." /> : <PricingFeature soon name="Standard Error Pages" partial hint="Ptah.sh branded Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." />}
+        <!-- {customErrorPages ? <PricingFeature soon name="Custom Error Pages" hint="Custom Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." /> : <PricingFeature soon name="Standard Error Pages" partial hint="Ptah.sh branded Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." />} -->
         {dedicatedDiscord ? <PricingFeature name="Dedicated Discord Channel" icon="discord" /> : <PricingFeature name="Community Discord Channel" icon="discord" partial href="https://r.ptah.sh/chat" />}
-        {roleManagement ? <PricingFeature name="Multiple User Roles" soon /> : <PricingFeature name="Single User Role" partial />}
+        <!-- {roleManagement ? <PricingFeature name="Multiple User Roles" soon /> : <PricingFeature name="Single User Role" partial />} -->
         <!-- <PricingFeature 
             name="Uptime Monitoring" 
             soon 
@@ -92,6 +96,12 @@ const [dollars, cents] = price.split('.');
             partial={s3Storage?.partial}
             soon
          /> -->
+        <PricingFeature 
+            name="Server Monitoring" 
+            soon 
+            hint={"CPU/RAM/Disk monitoring. " + serverMonitoring?.hint}
+            partial={serverMonitoring?.partial}
+        />
     </ul>
 
     <div class="italic text-xs md:text-sm text-center text-gray-600 dark:text-gray-400 mb-4 text-balance">{description}</div>

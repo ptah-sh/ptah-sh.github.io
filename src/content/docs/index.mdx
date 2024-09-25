@@ -107,6 +107,7 @@ import DocsCTA from '../../components/DocsCTA.astro';
       singleServer 
       uptimeMonitoring={{ partial: true, hint: "Basic uptime monitoring: 1 check every 3 minutes" }} 
       s3Storage={{ hint: "Storage size is 500 MiB with an unlimited traffic", partial: true }}
+      serverMonitoring={{ partial: true, hint: "Metrics are updated each 30 seconds. 7 days retention." }}
     />
     <PricingCard name="Startup" 
       description="Need more power or an improved stability? This is your choice!" 
@@ -115,6 +116,7 @@ import DocsCTA from '../../components/DocsCTA.astro';
       mostPopular
       uptimeMonitoring={{ partial: true, hint: "Enhanced uptime monitoring: 10 checks every minute" }}
       s3Storage={{ hint: "Storage size is 5 GiB with an unlimited traffic", partial: true }}
+      serverMonitoring={{ partial: true, hint: "Metrics are updated each 15 seconds. 30 days retention." }}
     />
     <PricingCard name="Business"
       description="Your business got traction? We will cover your back!"
@@ -125,6 +127,7 @@ import DocsCTA from '../../components/DocsCTA.astro';
       waitlist="https://forms.gle/YFZ8oJuiVvDm2gEU6"
       uptimeMonitoring={{ hint: "Full-featured uptime monitoring: 100 checks every 30 seconds" }}
       s3Storage={{ hint: "Storage size is 50 GiB with an unlimited traffic", partial: false }}
+      serverMonitoring={{ hint: "Metrics are updated each 5 seconds. 90 days retention." }}
     />
   </div>
 
