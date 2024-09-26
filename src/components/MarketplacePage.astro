@@ -2,6 +2,7 @@
 import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
 import { getCollection, getEntry } from 'astro:content';
 import Breadcrumbs from './Breadcrumbs.astro';
+import TagCloud from './TagCloud.astro';
 
 const { title, description, showCategories = true, breadcrumbItems = [], tags = [], category: currentCategory } = Astro.props;
 
@@ -29,13 +30,11 @@ const defaultDescription = "Deploy ready to use " + categories.slice(0, 3).map(c
         <Breadcrumbs items={breadcrumbItems} />
     )} 
 
-    <div class="flex flex-wrap gap-2 mb-4">
-        {tags.map((tag: any) => (
-            <span class="bg-blue-500 text-white text-xs font-semibold py-1 px-2 rounded-full">
-                {tag.data.name}
-            </span>
-        ))}
-    </div>
+    {tags.length > 0 && (
+        <div class="mb-4 not-content">
+            <TagCloud tags={tags} />
+        </div>
+    )}
 
     {showCategories && (
         <div class="mb-8 bg-gray-50 border border-gray-200 rounded-lg p-4 dark:bg-gray-800 dark:border-gray-700">

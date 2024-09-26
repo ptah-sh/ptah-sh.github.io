@@ -173,9 +173,4 @@ const alternatives = await getCollection('alternatives', ({ id }) => alternative
     <p>Want to explore more options? <a href={`/marketplace/${category?.id}/`}>See all {category?.data.description}</a> to find the best fit for your needs.</p>
 
     <DocsCTA />
-
-    {tags.map((tag: { data: { question?: string, name: string, description: string } }) => (
-        <h2>{tag.data.question || `Why use ${tag.data.name}?`}</h2>
-        <p set:html={tag.data.description} />
-    ))}
 </MarketplacePage>

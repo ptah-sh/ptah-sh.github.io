@@ -1,6 +1,8 @@
 ---
 import MarketplacePage from '../components/MarketplacePage.astro';
 import DocsCTA from '../components/DocsCTA.astro';
+import TagCloud from '../components/TagCloud.astro';
+import { getCollection } from 'astro:content';
 
 const description = "Explore our Self-hosted 1-Click Apps Marketplace for easy-to-deploy, pre-configured applications and services. Save time and streamline your development process.";
 
@@ -12,7 +14,11 @@ const structuredData = {
   "description": description,
   "url": "https://ptah.sh/marketplace/"
 };
+
+// Fetch all tags
+const allTags = await getCollection('marketplaceTags');
 ---
+
 <MarketplacePage 
   title="Self-Hosted Apps Marketplace aka 1-Click Apps"
   description={description}
@@ -35,7 +41,6 @@ const structuredData = {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
         referrerpolicy="strict-origin-when-cross-origin" 
         allowfullscreen
-        alt="Demo video of 1-Click Apps deployment process"
       ></iframe>
     </div>
   </div>
@@ -61,6 +66,12 @@ const structuredData = {
     <p>
       With Ptah.sh's 1-Click Apps Marketplace, you can enjoy these benefits of self-hosting while significantly reducing the complexity and time typically associated with setting up and managing self-hosted applications.
     </p>
+  </div>
+
+  <div class="mb-8">
+    <h2 class="text-2xl font-bold mb-4">Browse by Tag</h2>
+    <p class="mb-4">Explore our 1-Click Apps by popular tags</p>
+    <TagCloud tags={allTags} />
   </div>
 
   <DocsCTA />
