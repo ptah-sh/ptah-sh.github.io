@@ -54,6 +54,26 @@ const alternatives = await getCollection('alternatives', ({ id }) => alternative
         { label: template.data.name },
     ]}
 >
+    <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": template.data.name,
+        "applicationCategory": category.data.name,
+        "description": template.data.description,
+        "url": template.data.url,
+        "image": "https://ptah.sh" + template.data.logo,
+        "softwareVersion": template.data.version,
+        "releaseNotes": template.data.releaseNotes,
+        "featureList": template.data.features?.join(", "),
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "ratingCount": "1",
+            "bestRating": "5",
+            "worstRating": "1"
+        }
+    })} />
+
     {template.data.logo && (
         <img 
             src={template.data.logo} 

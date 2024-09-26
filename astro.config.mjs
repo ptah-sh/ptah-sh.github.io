@@ -24,31 +24,6 @@ const head = [
     },
   },
   {
-    tag: "script",
-    attrs: {
-      type: "application/ld+json",
-    },
-    content: `
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Ptah.sh",
-        "installUrl": "https://ptah.sh/tutorial/",
-        "applicationCategory": "Infrastructure Management Tool",
-        "featureList": "Self-hosted, Cloud-Hosted, 1-Click Apps, Marketplace, CI/CD, GitLab, GitHub, Docker, Open Source, Fair Source License",
-        "operatingSystem": "Web-based",
-        "releaseNotes": "https://r.ptah.sh/github",
-        "screenshot": "https://ptah.sh/og-image.png",
-        "offers": {
-          "@type": "Offer",
-          "price": "9.00",
-          "priceCurrency": "USD"
-        },
-        "description": "Optimize your infrastructure costs and simplify deployment with ptah.sh."
-      }
-    `,
-  },
-  {
     tag: "meta",
     attrs: {
       property: "og:image",
