@@ -13,14 +13,8 @@
     "url": "https://shlink.io/",
     "tags": ["url-shortener"],
     "alternativeTo": [
-        {
-            "name": "Bitly",
-            "url": "https://bitly.com/"
-        },
-        {
-            "name": "Rebrandly",
-            "url": "https://rebrandly.com/"
-        }
+        "bitly",
+        "dubdotco"
     ],
     "form": {
         "type": "v-stack",

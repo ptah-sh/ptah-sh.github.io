@@ -37,7 +37,8 @@ const tags = template?.data.tags.map((tag: any) => {
     return tagEntry;
 });
 
-const alternatives = template?.data.alternativeTo || [];
+const alternativeIds = template?.data.alternativeTo || [];
+const alternatives = await getCollection('alternatives', ({ id }) => alternativeIds.includes(id));
 
 ---
 
@@ -95,10 +96,11 @@ const alternatives = template?.data.alternativeTo || [];
             <>
                 <dt>{template.data.name} is a Good Alternative to</dt>
                 <dd>
-                    <ul class="px-4 flex flex-wrap gap-8 not-content">
-                        {alternatives.map((alt: { name: string, url: string }) => (
+                    <ul class="px-4 flex flex-wrap gap-2 not-content">
+                        {alternatives.map((alt) => (
                             <li>
-                                <a href={alt.url} rel="noopener nofollow" target="_blank">{alt.name}</a>
+                                <a href={alt.data.url} rel="noopener nofollow" target="_blank">{alt.data.name}</a>
+                                <p class="text-sm text-gray-600">{alt.data.description}</p>
                             </li>
                         ))}
                     </ul>

@@ -15,6 +15,7 @@
     "logo": "/marketplace/images/docs-n-wikis/docmost.png",
     "url": "https://docmost.com/",
     "tags": ["wiki", "cms"],
+    "alternativeTo": ["confluence"],
     "form": {
         "type": "v-stack",
         "items": [

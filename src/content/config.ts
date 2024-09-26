@@ -6,4 +6,5 @@ export const collections = {
   blog: defineCollection({ schema: docsSchema() }),
   marketplace: defineCollection({ type: "data" }),
   marketplaceTags: defineCollection({ type: "data" }),
+  alternatives: defineCollection({ type: "data" }),
 };

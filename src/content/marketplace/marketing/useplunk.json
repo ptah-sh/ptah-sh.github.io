@@ -24,18 +24,9 @@
         }
     ],
     "alternativeTo": [
-        {
-            "name": "Mailchimp",
-            "url": "https://mailchimp.com/"
-        },
-        {
-            "name": "Sendgrid",
-            "url": "https://sendgrid.com/"
-        },
-        {
-            "name": "Resend",
-            "url": "https://resend.com/"
-        }
+        "mailchimp",
+        "sendgrid",
+        "resend"
     ],
     "form": {
         "type": "v-stack",

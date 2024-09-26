@@ -30,18 +30,9 @@
     ],
     "tags": ["analytics-platform"],
     "alternativeTo": [
-        {
-            "name": "Mixpanel",
-            "url": "https://mixpanel.com/"
-        },
-        {
-            "name": "Google Analytics",
-            "url": "https://analytics.google.com/"
-        },
-        {
-            "name": "Plausible",
-            "url": "https://plausible.io/"
-        }
+        "mixpanel",
+        "google-analytics",
+        "plausible"
     ],
     "form": {
         "type": "v-stack",
