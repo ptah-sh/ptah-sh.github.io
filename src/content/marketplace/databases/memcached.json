@@ -1,0 +1,76 @@
+{
+    "name": "Memcached",
+    "slug": "databases/memcached",
+    "description": "Distributed memory caching system",
+    "about": "Memcached is a high-performance, distributed memory object caching system. It is an in-memory key-value store for small chunks of arbitrary data (strings, objects) from results of database calls, API calls, or page rendering. Memcached is designed to speed up dynamic web applications by alleviating database load.",
+    "logo": "/marketplace/images/databases/memcached.png",
+    "url": "https://memcached.org/",
+    "tags": ["cache", "kv-store", "nosql"],
+    "form": {
+        "type": "collapsible",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Memory Limit (in MB)",
+                        "name": "memoryLimit",
+                        "format": "number",
+                        "required": true,
+                        "default": 64
+                    }
+                ]
+            },
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Username",
+                        "name": "username",
+                        "format": "string",
+                        "required": true,
+                        "default": "{{ randomUsername }}"
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Password",
+                        "name": "password",
+                        "format": "string",
+                        "required": true,
+                        "default": "{{ randomPassword }}"
+                    }
+                ]
+            }
+        ]
+    },
+    "processes": [
+        {
+            "name": "Memcached",
+            "description": "Memcached distributed caching system",
+            "url": "https://github.com/bitnami/containers/tree/main/bitnami/memcached",
+            "data": {
+                "name": "memcached",
+                "dockerImage": "bitnami/memcached:latest",
+                "envVars": [
+                    {
+                        "name": "MEMCACHED_CACHE_SIZE",
+                        "value": "{{memoryLimit}}"
+                    },
+                    {
+                        "name": "MEMCACHED_USERNAME",
+                        "value": "{{username}}"
+                    }
+                ],
+                "secretVars": [
+                    {
+                        "name": "MEMCACHED_PASSWORD",
+                        "value": "{{password}}"
+                    }
+                ],
+                "volumes": []
+            }
+        }
+    ]
+}
