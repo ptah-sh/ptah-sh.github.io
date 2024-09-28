@@ -18,7 +18,7 @@
                         "name": "memoryLimit",
                         "format": "number",
                         "required": true,
-                        "default": 64
+                        "default": "64"
                     }
                 ]
             },

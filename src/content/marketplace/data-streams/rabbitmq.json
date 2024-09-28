@@ -48,6 +48,10 @@
                     {
                         "name": "RABBITMQ_NODE_NAME",
                         "value": "rabbit@{{service.internalDomainName}}"
+                    },
+                    {
+                        "name": "RABBITMQ_USE_LONGNAME",
+                        "value": "true"
                     }
                 ],
                 "secretVars": [
