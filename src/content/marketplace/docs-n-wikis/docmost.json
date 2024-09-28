@@ -14,7 +14,7 @@
     "about": "Create, collaborate, and share knowledge seamlessly with Docmost. Ideal for managing your wiki, knowledge-base, documentation and a lot more.",
     "logo": "/marketplace/images/docs-n-wikis/docmost.png",
     "url": "https://docmost.com/",
-    "tags": ["wiki", "cms"],
+    "tags": ["wiki", "cms", "collaboration-tools"],
     "alternativeTo": ["confluence"],
     "form": {
         "type": "v-stack",

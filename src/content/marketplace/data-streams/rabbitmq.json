@@ -1,0 +1,70 @@
+{
+    "name": "RabbitMQ",
+    "slug": "data-streams/rabbitmq",
+    "description": "RabbitMQ is a robust message broker.",
+    "about": "RabbitMQ is an open-source message-broker software that originally implemented the Advanced Message Queuing Protocol (AMQP).",
+    "logo": "/marketplace/images/data-streams/rabbitmq.svg",
+    "url": "https://www.rabbitmq.com/",
+    "tags": ["message-broker"],
+    "form": {
+        "type": "v-stack",
+        "items": [
+            {
+                "type": "collapsible",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Username",
+                        "name": "user",
+                        "format": "string",
+                        "required": true,
+                        "default": "{{randomUsername}}"
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Password",
+                        "name": "password",
+                        "format": "string",
+                        "required": true,
+                        "default": "{{randomPassword}}"
+                    }
+                ]
+            }
+        ]
+    },
+    "processes": [
+        {
+            "name": "RabbitMQ",
+            "description": "RabbitMQ is a robust message broker.",
+            "url": "https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq/",
+            "data": {
+                "name": "rabbitmq",
+                "dockerImage": "bitnami/rabbitmq",
+                "envVars": [
+                    {
+                        "name": "RABBITMQ_USERNAME",
+                        "value": "{{user}}"
+                    },
+                    {
+                        "name": "RABBITMQ_NODE_NAME",
+                        "value": "rabbit@{{service.internalDomainName}}"
+                    }
+                ],
+                "secretVars": [
+                    {
+                        "name": "RABBITMQ_PASSWORD",
+                        "value": "{{password}}"
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "data",
+                        "path": "/bitnami/rabbitmq",
+                        "backupSchedule": null
+                    }
+                ],
+                "caddy": []
+            }
+        }
+    ]
+}
