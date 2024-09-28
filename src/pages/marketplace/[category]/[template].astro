@@ -4,6 +4,7 @@ import MarketplacePage from "../../../components/MarketplacePage.astro";
 import { getCollection, getEntry } from 'astro:content';
 import { Aside } from '@astrojs/starlight/components';
 import DocsCTA from "../../../components/DocsCTA.astro";
+import RelatedArticles from "../../../components/RelatedArticles.astro";
 
 export const getStaticPaths = (async () => {
     const apps = await getCollection('marketplace', entry => entry.id.includes('/'));
@@ -173,4 +174,7 @@ const alternatives = await getCollection('alternatives', ({ id }) => alternative
     <p>Want to explore more options? <a href={`/marketplace/${category?.id}/`}>See all {category?.data.description}</a> to find the best fit for your needs.</p>
 
     <DocsCTA />
+
+    <RelatedArticles relatedApps={[template.id]} />
+
 </MarketplacePage>

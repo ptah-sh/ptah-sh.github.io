@@ -4,6 +4,8 @@ import { getCollection, getEntry } from 'astro:content';
 import MarketplacePage from "../../../components/MarketplacePage.astro";
 import fs from 'fs';
 import path from 'path';
+import RelatedArticles from "../../../components/RelatedArticles.astro";
+import DocsCTA from "../../../components/DocsCTA.astro";
 
 export const getStaticPaths = (async () => {
     const tags = await getCollection('marketplaceTags');
@@ -37,6 +39,7 @@ if (!tag) {
 const allTemplates = await getCollection('marketplace', entry => entry.id.includes('/'));
 const templates = allTemplates.filter(template => template.data.tags?.includes(tag.id));
 ---
+
 
 <MarketplacePage
     title={`1-Click Apps: ${tag.data.name}`}
@@ -89,4 +92,9 @@ const templates = allTemplates.filter(template => template.data.tags?.includes(t
             <li>Focus on your project's unique aspects, rather than spending time on setup and configuration</li>
         </ul>
     </div>
+
+    <DocsCTA />
+
+    <RelatedArticles relatedTags={[tag.id]} />
+
 </MarketplacePage>

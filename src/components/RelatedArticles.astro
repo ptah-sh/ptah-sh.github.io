@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+    relatedApps?: string[];
+    relatedTags?: string[];
+}
+
+const { relatedApps = [], relatedTags = [] } = Astro.props;
+
+// Fetch all docs (including blog posts)
+const allDocs = await getCollection('docs');
+
+// Filter docs related to this template or tag
+const relatedArticles = allDocs.filter(doc => 
+    (doc.data.relatedApps && doc.data.relatedApps.some((app: string) => relatedApps.includes(app))) ||
+    (doc.data.relatedTags && doc.data.relatedTags.some((tag: string) => relatedTags.includes(tag)))
+);
+---
+
+{relatedArticles.length > 0 && (
+    <>
+        <h2>Continue Reading</h2>
+        <ul>
+            {relatedArticles.map(article => (
+                <li>
+                    <a href={`/${article.slug}/`}>{article.data.title}</a>
+                </li>
+            ))}
+        </ul>
+    </>
+)}
