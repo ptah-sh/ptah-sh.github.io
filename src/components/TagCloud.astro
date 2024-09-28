@@ -16,7 +16,7 @@ const { tags } = Astro.props;
 <div class="flex flex-wrap gap-2 not-content">
   {tags.map((tag) => (
     <a 
-      href={`/marketplace/tags/${tag.id}`} 
+      href={`/marketplace/tags/${tag.id}/`} 
       class="px-3 py-1 bg-gray-200 rounded-full text-sm hover:bg-gray-300 transition-colors duration-200 no-underline"
     >
       {tag.data.name}
