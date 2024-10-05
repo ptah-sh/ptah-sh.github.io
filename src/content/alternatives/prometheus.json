@@ -1,0 +1,5 @@
+{
+    "name": "Prometheus",
+    "url": "https://prometheus.io/",
+    "description": "Prometheus is an open-source, time-series database and monitoring system that is designed for handling large volumes of data and for querying data in real-time. It is particularly useful for handling large volumes of data and for querying data in real-time. Prometheus offers several advantages over traditional relational databases, including better performance, scalability, and flexibility. Additionally, Prometheus is well-suited for applications that require high availability, horizontal scalability, and flexible data models."
+}

@@ -1,0 +1,5 @@
+{
+    "slug": "tsdb",
+    "name": "Time-Series Databases",
+    "description": "A time-series database is a type of database that is optimized for storing and querying time-series data. Time-series data is data that is collected over time, such as sensor data, network traffic, or financial data. Time-series databases are designed to handle large amounts of data, and they offer several advantages over traditional database systems, including better performance, scalability, and flexibility. Additionally, time-series databases are well-suited for applications that require high availability, horizontal scalability, and flexible data models."
+}
