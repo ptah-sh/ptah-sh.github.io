@@ -1,6 +1,16 @@
 ---
+interface Props {
+  src: string;
+  alt: string;
+  caption: string;
+}
+
+const { src, alt, caption } = Astro.props;
 ---
 
-<div class="shadow-xl rounded-xl overflow-hidden border border-gray-200 m-8">
-    <slot />
-</div>
+<figure class="m-0">
+  <a href={src} target="_blank" rel="noopener noreferrer">
+    <img src={src} alt={alt} class="w-full rounded-lg shadow-md cursor-pointer" />
+  </a>
+  <figcaption class="text-center text-sm mt-2 text-gray-600 dark:text-gray-400">{caption}</figcaption>
+</figure>
