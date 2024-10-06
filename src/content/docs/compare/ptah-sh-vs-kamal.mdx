@@ -1,12 +1,12 @@
 ---
-title: "Ptah.sh as alternative to Kamal"
-description: "A comprehensive comparison of Ptah.sh and Kamal for application deployment and management."
+title: "Ptah.sh as alternative to Kamal and Coolify"
+description: "A comprehensive comparison of Ptah.sh, Kamal, and Coolify for application deployment and management."
 sidebar:
-    label: Ptah.sh vs Kamal
+    label: Ptah.sh vs Kamal vs Coolify
 ---
 import DocsCTA from '../../../components/DocsCTA.astro';
 
-Ptah.sh and Kamal are both modern platforms designed for deploying and managing applications. While they share some similarities in their approach to containerization, there are key differences that may influence your choice. This comparison will help you decide which platform is best suited for your project.
+Ptah.sh, Kamal, and Coolify are modern platforms designed for deploying and managing applications. While they share some similarities in their approach to containerization, there are key differences that may influence your choice. This comparison will help you decide which platform is best suited for your project.
 
 ## Deployment Model
 
@@ -20,6 +20,11 @@ Ptah.sh and Kamal are both modern platforms designed for deploying and managing 
 - Command-line interface (CLI) for deployments
 - Designed for simplicity and ease of use
 
+### Coolify
+- Self-hosted PaaS (Platform as a Service)
+- Container-based using Docker
+- Provides a web-based UI for management
+
 ## Target Audience
 
 ### Ptah.sh
@@ -30,22 +35,26 @@ Ptah.sh and Kamal are both modern platforms designed for deploying and managing 
 - Primarily targets Ruby on Rails applications
 - Ideal for developers comfortable with CLI tools
 
+### Coolify
+- Targets developers and teams looking for a self-hosted alternative to platforms like Heroku
+- Supports multiple programming languages and frameworks
+
 ## Features Comparison
 
-| Feature | Ptah.sh | Kamal |
-|---------|---------|-------|
-| Container-based | Yes | Yes |
-| Web UI | Yes | No |
-| CLI support | Limited | Yes |
-| Multi-language support | Yes | Limited (Ruby-focused) |
-| Built-in load balancing | Yes (Docker Swarm) | No |
-| Zero-downtime deployments | Yes | Yes |
-| Rolling updates | Yes | Yes |
-| Automated SSL management | Yes | Yes |
-| Database management | Yes | Limited |
-| Custom deployment scripts | Yes | Yes |
-| Self-hosted option | Yes | Yes (by design) |
-| Resource monitoring | Built-in monitoring for CPU, memory, disk, network, and HTTP metrics | No built-in monitoring |
+| Feature | Ptah.sh | Kamal | Coolify |
+|---------|---------|-------|---------|
+| Container-based | Yes | Yes | Yes |
+| Web UI | Yes | No | Yes |
+| CLI support | Limited | Yes | Yes |
+| Multi-language support | Yes | Limited (Ruby-focused) | Yes |
+| Built-in load balancing | Yes (Docker Swarm) | No | Yes |
+| Zero-downtime deployments | Yes | Yes | Yes |
+| Rolling updates | Yes | Yes | Yes |
+| Automated SSL management | Yes | Yes | Yes |
+| Database management | Yes | Limited | Yes |
+| Custom deployment scripts | Yes | Yes | Yes |
+| Self-hosted option | Yes | Yes (by design) | Yes (by design) |
+| Resource monitoring | Built-in monitoring for CPU, memory, disk, network, and HTTP metrics | No built-in monitoring | Basic resource monitoring |
 
 ## Scalability
 
@@ -57,6 +66,11 @@ Ptah.sh and Kamal are both modern platforms designed for deploying and managing 
 ### Kamal
 - Manual scaling by deploying to multiple servers
 - Requires additional setup for load balancing
+
+### Coolify
+- Horizontal scaling support
+- Built-in load balancing
+- Scaling complexity depends on self-hosted infrastructure
 
 ## Ease of Use
 
@@ -70,6 +84,11 @@ Ptah.sh and Kamal are both modern platforms designed for deploying and managing 
 - Requires more manual configuration
 - Steeper learning curve for non-Ruby developers
 
+### Coolify
+- User-friendly web interface
+- One-click deployments for many applications
+- Requires some knowledge of server management for setup
+
 ## Customization and Flexibility
 
 ### Ptah.sh
@@ -82,6 +101,11 @@ Ptah.sh and Kamal are both modern platforms designed for deploying and managing 
 - Allows for fine-grained control over deployments
 - More flexibility, but requires more manual setup
 
+### Coolify
+- Supports custom Docker containers
+- Flexible application configurations
+- Extensible through plugins
+
 ## Community and Support
 
 ### Ptah.sh
@@ -93,6 +117,11 @@ Ptah.sh and Kamal are both modern platforms designed for deploying and managing 
 - Open-source project
 - Community-driven support
 - Backed by the Ruby on Rails community
+
+### Coolify
+- Open-source project
+- Growing community
+- Community-driven support with optional paid support plans
 
 ## Conclusion
 
@@ -109,8 +138,14 @@ Choose Kamal if you:
 - Want fine-grained control over your deployment process
 - Are comfortable with more manual configuration and setup
 
+Choose Coolify if you:
+- Want a self-hosted PaaS solution with a web-based UI
+- Need support for multiple programming languages and frameworks
+- Prefer one-click deployments and easy application management
+- Are comfortable managing your own infrastructure
+
 <DocsCTA />
 
-Both platforms leverage containerization for deployments, but they cater to different preferences in terms of management and workflow. Ptah.sh offers a more comprehensive platform with a user-friendly interface, while Kamal provides a lightweight, flexible tool for developers who prefer command-line control. Consider your team's expertise, project requirements, and desired level of management when making your decision.
+All three platforms leverage containerization for deployments, but they cater to different preferences in terms of management and workflow. Ptah.sh offers a comprehensive platform with a user-friendly interface and managed options. Kamal provides a lightweight, flexible tool for developers who prefer command-line control, especially for Ruby applications. Coolify sits in between, offering a self-hosted PaaS solution with a web UI and support for multiple languages.
 
-Ptah.sh is a good alternative to Kamal for teams and businesses that prefer a more comprehensive, user-friendly platform for application deployment. If you're looking for a solution that offers a web-based UI, built-in load balancing, and easier scaling options without sacrificing the benefits of containerization, Ptah.sh could be the ideal choice. It's particularly well-suited for projects that require multi-language support and teams that value a balance between simplicity and powerful features.
+Consider your team's expertise, project requirements, desired level of management, and infrastructure preferences when making your decision. Ptah.sh is particularly well-suited for teams and businesses that prefer a more comprehensive, user-friendly platform with both self-hosted and managed options. It's an excellent choice for projects that require multi-language support, easy scaling, and a balance between simplicity and powerful features.
