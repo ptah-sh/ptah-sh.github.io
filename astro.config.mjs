@@ -175,7 +175,6 @@ export default defineConfig({
         {
           label: "Company Blog",
           autogenerate: { directory: "blog" },
-          collapsed: true,
         },
       ],
       customCss: ["./src/tailwind.css", "./src/styles/starlight-content.css"],

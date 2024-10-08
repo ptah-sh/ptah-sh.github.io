@@ -1,0 +1,44 @@
+---
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+import { getCollection } from 'astro:content';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+
+const blogPosts = await getCollection('docs', ({ id }) => {
+    return id.startsWith('blog/');
+  });
+
+export async function getStaticProps() {
+  const blogPosts = await getCollection('docs', ({ id }) => {
+    return id.startsWith('blog/');
+  });
+  
+  return { props: { blogPosts } };
+}
+---
+
+<StarlightPage
+  headings={[
+    {
+      text: "Ptah.sh Company Blog",
+      depth: 1,
+      slug: "blog"
+    }
+  ]}
+  frontmatter={{
+    title: "Ptah.sh Company Blog",
+    description: "Product news and Updates",
+    tableOfContents: false,
+  }}
+>
+
+<CardGrid>
+  {blogPosts.map((post) => (
+    <LinkCard 
+      title={post.data.title}
+      description={post.data.description}
+      href={`/${post.slug}/`}
+    />
+  ))}
+</CardGrid>
+
+</StarlightPage>
