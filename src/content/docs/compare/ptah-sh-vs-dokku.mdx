@@ -1,0 +1,79 @@
+---
+title: Ptah.sh vs Dokku as an alternative to Heroku
+description: A comparison between Ptah.sh and Dokku for deploying and managing applications
+---
+
+import DocsCTA from '../../../components/DocsCTA.astro';
+
+When it comes to deploying and managing applications, both Ptah.sh and Dokku offer solutions for simplifying the process. Let's compare these two platforms to help you decide which might be the best fit for your needs.
+
+## Overview
+
+### Ptah.sh
+
+Ptah.sh is a modern, Docker Swarm-based platform designed to simplify application deployment and management. It offers a user-friendly interface and a range of features to streamline your DevOps processes.
+
+### Dokku
+
+Dokku is an open-source Platform as a Service (PaaS) that uses Docker under the hood. It's often described as a "mini-Heroku" that you can self-host.
+
+## Key Differences
+
+### 1. Orchestration
+
+- **Ptah.sh**: Uses Docker Swarm for orchestration, providing built-in load balancing and service discovery.
+- **Dokku**: Primarily uses Docker, but doesn't have built-in orchestration. It's designed for single-host deployments.
+
+### 2. User Interface
+
+- **Ptah.sh**: Offers a comprehensive web-based dashboard for managing services, configurations, and deployments.
+- **Dokku**: Primarily command-line based, though third-party UIs are available.
+
+### 3. Scaling
+
+- **Ptah.sh**: Supports easy horizontal scaling of services across a Docker Swarm cluster.
+- **Dokku**: Limited scaling capabilities, primarily vertical scaling on a single host.
+
+### 4. Configuration Management
+
+- **Ptah.sh**: Provides a centralized way to manage environment variables, secrets, and config files through its interface.
+- **Dokku**: Relies on environment variables and plugin-based configuration management.
+
+### 5. Service Discovery and Routing
+
+- **Ptah.sh**: Integrated service discovery and routing through Docker Swarm and Caddy.
+- **Dokku**: Basic routing capabilities, often requiring additional setup for advanced scenarios.
+
+### 6. Backup and Restore
+
+- **Ptah.sh**: Built-in backup and restore functionality for services and volumes, with S3 integration.
+- **Dokku**: Backup and restore typically handled through plugins or manual processes.
+
+### 7. Marketplace and 1-Click Apps
+
+- **Ptah.sh**: Offers a marketplace with 1-Click Apps for easy deployment of common services.
+- **Dokku**: Relies on buildpacks and plugins for application support, but doesn't have a centralized marketplace.
+
+## When to Choose Ptah.sh
+
+- You need a scalable solution that can grow with your infrastructure
+- You want a user-friendly web interface for managing your applications
+- You require advanced features like integrated backups and service discovery
+- You're looking for easy deployment of common services through 1-Click Apps
+
+## When to Choose Dokku
+
+- You prefer a lightweight, single-host solution
+- You're comfortable with command-line interfaces
+- You want a more Heroku-like experience
+- You need a solution with a smaller resource footprint
+
+Both Ptah.sh and Dokku have their strengths, and the best choice depends on your specific needs, infrastructure, and team expertise. Consider factors like scalability requirements, ease of use, and desired features when making your decision.
+
+<DocsCTA />
+
+## Conclusion
+
+Ptah.sh offers a more comprehensive, scalable solution with a user-friendly interface and advanced features, making it suitable for teams looking for a robust platform to manage complex deployments. Dokku, on the other hand, provides a simpler, lightweight option that's ideal for smaller projects or teams that prefer a more hands-on approach.
+
+Evaluate your project requirements, team skills, and growth projections to determine which platform aligns best with your goals.
