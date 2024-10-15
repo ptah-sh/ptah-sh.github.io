@@ -103,7 +103,12 @@
             "url": "https://github.com/useplunk/plunk/",
             "data": {
                 "name": "plunk",
-                "dockerImage": "driaug/plunk:latest",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "driaug/plunk:latest"
+                    }
+                ],
                 "envVars": [
                     {
                         "name": "DISABLE_SIGNUPS",

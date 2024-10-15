@@ -89,12 +89,26 @@
             "url": "https://github.com/Openpanel-dev/openpanel",
             "data": {
                 "name": "openpanel-api",
-                "dockerImage": "lindesvard/openpanel-api:latest",
-                "releaseCommand": {
-                    "command": "pnpm -r run migrate:deploy"
-                },
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "lindesvard/openpanel-api:latest",
+                        "releaseCommand": {
+                            "command": "pnpm -r run migrate:deploy"
+                        },
+                        "launchMode": "daemon",
+                        "replicas": 1
+                    },
+                    {
+                        "name": "worker",
+                        "dockerImage": "lindesvard/openpanel-worker:latest",
+                        "launchMode": "daemon",
+                        "replicas": 1
+                    }
+                ],
                 "envVars": [
                     { "name": "NODE_ENV", "value": "production" },
+                    { "name": "SELF_HOSTED", "value": "true" },
                     { "name": "GEO_IP_HOST", "value": "geoip.{{service.internalDomainName}}" },
                     { "name": "NEXT_PUBLIC_DASHBOARD_URL", "value": "https://{{domain}}" },
                     { "name": "BATCH_SIZE", "value": "5000" },
@@ -127,30 +141,19 @@
             }
         },
         {
-            "name": "Worker",
-            "description": "The OpenPanel worker",
-            "url": "https://github.com/Openpanel-dev/openpanel",
-            "data": {
-                "name": "openpanel-worker",
-                "dockerImage": "lindesvard/openpanel-worker:latest",
-                "envVars": [
-                    { "name": "NODE_ENV", "value": "production" },
-                    { "name": "SELF_HOSTED", "value": "true" }
-                ],
-                "secretVars": [
-                    { "name": "CLICKHOUSE_URL", "value": "http://{{databases.clickhouse.user}}:{{databases.clickhouse.password}}@clickhouse.{{service.internalDomainName}}:8123" },
-                    { "name": "REDIS_URL", "value": "redis://default:{{databases.redis.password}}@redis.{{service.internalDomainName}}:6379" },
-                    { "name": "DATABASE_URL", "value": "postgresql://{{databases.postgresql.user}}:{{databases.postgresql.password}}@pgbouncer.{{service.internalDomainName}}/{{databases.postgresql.database}}" }
-                ]
-            }
-        },
-        {
             "name": "Dashboard",
             "description": "The OpenPanel dashboard",
             "url": "https://github.com/Openpanel-dev/openpanel",
             "data": {
                 "name": "openpanel-dashboard",
-                "dockerImage": "lindesvard/openpanel-dashboard:latest",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "lindesvard/openpanel-dashboard:latest",
+                        "launchMode": "daemon",
+                        "replicas": 1
+                    }
+                ],
                 "envVars": [
                     { "name": "NODE_ENV", "value": "production" },
                     { "name": "NEXT_PUBLIC_DASHBOARD_URL", "value": "https://{{domain}}" },

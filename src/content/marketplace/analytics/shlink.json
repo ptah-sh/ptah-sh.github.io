@@ -54,7 +54,12 @@
             "url": "https://github.com/shlinkio/shlink",
             "data": {
                 "name": "shlink",
-                "dockerImage": "shlinkio/shlink",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "shlinkio/shlink"
+                    }
+                ],
                 "envVars": [
                     { "name": "DEFAULT_DOMAIN", "value": "{{domain}}" },
                     { "name": "IS_HTTPS_ENABLED", "value": "true" },

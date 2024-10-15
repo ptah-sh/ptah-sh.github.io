@@ -194,7 +194,12 @@
             "url": "https://github.com/gitroomhq/postiz-app/",
             "data": {
                 "name": "postiz",
-                "dockerImage": "ghcr.io/gitroomhq/postiz-app:latest",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "ghcr.io/gitroomhq/postiz-app:latest"
+                    }
+                ],
                 "envVars": [
                     {
                         "name": "MAIN_URL",

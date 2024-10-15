@@ -68,7 +68,12 @@
             "url": "https://github.com/bitnami/containers/tree/main/bitnami/mysql",
             "data": {
                 "name": "mysql",
-                "dockerImage": "bitnami/mysql:8.4",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "bitnami/mysql:8.4"
+                    }
+                ],
                 "envVars": [
                     {
                         "name": "MYSQL_USER",
@@ -96,8 +101,7 @@
                 "volumes": [
                     {
                         "name": "data",
-                        "path": "/bitnami/mysql",
-                        "backupSchedule": null
+                        "path": "/bitnami/mysql"
                     }
                 ]
             }

@@ -52,7 +52,12 @@
             "url": "https://github.com/bitnami/containers/tree/main/bitnami/memcached",
             "data": {
                 "name": "memcached",
-                "dockerImage": "bitnami/memcached:latest",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "bitnami/memcached:latest"
+                    }
+                ],
                 "envVars": [
                     {
                         "name": "MEMCACHED_CACHE_SIZE",

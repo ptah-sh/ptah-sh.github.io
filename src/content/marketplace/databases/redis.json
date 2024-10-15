@@ -31,7 +31,12 @@
             "url": "https://github.com/bitnami/containers/tree/main/bitnami/redis",
             "data": {
                 "name": "redis",
-                "dockerImage": "bitnami/redis:7.4",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "bitnami/redis:7.4"
+                    }
+                ],
                 "envVars": [],
                 "secretVars": [
                     {
@@ -42,8 +47,7 @@
                 "volumes": [
                     {
                         "name": "data",
-                        "path": "/bitnami/redis",
-                        "backupSchedule": null
+                        "path": "/bitnami/redis"
                     }
                 ]
             }

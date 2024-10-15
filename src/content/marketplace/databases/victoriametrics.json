@@ -17,12 +17,16 @@
             "url": "https://hub.docker.com/r/victoriametrics/victoria-metrics",
             "data": {
                 "name": "victoriametrics",
-                "dockerImage": "victoriametrics/victoria-metrics",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "victoriametrics/victoria-metrics"
+                    }
+                ],
                 "volumes": [
                     {
                         "name": "data",
-                        "path": "/victoria-metrics-data",
-                        "backupSchedule": null
+                        "path": "/victoria-metrics-data"
                     }
                 ]
             }

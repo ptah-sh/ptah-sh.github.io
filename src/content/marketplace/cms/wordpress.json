@@ -62,7 +62,12 @@
             "url": "https://github.com/bitnami/containers/tree/main/bitnami/wordpress/",
             "data": {
                 "name": "wordpress",
-                "dockerImage": "bitnami/wordpress",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "bitnami/wordpress"
+                    }
+                ],
                 "envVars": [
                     {
                         "name": "WORDPRESS_BLOG_NAME",
@@ -106,8 +111,7 @@
                 "volumes": [
                     {
                         "name": "data",
-                        "path": "/bitnami/wordpress",
-                        "backupSchedule": null
+                        "path": "/bitnami/wordpress"
                     }
                 ],
                 "caddy": [

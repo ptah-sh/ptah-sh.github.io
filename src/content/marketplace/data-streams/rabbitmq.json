@@ -39,7 +39,12 @@
             "url": "https://github.com/bitnami/containers/tree/main/bitnami/rabbitmq/",
             "data": {
                 "name": "rabbitmq",
-                "dockerImage": "bitnami/rabbitmq",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "bitnami/rabbitmq"
+                    }
+                ],
                 "envVars": [
                     {
                         "name": "RABBITMQ_USERNAME",
@@ -63,8 +68,7 @@
                 "volumes": [
                     {
                         "name": "data",
-                        "path": "/bitnami/rabbitmq",
-                        "backupSchedule": null
+                        "path": "/bitnami/rabbitmq"
                     }
                 ],
                 "caddy": []

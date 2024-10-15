@@ -16,7 +16,12 @@
             "url": "https://github.com/observabilitystack/geoip-api",
             "data": {
                 "name": "geoip-api",
-                "dockerImage": "observabilitystack/geoip-api:latest",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "observabilitystack/geoip-api:latest"
+                    }
+                ],
                 "envVars": [],
                 "secretVars": [],
                 "volumes": []

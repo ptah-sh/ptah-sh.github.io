@@ -40,7 +40,12 @@
             "url": "https://github.com/docmost/docmost/",
             "data": {
                 "name": "docmost",
-                "dockerImage": "docmost/docmost",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "docmost/docmost"
+                    }
+                ],
                 "envVars": [
                     {
                         "name": "PORT",
@@ -72,8 +77,7 @@
                 "volumes": [
                     {
                         "name": "data",
-                        "path": "/app/data/storage",
-                        "backupSchedule": null
+                        "path": "/app/data/storage"
                     }
                 ],
                 "caddy": [

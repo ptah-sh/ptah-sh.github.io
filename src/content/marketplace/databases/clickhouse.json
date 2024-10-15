@@ -45,7 +45,12 @@
             "url": "https://github.com/bitnami/containers/tree/main/bitnami/clickhouse",
             "data": {
                 "name": "clickhouse",
-                "dockerImage": "bitnami/clickhouse:24.3",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "bitnami/clickhouse:24.3"
+                    }
+                ],
                 "envVars": [
                     {
                         "name": "CLICKHOUSE_ADMIN_USER",
@@ -61,8 +66,7 @@
                 "volumes": [
                     {
                         "name": "data",
-                        "path": "/bitnami/clickhouse",
-                        "backupSchedule": null
+                        "path": "/bitnami/clickhouse"
                     }
                 ]
             }

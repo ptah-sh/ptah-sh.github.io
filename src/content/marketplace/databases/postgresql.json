@@ -47,7 +47,12 @@
             "url": "https://github.com/bitnami/containers/tree/main/bitnami/postgresql",
             "data": {
                 "name": "pg",
-                "dockerImage": "bitnami/postgresql:16",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "bitnami/postgresql:16"
+                    }
+                ],
                 "envVars": [
                     {
                         "name": "POSTGRESQL_USER",
@@ -67,8 +72,7 @@
                 "volumes": [
                     {
                         "name": "data",
-                        "path": "/bitnami/postgresql",
-                        "backupSchedule": null
+                        "path": "/bitnami/postgresql"
                     }
                 ]
             }
@@ -79,7 +83,12 @@
             "url": "https://github.com/bitnami/containers/tree/main/bitnami/pgbouncer",
             "data": {
                 "name": "pgbouncer",
-                "dockerImage": "bitnami/pgbouncer:latest",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "bitnami/pgbouncer:latest"
+                    }
+                ],
                 "envVars": [
                     {
                         "name": "PGBOUNCER_POOL_MODE",
