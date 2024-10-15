@@ -1,0 +1,113 @@
+{
+    "name": "MariaDB",
+    "slug": "databases/mariadb",
+    "description": "Single-server MariaDB database",
+    "about": "MariaDB is a powerful, open-source relational database management system that uses SQL language to manage and scale the most complicated data workloads.",
+    "logo": "/marketplace/images/databases/mariadb.png",
+    "url": "https://mariadb.org/",
+    "tags": ["rdbms"],
+    "alternativeTo": [
+        "mysql"
+    ],
+    "form": {
+        "type": "collapsible",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "User",
+                        "name": "user",
+                        "format": "string",
+                        "required": true,
+                        "default": "{{ randomUsername }}"
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Password",
+                        "name": "password",
+                        "format": "string",
+                        "required": true,
+                        "default": "{{ randomPassword }}"
+                    }
+                ]
+            },
+            {
+                "type": "text-field",
+                "label": "Database",
+                "name": "database",
+                "format": "string",
+                "required": true,
+                "default": "db"
+            },
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Root User",
+                        "name": "rootUser",
+                        "format": "string",
+                        "required": true,
+                        "default": "root"
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Root Password",
+                        "name": "rootPassword",
+                        "format": "string",
+                        "required": true,
+                        "default": "{{ randomPassword }}"
+                    }
+                ]
+            }
+        ]
+    },
+    "processes": [
+        {
+            "name": "MariaDB",
+            "description": "MariaDB database",
+            "url": "https://github.com/bitnami/containers/tree/main/bitnami/mariadb",
+            "data": {
+                "name": "mariadb",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "bitnami/mariadb:11.5"
+                    }
+                ],
+                "envVars": [
+                    {
+                        "name": "MARIADB_USER",
+                        "value": "{{user}}"
+                    },
+                    {
+                        "name": "MARIADB_DATABASE",
+                        "value": "{{database}}"
+                    }
+                ],
+                "secretVars": [
+                    {
+                        "name": "MARIADB_ROOT_USER",
+                        "value": "{{rootUser}}"
+                    },
+                    {
+                        "name": "MARIADB_ROOT_PASSWORD",
+                        "value": "{{rootPassword}}"
+                    },
+                    {
+                        "name": "MARIADB_PASSWORD",
+                        "value": "{{password}}"
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "data",
+                        "path": "/bitnami/mariadb"
+                    }
+                ]
+            }
+        }
+    ]
+}
