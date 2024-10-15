@@ -156,10 +156,14 @@ const alternatives = await getCollection('alternatives', ({ id }) => alternative
                 <div class="px-4">
                     <p>{process.description}</p>
 
-                    <dl>
-                        <dt>Docker Image</dt>
-                        <dd><code>{process.data.dockerImage}</code></dd>
-                    </dl>
+                    {process.data.workers.map((worker: any) => (
+                        <dl>
+                            <dt>Worker Name</dt>
+                            <dd>{worker.name}</dd>
+                            <dt>Docker Image</dt>
+                            <dd><code>{worker.dockerImage}</code></dd>
+                        </dl>
+                    ))}
                 </div>
 
                 <div class="px-4 text-sm">
