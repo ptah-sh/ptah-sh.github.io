@@ -1,11 +1,12 @@
 ---
+
 interface Props {
   src: string;
   alt: string;
-  caption: string;
+  caption?: string;
 }
 
-const { src, alt, caption } = Astro.props;
+const { src, alt, caption = Astro.props.alt } = Astro.props;
 ---
 
 <figure class="m-0">

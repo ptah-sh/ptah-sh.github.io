@@ -1,0 +1,143 @@
+---
+title: Launch Modes
+description: "Understanding and configuring launch modes for Ptah.sh workers"
+---
+
+import { Aside } from '@astrojs/starlight/components';
+import Screenshot from '../../../components/Screenshot.astro';
+
+Launch modes in Ptah.sh determine how and when workers within a service are started. They provide flexibility in managing your application's behavior and resource utilization. This page explains the available launch modes and how to use them effectively.
+
+## Available Launch Modes
+
+Ptah.sh offers four launch modes for workers:
+
+1. Daemon or Queue Worker
+2. Schedule: Cronjob
+3. Backup: create a backup
+4. Backup: restore a backup
+
+Let's explore each of these in detail.
+
+### 1. Daemon or Queue Worker
+
+This is the default launch mode for most workers. In this mode, the worker runs continuously as a background process.
+
+**Use cases:**
+- Web servers
+- Database servers
+- Message queues
+- Long-running background tasks
+
+**Configuration:**
+To set a worker to run as a daemon or queue worker, simply select this option in the worker's launch mode settings.
+
+<Aside type="tip">
+  For queue workers, make sure to set the appropriate command that starts your queue processing script.
+</Aside>
+
+<Screenshot src="/concepts/launch-modes/daemon.png" alt="Daemon or Queue Worker Configuration" />
+
+### 2. Schedule: Cronjob
+
+This launch mode allows you to run workers on a predefined schedule, similar to a cron job in Unix-like operating systems.
+
+**Use cases:**
+- Periodic data updates
+- Scheduled backups
+- Report generation
+- Cleanup tasks
+
+**Configuration:**
+When selecting this launch mode, you have two options for setting the schedule:
+
+1. Choose from pre-defined expressions:
+   - Every minute
+   - Every five minutes
+   - Every hour
+   - Every day at midnight
+   - Every Sunday at midnight
+
+2. Enter a custom cron expression:
+   - `0 0 * * *` - Run daily at midnight
+   - `*/15 * * * *` - Run every 15 minutes
+   - `0 0 * * MON` - Run every Monday at midnight
+
+<Aside type="note">
+  For custom expressions, Ptah.sh uses the standard cron syntax. Make sure to test your cron expressions to ensure they produce the desired schedule.
+</Aside>
+
+<Screenshot src="/concepts/launch-modes/cronjob.png" alt="Cronjob Configuration" />
+
+### 3. Backup: create a backup
+
+This launch mode is specifically designed for creating backups of your service data. It functions similarly to the "Schedule: Cronjob" mode but with additional backup-specific features.
+
+**Use cases:**
+- Regular data backups
+- Pre-update snapshots
+- Scheduled backup creation
+
+**Configuration:**
+When using this launch mode, you'll need to provide:
+1. A backup command that creates the backup file(s)
+2. The archive type: tar.gz or zip
+3. A schedule for the backup (required)
+
+**Scheduling:**
+Like the "Schedule: Cronjob" mode, you must set a schedule for your backups. You can either:
+1. Choose from pre-defined expressions (e.g., every day at midnight, every Sunday at midnight)
+2. Enter a custom cron expression (e.g., `0 0 * * *` for daily at midnight)
+
+**Special Environment Variable:**
+Ptah.sh defines a special environment variable `$PTAH_BACKUP_DIR` where your backup command should store the files to be uploaded to the selected S3 storage.
+
+<Aside type="tip">
+  Your backup command should use the `$PTAH_BACKUP_DIR` variable to ensure the backup files are correctly stored and can be managed by Ptah.sh.
+</Aside>
+
+<Screenshot src="/concepts/launch-modes/backups-create.png" alt="Backup Configuration" />
+
+**Backup Management:**
+All backups created using this launch mode will be displayed on the "Backups" page of the service. From there, you can manage your backups and initiate restore operations when needed.
+
+### 4. Backup: restore a backup
+
+This launch mode is used to restore service data from a previously created backup.
+
+**Use cases:**
+- Disaster recovery
+- Rolling back to a previous state
+- Migrating data to a new environment
+
+**Configuration:**
+For this launch mode, you'll need to specify:
+1. A restore command that processes the backup file and restores the data
+
+**Special Environment Variable:**
+Ptah.sh defines a special environment variable `$PTAH_BACKUP_DIR` where the selected backup files will be placed for restoration.
+
+**Execution:**
+Workers in this launch mode are started manually from the "Backups" tab on the "Services" page. When initiated:
+1. Ptah.sh will download the selected backup
+2. The backup files will be placed into the `$PTAH_BACKUP_DIR`
+3. Your specified restore command will be executed
+
+<Aside type="tip">
+  Your restore command should use the `$PTAH_BACKUP_DIR` variable to access the backup files and perform the restoration process.
+</Aside>
+
+<Aside type="caution">
+  Be careful when using the restore mode, as it may overwrite existing data. Always ensure you have a recent backup before performing a restore operation.
+</Aside>
+
+<Screenshot src="/concepts/launch-modes/backups-restore.png" alt="Backup: Restore Configuration" />
+
+## Best Practices
+
+1. **Choose the right launch mode:** Select the launch mode that best fits your worker's purpose and resource requirements.
+2. **Use schedules wisely:** For scheduled tasks, choose intervals that balance between keeping data up-to-date and minimizing resource usage.
+3. **Test backup and restore:** Regularly test your backup and restore processes to ensure they work as expected.
+4. **Monitor and adjust:** Keep an eye on your workers' performance and adjust launch modes or schedules as needed.
+
+By leveraging these launch modes effectively, you can optimize your Ptah.sh services for performance, resource utilization, and data management.
