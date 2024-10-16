@@ -6,6 +6,7 @@
     "logo": "/marketplace/images/databases/redis.svg",
     "url": "https://redis.io/",
     "tags": ["nosql", "kv-store", "cache", "message-broker"],
+    "alternativeTo": ["memcached"],
     "form": {
         "type": "collapsible",
         "items": [
