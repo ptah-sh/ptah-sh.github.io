@@ -1,0 +1,131 @@
+{
+    "extends": [
+        {
+            "slug": "databases/postgresql"
+        },
+        {
+            "slug": "databases/redis"
+        }
+    ],
+
+    "name": "Chatwoot",
+    "slug": "customer-support/chatwoot",
+    "description": "Chatwoot is an open-source customer support platform.",
+    "about": "Chatwoot is an open-source customer support platform.",
+    "logo": "/marketplace/images/customer-support/chatwoot.svg",
+    "url": "https://chatwoot.com/",
+    "tags": ["customer-support"],
+    "alternativeTo": ["zendesk"],
+    "form": {
+        "type": "v-stack",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Domain",
+                        "name": "domain",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            }
+        ]
+    },
+    "processes": [
+        {
+            "name": "Chatwoot",
+            "description": "Chatwoot is an open-source customer support platform.",
+            "url": "https://github.com/chatwoot/chatwoot/",
+            "data": {
+                "name": "chatwoot",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "chatwoot/chatwoot",
+                        "command": "bin/rails db:migrate && bundle exec rails s -p 3000 -b '0.0.0.0'"
+                    },
+                    {
+                        "name": "sidekiq",
+                        "dockerImage": "chatwoot/chatwoot",
+                        "command": "bundle exec sidekiq -C config/sidekiq.yml"
+                    },
+                    {
+                        "name": "backup",
+                        "dockerImage": "alpine",
+                        "launchMode": "backup_create",
+                        "command": "cp -r /app/storage $PTAH_BACKUP_DIR/"
+                    }
+                ],
+                "envVars": [
+                    {
+                        "name": "NODE_ENV",
+                        "value": "production"
+                    },
+                    {
+                        "name": "RAILS_ENV",
+                        "value": "production"
+                    },
+                    {
+                        "name": "INSTALLATION_ENV",
+                        "value": "docker"
+                    },
+                    {
+                        "name": "FRONTEND_URL",
+                        "value": "https://{{domain}}"
+                    },
+                    {
+                        "name": "ENABLE_ACCOUNT_SIGNUP",
+                        "value": "false"
+                    },
+                    {
+                        "name": "POSTGRES_DATABASE",
+                        "value": "{{databases.postgresql.database}}"
+                    },
+                    {
+                        "name": "POSTGRES_HOST",
+                        "value": "pgbouncer.{{service.internalDomainName}}"
+                    },
+                    {
+                        "name": "POSTGRES_USERNAME",
+                        "value": "{{databases.postgresql.user}}"
+                    }
+                ],
+                "secretVars": [
+                    {
+                        "name": "SECRET_KEY_BASE",
+                        "value": "{{randomPassword length = 64}}"
+                    },
+                    {
+                        "name": "REDIS_URL",
+                        "value": "redis://redis.{{service.internalDomainName}}:6379"
+                    },
+                    {
+                        "name": "REDIS_PASSWORD",
+                        "value": "{{databases.redis.password}}"
+                    },
+                    {
+                        "name": "POSTGRES_PASSWORD",
+                        "value": "{{databases.postgresql.password}}"
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "data",
+                        "path": "/app/storage"
+                    }
+                ],
+                "caddy": [
+                    {
+                        "targetProtocol": "http",
+                        "targetPort": "3000",
+                        "publishedPort": "443",
+                        "domain": "{{domain}}",
+                        "path": "/*"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -31,12 +31,25 @@
                 ]
             },
             {
-                "type": "text-field",
-                "label": "Database",
-                "name": "database",
-                "format": "string",
-                "required": true,
-                "default": "db"
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Root (\"postgres\") user password",
+                        "name": "postgresPassword",
+                        "format": "string",
+                        "required": true,
+                        "default": "{{ randomPassword }}"
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Database",
+                        "name": "database",
+                        "format": "string",
+                        "required": true,
+                        "default": "db"
+                    }
+                ]
             }
         ]
     },
@@ -61,18 +74,36 @@
                     {
                         "name": "POSTGRESQL_DATABASE",
                         "value": "{{database}}"
+                    },
+                    {
+                        "name": "POSTGRESQL_INITSCRIPTS_USERNAME",
+                        "value": "postgres"
                     }
                 ],
                 "secretVars": [
                     {
                         "name": "POSTGRESQL_PASSWORD",
                         "value": "{{password}}"
+                    },
+                    {
+                        "name": "POSTGRESQL_POSTGRES_PASSWORD",
+                        "value": "{{postgresPassword}}"
+                    },
+                    {
+                        "name": "POSTGRESQL_INITSCRIPTS_PASSWORD",
+                        "value": "{{postgresPassword}}"
                     }
                 ],
                 "volumes": [
                     {
                         "name": "data",
                         "path": "/bitnami/postgresql"
+                    }
+                ],
+                "configFiles": [
+                    {
+                        "path": "/docker-entrypoint-initdb.d/0-ptah_init.sql",
+                        "content": "GRANT CREATEDB SUPERUSER TO \"{{user}}\";\nCREATE EXTENSION \"pg_stat_statements\";\n"
                     }
                 ]
             }
@@ -120,7 +151,7 @@
                         "name": "POSTGRESQL_PASSWORD",
                         "value": "{{password}}"
                     }
-                ]                
+                ]
             }
         }
     ]

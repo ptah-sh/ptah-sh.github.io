@@ -149,25 +149,27 @@ const alternatives = await getCollection('alternatives', ({ id }) => alternative
     )}
 
     <h2>Processes</h2>
-    <ul class="list-none p-0 grid gap-4 md:grid-cols-2">
+    <ul class="list-none p-0">
         {template.data.processes.map((process: any) => (
             <li class="border border-gray-200 my-4 rounded">
                 <h3 class="bg-gray-50 font-bold p-4" style="font-size: 1rem">{process.name}</h3>
                 <div class="px-4">
                     <p>{process.description}</p>
 
-                    {process.data.workers.map((worker: any) => (
-                        <dl>
-                            <dt>Worker Name</dt>
-                            <dd>{worker.name}</dd>
-                            <dt>Docker Image</dt>
-                            <dd><code>{worker.dockerImage}</code></dd>
-                        </dl>
-                    ))}
-                </div>
+                    <div class="text-sm">
+                        <a href={process.url} rel="noopener nofollow" target="_blank">Documentation</a>
+                    </div>
 
-                <div class="px-4 text-sm">
-                    <a href={process.url} rel="noopener nofollow" target="_blank">Documentation</a>
+                    <div class="flex flex-wrap gap-4">
+                        {process.data.workers.map((worker: any) => (
+                            <dl class="pl-4 min-w-64" style="margin-top: 0">
+                                <dt>Worker Name</dt>
+                                <dd>{worker.name}</dd>
+                                <dt>Docker Image</dt>
+                                <dd><code>{worker.dockerImage}</code></dd>
+                            </dl>
+                        ))}
+                    </div>
                 </div>
             </li>
         ))}
