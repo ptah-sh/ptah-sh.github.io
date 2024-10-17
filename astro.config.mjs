@@ -110,7 +110,7 @@ export default defineConfig({
         "x.com": "https://r.ptah.sh/twitter",
         discord: "https://r.ptah.sh/chat",
         "youtube": "https://r.ptah.sh/youtube",
-        github: "https://r.ptah.sh/github",
+        github: "https://github.com/ptah-sh/ptah-server",
       },
       components: {
         ThemeSelect: "./src/components/auth-header.astro",
