@@ -77,7 +77,7 @@
                     },
                     {
                         "name": "ENABLE_ACCOUNT_SIGNUP",
-                        "value": "false"
+                        "value": "true"
                     },
                     {
                         "name": "POSTGRES_DATABASE",
