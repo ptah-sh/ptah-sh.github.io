@@ -115,6 +115,7 @@ export default defineConfig({
       components: {
         ThemeSelect: "./src/components/auth-header.astro",
         Footer: "./src/components/Footer.astro",
+        Hero: "./src/components/Hero.astro",
       },
       sidebar: [
         // {
