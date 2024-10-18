@@ -1,0 +1,130 @@
+{
+    "extends": [
+        {
+            "slug": "databases/mariadb"
+        }
+    ],
+
+    "name": "Matomo",
+    "slug": "analytics/matomo",
+    "description": "Matomo is an open-source web analytics platform.",
+    "about": "Matomo is an open-source web analytics platform.",
+    "logo": "/marketplace/images/analytics/matomo.png",
+    "url": "https://matomo.org/",
+    "tags": ["analytics-platform"],
+    "alternativeTo": [
+        "google-analytics",
+        "plausible"
+    ],
+    "form": {
+        "type": "v-stack",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Domain",
+                        "name": "domain",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            },
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Username",
+                        "name": "user",
+                        "format": "string",
+                        "required": true
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Password",
+                        "name": "password",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            }
+        ]
+    },
+    "processes": [
+        {
+            "name": "Matomo",
+            "description": "Matomo is an open-source web analytics platform.",
+            "url": "https://github.com/bitnami/containers/tree/main/bitnami/matomo",
+            "data": {
+                "name": "matomo",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "bitnami/matomo"
+                    }
+                ],
+                "envVars": [
+                    {
+                        "name": "MATOMO_WEBSITE_NAME",
+                        "value": "{{domain}}"
+                    },
+                    {
+                        "name": "MATOMO_WEBSITE_HOST",
+                        "value": "https://{{domain}}"
+                    },
+                    {
+                        "name": "MATOMO_DATABASE_NAME",
+                        "value": "{{databases.mariadb.database}}"
+                    },
+                    {
+                        "name": "MATOMO_DATABASE_USER",
+                        "value": "{{databases.mariadb.user}}"
+                    },
+                    {
+                        "name": "MATOMO_DATABASE_HOST",
+                        "value": "mariadb.{{service.internalDomainName}}"
+                    },
+                    {
+                        "name": "MATOMO_DATABASE_PORT_NUMBER",
+                        "value": "3306"
+                    },
+                    {
+                        "name": "MATOMO_ENABLE_HTTPS",
+                        "value": "true"
+                    },
+                    {
+                        "name": "MATOMO_USERNAME",
+                        "value": "{{user}}"
+                    }
+                ],
+                "secretVars": [
+                    {
+                        "name": "MATOMO_DATABASE_PASSWORD",
+                        "value": "{{databases.mariadb.password}}"
+                    },
+                    {
+                        "name": "MATOMO_PASSWORD",
+                        "value": "{{password}}"
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "data",
+                        "path": "/bitnami/matomo"
+                    }
+                ],
+                "caddy": [
+                    {
+                        "targetProtocol": "http",
+                        "targetPort": "8080",
+                        "publishedPort": "443",
+                        "domain": "{{domain}}",
+                        "path": "/*"
+                    }
+                ]
+            }
+        }
+    ]
+}
