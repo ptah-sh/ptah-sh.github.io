@@ -1,0 +1,114 @@
+{
+    "name": "MongoDB",
+    "slug": "databases/mongodb",
+    "description": "Single-server MongoDB database",
+    "about": "MongoDB is a powerful, open-source NoSQL database management system that uses JSON-like documents with optional schemas to manage and scale the most complicated data workloads.",
+    "logo": "/marketplace/images/databases/mongodb.svg",
+    "url": "https://www.mongodb.com/",
+    "tags": ["nosql"],
+    "alternativeTo": [
+        "mysql",
+        "postgresql"
+    ],
+    "form": {
+        "type": "collapsible",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "User",
+                        "name": "user",
+                        "format": "string",
+                        "required": true,
+                        "default": "{{ randomUsername }}"
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Password",
+                        "name": "password",
+                        "format": "string",
+                        "required": true,
+                        "default": "{{ randomPassword }}"
+                    }
+                ]
+            },
+            {
+                "type": "text-field",
+                "label": "Database",
+                "name": "database",
+                "format": "string",
+                "required": true,
+                "default": "db"
+            },
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Root User",
+                        "name": "rootUser",
+                        "format": "string",
+                        "required": true,
+                        "default": "{{ randomUsername }}"
+                    },
+                    {
+                        "type": "text-field",
+                        "label": "Root Password",
+                        "name": "rootPassword",
+                        "format": "string",
+                        "required": true,
+                        "default": "{{ randomPassword }}"
+                    }
+                ]
+            }
+        ]
+    },
+    "processes": [
+        {
+            "name": "MongoDB",
+            "description": "MongoDB database",
+            "url": "https://github.com/bitnami/containers/tree/main/bitnami/mongodb",
+            "data": {
+                "name": "mongodb",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "bitnami/mongodb:8.0"
+                    }
+                ],
+                "envVars": [
+                    {
+                        "name": "MONGODB_USER",
+                        "value": "{{user}}"
+                    },
+                    {
+                        "name": "MONGODB_DATABASE",
+                        "value": "{{database}}"
+                    },
+                    {
+                        "name": "MONGODB_ROOT_USER",
+                        "value": "{{rootUser}}"
+                    }
+                ],
+                "secretVars": [
+                    {
+                        "name": "MONGODB_PASSWORD",
+                        "value": "{{password}}"
+                    },
+                    {
+                        "name": "MONGODB_ROOT_PASSWORD",
+                        "value": "{{rootPassword}}"
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "data",
+                        "path": "/bitnami/mongodb"
+                    }
+                ]
+            }
+        }
+    ]
+}
