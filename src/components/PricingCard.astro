@@ -6,7 +6,8 @@ interface Props {
     description: string;
     price: string;
     yearlyPrice?: string;
-    singleServer?: boolean;
+    hasTrial?: boolean;
+    servers?: number;
     customErrorPages?: boolean;
     roleManagement?: boolean;
     dedicatedDiscord?: boolean;
@@ -26,14 +27,18 @@ interface Props {
     };
 }
 
-const { name, description, price, yearlyPrice, singleServer, customErrorPages, roleManagement, dedicatedDiscord, mostPopular, waitlist, uptimeMonitoring, s3Storage, serverMonitoring } = Astro.props;
+const { name, description, price, yearlyPrice, servers, customErrorPages, roleManagement, dedicatedDiscord, mostPopular, waitlist, uptimeMonitoring, s3Storage, serverMonitoring } = Astro.props;
 
 // Split the price into dollars and cents
 const [dollars, cents] = price.split('.');
 
 ---
 
-<div class={`pricing-card ${mostPopular ? 'relative z-10 border-2 border-green-600 md:transform md:scale-105' : 'border border-gray-200 dark:border-gray-700 -md:scale-105'} bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 md:p-6 flex flex-col my-4`}>
+<div class={`pricing-card bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4 md:p-6 flex flex-col my-4 ${
+    mostPopular 
+        ? 'relative z-10 border-2 border-green-600 shadow-xl md:transform md:scale-105' 
+        : 'border border-gray-200 dark:border-gray-700'
+}`}>
     <meta itemprop="price" content={price} />
     <meta itemprop="priceCurrency" content="USD" />
     <meta itemprop="name" content={`${name} Plan`} />
@@ -70,15 +75,17 @@ const [dollars, cents] = price.split('.');
         <PricingFeature name="Unlimited Apps & Databases" />
         <PricingFeature name="Unlimited Backups" hint="You are free to schedule as many backups as you want and upload them to your own S3-compatible storage." />
         <PricingFeature name="Unlimited Users" />
-        {singleServer ? (
+        {servers === 1 && (
             <PricingFeature 
                 name="Single Server" 
                 partial 
                 hint="You provide your own server. We offer the PaaS control layer."
             />
-        ) : (
+        )}
+
+        {servers !== 1 && (
             <PricingFeature 
-                name="Unlimited Servers" 
+                name={`Up to ${servers} Servers (included)`}
                 hint="You provide your own servers. We offer the PaaS control layer for multiple servers."
             />
         )}
@@ -109,7 +116,7 @@ const [dollars, cents] = price.split('.');
         <button
             type="button"
             onclick={`window.open('${waitlist}')`}
-            class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            class="w-full cursor-pointer text-white bg-gray-600 hover:bg-gray-700 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2.5 md:px-5 md:py-3 text-center transition-colors duration-200 ease-in-out dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-600"
         >
             Join the Waitlist!
         </button>
@@ -117,9 +124,13 @@ const [dollars, cents] = price.split('.');
         <div>
             <a
                 href="https://ctl.ptah.sh/register"
-                class="block w-full text-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                class={`block w-full text-center font-medium rounded-lg text-sm px-4 py-2.5 md:px-5 md:py-3 transition-colors duration-200 ease-in-out ${
+                    mostPopular
+                        ? 'text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 dark:bg-blue-500 dark:hover:bg-blue-600 dark:focus:ring-blue-800'
+                        : 'text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700'
+                }`}
             >
-                Start free Trial
+                Start Free Trial
             </a>
             <p class="text-xs text-center mt-2 text-gray-600 dark:text-gray-400">No credit card required</p>
         </div>

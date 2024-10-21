@@ -142,14 +142,15 @@ Take a closer look at our intuitive interface and powerful features:
       description="Perfect plan to try the service or host non-critical applications" 
       price="4.75"
       yearlyPrice="57"
-      singleServer 
+      servers={1} 
       uptimeMonitoring={{ partial: true, hint: "Basic uptime monitoring: 1 check every 3 minutes" }} 
       s3Storage={{ hint: "Storage size is 500 MiB with an unlimited traffic", partial: true }}
       serverMonitoring={{ partial: true, hint: "Metrics are updated each 30 seconds. 7 days retention." }}
     />
     <PricingCard name="Startup" 
       description="Need more power or an improved stability? This is your choice!" 
-      price="27"
+      price="29"
+      servers={3}
       customErrorPages
       mostPopular
       uptimeMonitoring={{ partial: true, hint: "Enhanced uptime monitoring: 10 checks every minute" }}
@@ -158,7 +159,8 @@ Take a closer look at our intuitive interface and powerful features:
     />
     <PricingCard name="Business"
       description="Your business got traction? We will cover your back!"
-      price="???"
+      price="89"
+      servers={10}
       customErrorPages
       roleManagement
       dedicatedDiscord
