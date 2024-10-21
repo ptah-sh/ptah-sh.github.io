@@ -92,12 +92,12 @@ const [dollars, cents] = price.split('.');
         <!-- {customErrorPages ? <PricingFeature soon name="Custom Error Pages" hint="Custom Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." /> : <PricingFeature soon name="Standard Error Pages" partial hint="Ptah.sh branded Error Pages for reverse-proxy error responses (502, 503, 504) if they are not handled by the application itself." />} -->
         {dedicatedDiscord ? <PricingFeature name="Dedicated Discord Channel" icon="discord" /> : <PricingFeature name="Community Discord Channel" icon="discord" partial href="https://r.ptah.sh/chat" />}
         <!-- {roleManagement ? <PricingFeature name="Multiple User Roles" soon /> : <PricingFeature name="Single User Role" partial />} -->
-        <!-- <PricingFeature 
+        <PricingFeature 
             name="Uptime Monitoring" 
             soon 
             hint={uptimeMonitoring?.hint}
             partial={uptimeMonitoring?.partial}
-        /> -->
+        />
         <!-- <PricingFeature name="Cloud Storage for Backups" 
             hint={"You can opt-in to use a managed cloud storage for your backups. " + (s3Storage?.hint || '')}
             partial={s3Storage?.partial}
