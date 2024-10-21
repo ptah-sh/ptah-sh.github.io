@@ -113,6 +113,7 @@ export default defineConfig({
         github: "https://github.com/ptah-sh/ptah-server",
       },
       components: {
+        ThemeProvider: "./src/components/ThemeProvider.astro",
         ThemeSelect: "./src/components/auth-header.astro",
         Footer: "./src/components/Footer.astro",
         Hero: "./src/components/Hero.astro",
