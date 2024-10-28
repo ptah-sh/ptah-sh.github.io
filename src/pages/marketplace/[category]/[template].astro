@@ -44,8 +44,8 @@ const alternatives = await getCollection('alternatives', ({ id }) => alternative
 ---
 
 <MarketplacePage
-    title={"Self-hosted " + template.data.name + ", deploy to your own server"}
-    description={"Deploy " + template.data.name + " with Docker to your VPS or dedicated server. Top-notch security with HTTPS, Backups, and Server Monitoring included."}
+    title={"Self-hosted " + template.data.name + " - Deploy on-premises or to your own server"}
+    description={"Deploy " + template.data.name + " on-premises or to your own VPS/dedicated server. Top-notch security with HTTPS, Backups, and Server Monitoring included."}
     showCategories={false}
     tags={tags}
     breadcrumbItems={[
@@ -174,9 +174,17 @@ const alternatives = await getCollection('alternatives', ({ id }) => alternative
             </li>
         ))}
     </ul>
-    <h2>Why host {template?.data.name} on your own VPS or dedicated server?</h2>
-    <p>Hosting {template?.data.name} on your own VPS or dedicated server gives you full control over your application. You can customize the server environment, optimize performance, and ensure security. It also allows you to scale your application as needed without any restrictions.</p>
-    <p>Additionally, hosting on your own VPS or dedicated server can lead to significant cost savings. By managing your own infrastructure, you can avoid the recurring costs associated with cloud services and optimize your resource allocation to meet your specific needs. This can result in a more cost-effective solution for your application.</p>
+    <h2>Why host {template?.data.name} on-premises or on your own infrastructure?</h2>
+    <p>Hosting {template?.data.name} on-premises or on your own VPS/dedicated server gives you complete control over your application and data. You can customize the server environment, optimize performance, and ensure compliance with your organization's security requirements.</p>
+    <p>On-premises hosting allows you to:</p>
+    <ul>
+        <li>Maintain full control over your data and infrastructure</li>
+        <li>Customize the environment to your exact needs</li>
+        <li>Meet specific compliance and security requirements</li>
+        <li>Scale your application without cloud service restrictions</li>
+        <li>Significantly reduce hosting costs compared to managed services</li>
+    </ul>
+    <p>By managing your own infrastructure, you can avoid the recurring costs associated with cloud services and optimize your resource allocation to meet your specific needs. This typically results in substantial cost savings for your application.</p>
     <p>Want to explore more options? <a href={`/marketplace/${category?.id}/`}>See all {category?.data.description}</a> to find the best fit for your needs.</p>
 
     <DocsCTA />

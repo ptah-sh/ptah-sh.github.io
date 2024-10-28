@@ -34,8 +34,8 @@ const templates = await getCollection('marketplace', entry => entry.id.startsWit
 ---
 
 <MarketplacePage
-    title={"1-Click Apps: " + category.data.name}
-    description={"Deploy ready to use " + category.data.name + " - " + category.data.description + " - in seconds."}
+    title={"On-Premises 1-Click Apps: " + category.data.name}
+    description={"Deploy ready to use " + category.data.name + " on your own infrastructure - " + category.data.description + " - in seconds."}
     category={Astro.params.category}
     breadcrumbItems={[
         { label: "Home", href: "/" },
@@ -75,14 +75,14 @@ const templates = await getCollection('marketplace', entry => entry.id.startsWit
     <a href="https://r.ptah.sh/chat" class="italic" rel="noopener nofollow" target="_blank">Missing app or service?</a>
 
     <div class="my-8">
-        <h2>Why Use Pre-Configured {category.data.name}?</h2>
-        <p class="mb-4">Using pre-configured {category.data.name} from our marketplace offers numerous benefits. It saves you time and effort by providing a ready-to-use solution, allowing you to focus on your project's core aspects. Our pre-configured {category.data.name} come with reasonable defaults, ensuring a smooth integration into your project. We offer various {category.data.description} to suit your specific needs.</p>
-        <p>By leveraging our 1-click {category.data.name}, you can:</p>
+        <h2>Why Use Pre-Configured On-Premises {category.data.name}?</h2>
+        <p class="mb-4">Using pre-configured on-premises {category.data.name} from our marketplace offers numerous benefits. It saves you time and effort by providing a ready-to-use solution that you can deploy on your own infrastructure, allowing you to focus on your project's core aspects while maintaining full control over your data and resources. Our pre-configured {category.data.name} come with reasonable defaults, ensuring a smooth integration into your project. We offer various {category.data.description} to suit your specific needs.</p>
+        <p>By leveraging our 1-click on-premises {category.data.name}, you can:</p>
         <ul class="list-disc pl-5">
-            <li>Speed up your project's development and deployment</li>
-            <li>Eliminate the need for manual configuration and setup</li>
-            <li>Ensure consistency and reliability across your project's infrastructure</li>
-            <li>Focus on your project's unique aspects, rather than spending time on setup and configuration</li>
+            <li>Speed up your project's development and deployment while maintaining full infrastructure control</li>
+            <li>Eliminate the need for manual configuration while keeping your data on your own servers</li>
+            <li>Ensure consistency and reliability across your on-premises infrastructure</li>
+            <li>Focus on your project's unique aspects while saving significantly on hosting costs</li>
         </ul>
     </div>
 </MarketplacePage>

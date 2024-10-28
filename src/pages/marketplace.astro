@@ -4,13 +4,13 @@ import DocsCTA from '../components/DocsCTA.astro';
 import TagCloud from '../components/TagCloud.astro';
 import { getCollection } from 'astro:content';
 
-const description = "Explore our Self-hosted 1-Click Apps Marketplace for easy-to-deploy, pre-configured applications and services. Save time and streamline your development process.";
+const description = "Explore our Self-hosted On-Premises 1-Click Apps Marketplace for easy-to-deploy, pre-configured applications and services. Deploy to your own infrastructure and save up to 82% on hosting costs.";
 
 // Structured data for better SEO
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "Self-Hosted Apps Marketplace aka 1-Click Apps",
+  "name": "Self-Hosted On-Premises Apps Marketplace aka 1-Click Apps",
   "description": description,
   "url": "https://ptah.sh/marketplace/"
 };
@@ -20,7 +20,7 @@ const allTags = await getCollection('marketplaceTags');
 ---
 
 <MarketplacePage 
-  title="Self-Hosted Apps Marketplace aka 1-Click Apps"
+  title="Self-Hosted On-Premises Apps Marketplace aka 1-Click Apps"
   description={description}
   breadcrumbItems={[
     { label: "Home", href: "/" },
@@ -51,12 +51,12 @@ const allTags = await getCollection('marketplaceTags');
   </div>
 
   <div class="mb-8">
-    <h2 class="text-2xl font-bold mb-4">Why You Should Use Self-Hosted Apps</h2>
+    <h2 class="text-2xl font-bold mb-4">Why Use Self-Hosted On-Premises Apps</h2>
     <p class="mb-6">
-      Self-hosted applications offer numerous advantages that make them an attractive option for businesses and individuals alike:
+      Self-hosted on-premises applications offer numerous advantages that make them an attractive option for businesses and individuals alike:
     </p>
     <ul class="list-disc pl-6 mb-4 space-y-2">
-      <li><strong>Data Control and Privacy:</strong> With self-hosted apps, you have complete control over your data. It remains on your servers, reducing the risk of data breaches and ensuring compliance with data protection regulations.</li>
+      <li><strong>Complete Infrastructure Control:</strong> With on-premises hosting, you have full control over your infrastructure and deployment environment.</li>
       <li><strong>Customization and Flexibility:</strong> Self-hosted solutions allow for greater customization to fit your specific needs. You can modify the code, add features, or integrate with other systems more easily.</li>
       <li><strong>Cost-Effectiveness:</strong> While there may be initial setup costs, self-hosted apps can be more cost-effective in the long run, especially for larger organizations or high-usage scenarios.</li>
       <li><strong>Performance Control:</strong> You can optimize the hardware and network infrastructure to ensure the best performance for your specific use case.</li>
@@ -64,7 +64,7 @@ const allTags = await getCollection('marketplaceTags');
       <li><strong>Learning Opportunity:</strong> For developers and IT professionals, self-hosting provides valuable experience in server management, security, and application deployment.</li>
     </ul>
     <p>
-      With Ptah.sh's 1-Click Apps Marketplace, you can enjoy these benefits of self-hosting while significantly reducing the complexity and time typically associated with setting up and managing self-hosted applications.
+      With Ptah.sh's 1-Click Apps Marketplace, you can enjoy these benefits of on-premises self-hosting while significantly reducing the complexity and time typically associated with setting up and managing self-hosted applications.
     </p>
   </div>
 
