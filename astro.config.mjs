@@ -117,6 +117,7 @@ export default defineConfig({
         ThemeSelect: "./src/components/auth-header.astro",
         Footer: "./src/components/Footer.astro",
         Hero: "./src/components/Hero.astro",
+        SocialIcons: "./src/components/SocialIcons.astro",
       },
       sidebar: [
         // {
@@ -180,7 +181,15 @@ export default defineConfig({
         },
       ],
       customCss: ["./src/tailwind.css", "./src/styles/starlight-content.css"],
-      head: process.env.NODE_ENV === "production" ? head : [],
+      head: (process.env.NODE_ENV === "production" ? head : []).concat(
+        {
+          tag: "script",
+          attrs: {
+            async: true,
+            defer: true,
+            src: "https://buttons.github.io/buttons.js"
+          }
+        },),
       editLink: {
         baseUrl: "https://github.com/ptah-sh/ptah-sh.github.io/edit/main/",
       },
