@@ -1,18 +1,10 @@
 ---
-import { Image } from 'astro:assets';
+import { Icon } from '@astrojs/starlight/components';
 import type { Props } from '@astrojs/starlight/props';
 
 
 const { data } = Astro.props.entry;
 const { title = data.title, tagline, image, actions = [] } = data.hero || {};
-
-const imageAttrs = {
-	loading: 'eager' as const,
-	decoding: 'async' as const,
-	width: 400,
-	height: 400,
-	alt: image?.alt || '',
-};
 
 let darkImage: ImageMetadata | undefined;
 let lightImage: ImageMetadata | undefined;
@@ -42,8 +34,8 @@ if (image) {
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                 </svg>
             </a>
-            <a href={actions[1].link} class="py-3 px-5 sm:ms-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-70">
-                {actions[1].text}
+            <a href="https://github.com/ptah-sh/ptah-server" target="_blank" class="flex items-center gap-2 py-3 px-5 sm:ms-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-70">
+                <Icon name="github" class="w-5 h-5" /> Star on GitHub
             </a>  
         </div>}
     </div>
