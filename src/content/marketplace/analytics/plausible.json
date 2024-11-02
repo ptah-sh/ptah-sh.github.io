@@ -1,0 +1,83 @@
+{
+    "extends": [
+        {
+            "slug": "databases/postgresql"
+        },
+        {
+            "slug": "databases/clickhouse"
+        }
+    ],
+
+    "name": "Plausible",
+    "slug": "analytics/plausible",
+    "description": "Easy to use and privacy-friendly Google Analytics alternative.",
+    "about": "Plausible is intuitive, lightweight and open source web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. Made and hosted in the EU, powered by European-owned cloud infrastructure 🇪🇺.",
+    "logo": "/marketplace/images/analytics/plausible.png",
+    "tags": ["analytics-platform"],
+    "alternativeTo": [
+        "mixpanel",
+        "google-analytics"
+    ],
+    "form": {
+        "type": "v-stack",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Domain",
+                        "name": "domain",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            }
+        ]
+    },
+    "processes": [
+        {
+            "name": "API",
+            "description": "The Plausible API",
+            "url": "https://github.com/plausible/analytics",
+            "data": {
+                "name": "plausible",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "ghcr.io/plausible/community-edition:v2.1.4",
+                        "releaseCommand": {
+                            "command": "/entrypoint.sh db migrate"
+                        },
+                        "launchMode": "daemon",
+                        "replicas": 1
+                    }
+                ],
+                "envVars": [
+                    { 
+                        "name": "BASE_URL",
+                        "value": "https://{{domain}}"
+                    },
+                    {
+                        "name": "HTTP_PORT",
+                        "value": "8000"
+                    }
+                ],
+                "secretVars": [
+                    { "name": "CLICKHOUSE_DATABASE_URL", "value": "http://{{databases.clickhouse.user}}:{{databases.clickhouse.password}}@clickhouse.{{service.internalDomainName}}:8123/default" },
+                    { "name": "DATABASE_URL", "value": "postgresql://{{databases.postgresql.user}}:{{databases.postgresql.password}}@pgbouncer.{{service.internalDomainName}}/{{databases.postgresql.database}}" },
+                    { "name": "SECRET_KEY_BASE", "value": "{{ base64Encode (randomBytes length=48) }}" }
+                ],
+                "caddy": [
+                    {
+                        "targetProtocol": "http",
+                        "targetPort": "8000",
+                        "publishedPort": "443",
+                        "domain": "{{domain}}",
+                        "path": "/*"
+                    }
+                ]
+            }
+        }
+    ]
+}
