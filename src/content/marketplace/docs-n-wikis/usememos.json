@@ -1,0 +1,76 @@
+{
+    "extends": [
+        {
+            "slug": "databases/postgresql"
+        }
+    ],
+
+    "name": "Memos",
+    "slug": "docs-n-wikis/memos",
+    "description": "An open-source, self-hosted memo hub with knowledge management and collaboration.",
+    "about": "Memos is a simple, privacy-focused note-taking app that works well on your server. It's a great alternative to Confluence, Notion, and Asana.",
+    "logo": "/marketplace/images/docs-n-wikis/memos.png",
+    "url": "https://usememos.com/",
+    "tags": ["wiki", "cms", "collaboration-tools"],
+    "alternativeTo": ["confluence", "notion", "asana"],
+    "form": {
+        "type": "v-stack",
+        "items": [
+            {
+                "type": "h-stack",
+                "items": [
+                    {
+                        "type": "text-field",
+                        "label": "Domain",
+                        "name": "domain",
+                        "format": "string",
+                        "required": true
+                    }
+                ]
+            }
+        ]
+    },
+    "processes": [
+        {
+            "name": "Memos",
+            "description": "An open-source, self-hosted memo hub with knowledge management and collaboration.",
+            "url": "https://github.com/usememos/memos/",
+            "data": {
+                "name": "memos",
+                "workers": [
+                    {
+                        "name": "main",
+                        "dockerImage": "neosmemo/memos:latest"
+                    }
+                ],
+                "envVars": [
+                    {
+                        "name": "MEMOS_DRIVER",
+                        "value": "postgres"
+                    }
+                ],
+                "secretVars": [
+                    {
+                        "name": "MEMOS_DSN",
+                        "value": "user={{databases.postgresql.user}} password={{databases.postgresql.password}} host=pgbouncer.{{service.internalDomainName}} port=5432 dbname={{databases.postgresql.database}} sslmode=disable"
+                    }
+                ],
+                "volumes": [
+                    {
+                        "name": "data",
+                        "path": "/var/opt/memos"
+                    }
+                ],
+                "caddy": [
+                    {
+                        "targetProtocol": "http",
+                        "targetPort": "5230",
+                        "publishedPort": "443",
+                        "domain": "{{domain}}",
+                        "path": "/*"
+                    }
+                ]
+            }
+        }
+    ]
+}
