@@ -9,7 +9,7 @@
     "slug": "docs-n-wikis/memos",
     "description": "An open-source, self-hosted memo hub with knowledge management and collaboration.",
     "about": "Memos is a simple, privacy-focused note-taking app that works well on your server. It's a great alternative to Confluence, Notion, and Asana.",
-    "logo": "/marketplace/images/docs-n-wikis/memos.png",
+    "logo": "/marketplace/images/docs-n-wikis/usememos.png",
     "url": "https://usememos.com/",
     "tags": ["wiki", "cms", "collaboration-tools"],
     "alternativeTo": ["confluence", "notion", "asana"],
