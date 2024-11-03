@@ -92,7 +92,14 @@ const head = [
       name: "twitter:image:alt",
       content: "Ptah.sh - Self-Hosted made Easy",
     },
-  }
+  },
+  {
+    tag: "script",
+    attrs: {
+      defer: true,
+      src: "https://plausible.ptah.sh/js/script.js",
+    },
+  },
 ];
 
 // https://astro.build/config
