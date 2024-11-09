@@ -92,7 +92,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "lindesvard/openpanel-api:latest",
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "lindesvard/openpanel-api:latest"
+                            }
+                        },
                         "releaseCommand": {
                             "command": "pnpm -r run migrate:deploy"
                         },
@@ -101,7 +106,10 @@
                     },
                     {
                         "name": "worker",
-                        "dockerImage": "lindesvard/openpanel-worker:latest",
+                        "source": {
+                            "type": "docker_image",
+                            "image": "lindesvard/openpanel-worker:latest"
+                        },
                         "launchMode": "daemon",
                         "replicas": 1
                     }
@@ -149,7 +157,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "lindesvard/openpanel-dashboard:latest",
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "lindesvard/openpanel-dashboard:latest"
+                            }
+                        },
                         "launchMode": "daemon",
                         "replicas": 1
                     }

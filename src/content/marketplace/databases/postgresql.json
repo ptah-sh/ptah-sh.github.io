@@ -63,7 +63,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "bitnami/postgresql:16"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "bitnami/postgresql:16"
+                            }
+                        }
                     }
                 ],
                 "envVars": [
@@ -117,7 +122,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "bitnami/pgbouncer:latest"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "bitnami/pgbouncer:latest"
+                            }
+                        }
                     }
                 ],
                 "envVars": [

@@ -55,7 +55,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "bitnami/memcached:latest"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "bitnami/memcached:latest"
+                            }
+                        }
                     }
                 ],
                 "envVars": [

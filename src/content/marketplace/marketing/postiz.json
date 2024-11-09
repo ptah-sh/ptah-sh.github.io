@@ -197,7 +197,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "ghcr.io/gitroomhq/postiz-app:latest"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "ghcr.io/gitroomhq/postiz-app:latest"
+                            }
+                        }
                     }
                 ],
                 "envVars": [

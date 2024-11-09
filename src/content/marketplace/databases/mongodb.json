@@ -75,7 +75,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "bitnami/mongodb:8.0"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "bitnami/mongodb:8.0"
+                            }
+                        }
                     }
                 ],
                 "envVars": [

@@ -65,7 +65,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "bitnami/wordpress"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "bitnami/wordpress"
+                            }
+                        }
                     }
                 ],
                 "envVars": [

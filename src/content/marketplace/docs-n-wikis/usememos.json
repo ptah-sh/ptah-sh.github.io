@@ -40,7 +40,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "neosmemo/memos:latest"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "neosmemo/memos:latest"
+                            }
+                        }
                     }
                 ],
                 "envVars": [

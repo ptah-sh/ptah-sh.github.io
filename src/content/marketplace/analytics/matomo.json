@@ -62,7 +62,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "bitnami/matomo"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "bitnami/matomo"
+                            }
+                        }
                     }
                 ],
                 "envVars": [

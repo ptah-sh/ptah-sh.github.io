@@ -1,0 +1,277 @@
+---
+title: Daemons and Workers
+description: "What are the Daemons and Workers?"
+next: CI/CD introduction
+---
+import { Aside } from '@astrojs/starlight/components';
+
+
+## Deployment Sources
+
+### Docker Images
+
+Each worker must specify a Docker image to use. Ptah.sh handles this in two ways:
+
+1. For public registries:
+   - Specify the full form of the Docker image name (e.g., `ghcr.io/ptah-sh/ptah-server:latest`).
+   - No pre-configuration is needed for public registries.
+
+2. For private registries:
+   - Pre-configure your private registries in the Ptah.sh dashboard.
+   - When setting up a worker, select the appropriate private registry from a dropdown in the configuration form.
+   - Specify the image name and tag for your worker.
+
+This approach streamlines the use of private registries and enhances security by centralizing credential management for private images.
+
+For more detailed information on working with Docker registries in Ptah.sh, including how to pre-configure private registries, see the [Docker Registries](/concepts/docker-registries/) page.
+
+### Git-based Deployments
+
+Ptah.sh supports deploying directly from Git repositories. This allows you to automatically build and deploy your application from your source code.
+
+To set up Git-based deployments, you'll need to add Ptah.sh's SSH public key to your repository. The process varies depending on your Git provider:
+
+#### GitHub
+1. Go to your repository settings
+2. Navigate to "Deploy Keys" under "Security"
+3. Click "Add deploy key"
+4. Give it a title (e.g., "Ptah.sh Deploy Key")
+5. Paste the Ptah.sh public SSH key
+6. Check "Allow write access" if you need Ptah.sh to push to the repository
+7. Click "Add key"
+
+#### GitLab
+1. Go to your repository settings
+2. Navigate to "Repository" → "Deploy Keys"
+3. Add a new deploy key
+4. Enter a title for the key
+5. Paste the Ptah.sh public SSH key
+6. Optionally enable write access
+7. Click "Add key"
+
+#### Bitbucket
+1. Go to repository settings
+2. Navigate to "Security" → "Access keys"
+3. Click "Add key"
+4. Choose "SSH" as the key type
+5. Enter a label for the key
+6. Paste the Ptah.sh public SSH key
+7. Click "Add key"
+
+You can find your Ptah.sh node's public SSH key in the Node settings section of your Ptah.sh dashboard.
+
+<Aside type="note">
+  Currently, only SSH-based Git URLs are supported (e.g., `git@github.com:ptah-sh/ptah-server.git`). HTTPS URLs are not supported at this time.
+</Aside>
+
+### Git with Dockerfile
+
+When using Git as a deployment source with a Dockerfile, Ptah.sh will:
+
+1. Clone your repository
+2. Build the Docker image using the Dockerfile in your repository
+3. Deploy the resulting image to your worker
+
+To use this deployment method:
+
+1. Select "Git with Dockerfile" as the deployment source
+2. Specify the Git repository URL (supports any Git repository using SSH format)
+3. Specify the branch or tag to build from
+4. Specify the path to the Dockerfile if it's not in the root directory
+
+If you need to use a private Git repository, please add the public SSH key of the Ptah.sh node to the repository settings (usually as a deployment key). You can find the public SSH key in the Node settings in the Ptah.sh dashboard.
+
+<Aside type="tip">
+  Using a Dockerfile gives you complete control over your build process and container configuration, making it ideal for complex applications with specific build requirements.
+</Aside>
+
+### Git with Nixpacks
+
+[Nixpacks](https://nixpacks.com/) provides a zero-configuration approach to building container images from your source code. When using Git with Nixpacks, Ptah.sh will:
+
+1. Clone your repository
+2. Automatically detect your application's framework and language
+3. Build an optimized container image using Nixpacks
+4. Deploy the resulting image to your worker
+
+Key benefits of using Nixpacks:
+
+1. Zero configuration required - works out of the box for most applications
+2. Supports multiple languages and frameworks including:
+   - Node.js
+   - Python
+   - Ruby
+   - Go
+   - Java
+   - PHP
+   - Rust
+   - And many more
+
+<Aside type="note">
+  Nixpacks is ideal for projects that follow standard conventions and don't require custom build steps. For applications needing specific build configurations, consider using a Dockerfile instead.
+</Aside>
+
+You can customize the Nixpacks build process by adding a `nixpacks.toml` file to your repository root. This allows you to:
+
+- Specify custom build commands
+- Configure environment variables
+- Define start commands
+- Set up additional system packages
+
+Example `nixpacks.toml`:
+```toml
+[phases.setup]
+nixPkgs = ['postgresql', 'redis']
+
+[variables]
+NODE_ENV = 'production'
+
+[start]
+cmd = 'npm start'
+```
+
+## Launch Modes
+
+Launch modes specify how and when a worker should be started. This feature provides flexibility in managing resource usage and application behavior. Ptah.sh offers the following launch modes:
+
+1. Daemon or Queue Worker: The worker runs continuously as a background process.
+2. Schedule: Cronjob: The worker runs on a predefined schedule, similar to a cron job.
+3. Backup: create a backup: The worker is launched to create a backup of the service data.
+4. Restore: restore a backup: The worker is launched to restore service data from a backup.
+
+Each launch mode is designed for specific use cases, allowing you to optimize your service's behavior and resource utilization.
+
+For more detailed information on launch modes, including how to configure and use them, see the [Launch Modes](/concepts/launch-modes/) page.
+
+## Healthcheck Configuration
+
+Each worker can be configured with a healthcheck to monitor its health and availability. Healthchecks are crucial for maintaining the reliability of your services and enabling automatic recovery from failures.
+
+When configuring a healthcheck, you need to provide the following information:
+
+1. Test: The shell command to run inside the container to check its health
+2. Interval: How often to run the healthcheck (in seconds)
+3. Timeout: Maximum time to wait for the healthcheck to complete (in seconds)
+4. Retries: Number of consecutive failures needed to consider the container unhealthy
+5. Start Period: Initial grace period during which failures don't count towards the retry limit (in seconds)
+
+<Aside type="note">
+  The healthcheck command should exit with a non-zero status code if the worker is unhealthy. This signals to Docker that the container is in an unhealthy state.
+</Aside>
+
+### Examples
+
+1. For a web server:
+   - Test: `curl -f http://localhost/ || exit 1`
+   - Interval: 30
+   - Timeout: 10
+   - Retries: 3
+   - Start Period: 40
+
+2. For a database:
+   - Test: `pg_isready -U postgres`
+   - Interval: 10
+   - Timeout: 5
+   - Retries: 5
+   - Start Period: 60
+
+3. For a custom application:
+   - Test: `/app/healthcheck.sh`
+   - Interval: 60
+   - Timeout: 30
+   - Retries: 3
+   - Start Period: 120
+
+By configuring healthchecks, you ensure that Docker Swarm can automatically detect and respond to service failures, improving the overall reliability and availability of your application.
+
+<Aside type="note">
+  If you specify a healthcheck command in Ptah.sh, it will override any healthcheck defined in the container's image Dockerfile. This allows you to customize the healthcheck for your specific deployment needs without modifying the original image.
+</Aside>
+
+## Command (Entrypoint)
+
+The command setting for a worker defines the main process that will run inside the container. This is typically the entry point for your application or service. For example:
+
+1. For a Node.js application:
+   ```
+   node server.js
+   ```
+
+2. For a Python web application using Gunicorn:
+   ```
+   gunicorn myapp.wsgi:application
+   ```
+
+3. For a custom shell script:
+   ```
+   /app/start.sh
+   ```
+
+By specifying the command for each worker, you have fine-grained control over how each component of your service runs.
+
+## Release Command
+
+Each worker may have a release command that is executed when the worker is started, before the default command of the container runs. This feature is particularly useful for performing setup tasks, running migrations, or other initialization processes that need to occur before the main application starts.
+
+Release commands are typically used for:
+
+1. Database migrations: Updating the database schema before starting the application.
+2. Asset compilation: Building or compiling assets required by the application.
+3. Configuration updates: Modifying configuration files based on environment variables.
+4. Dependency checks: Ensuring all required services are available before starting the main process.
+
+### Examples
+
+1. Running database migrations for a Rails application:
+   ```
+   bundle exec rails db:migrate
+   ```
+
+2. Running multiple commands in sequence:
+   ```
+   python manage.py collectstatic --noinput && python manage.py migrate
+   ```
+
+To use a release command in Ptah.sh:
+1. When configuring your service, locate the "Release Command" field in the worker settings.
+2. Enter the command or script you want to run before the main container process starts.
+3. Ensure that any necessary dependencies or scripts are included in your Docker image.
+
+By utilizing release commands, you can ensure that your application environment is properly prepared before the main process begins, leading to smoother deployments and reducing potential startup issues.
+
+## Backup Command
+
+Each worker may also have a backup command that is executed when the service is stopped. The backup command is designed to create a snapshot of important data before the container is terminated.
+
+Key points about the backup command:
+
+1. Execution context: The command runs within the container, similar to using `docker exec`.
+2. Purpose: It's used to create backups of critical data, configurations, or state information.
+3. Output handling: The backup file should be created in the current working directory. It will then be automatically compressed (gzipped) and uploaded to the specified S3 Storage.
+
+### Examples
+
+1. For a PostgreSQL database:
+   ```
+   pg_dump -U username -d database_name > ./database_backup.sql
+   ```
+
+2. For a Redis instance:
+   ```
+   redis-cli save && cp /var/lib/redis/dump.rdb ./redis_backup.rdb
+   ```
+
+3. For a custom application data directory:
+   ```
+   tar -czf ./app_data.tar.gz /app/data
+   ```
+
+To use a backup command in Ptah.sh:
+1. When configuring your service, locate the "Backup Command" field in the worker settings.
+2. Enter the command or script you want to run when the container is about to stop.
+3. Ensure that your command saves the backup file in the current working directory.
+4. Ensure that you have configured an S3 Storage destination for your backups.
+
+By utilizing backup commands, you can ensure that critical data is safely preserved before a container is terminated, facilitating easier recovery and data management. Remember that the backup file created in the current working directory will be automatically handled by Ptah.sh for compression and upload to S3 storage.
+
+For more information on configuring and using S3 storage for backups, including setup instructions and restoration processes, see the [S3 Storages](/concepts/s3-storages/) page.

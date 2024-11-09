@@ -43,7 +43,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "docmost/docmost"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "docmost/docmost"
+                            }
+                        }
                     }
                 ],
                 "envVars": [

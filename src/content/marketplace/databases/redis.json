@@ -35,7 +35,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "bitnami/redis:7.4"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "bitnami/redis:7.4"
+                            }
+                        }
                     }
                 ],
                 "envVars": [],

@@ -106,7 +106,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "driaug/plunk:latest"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "driaug/plunk:latest"
+                            }
+                        }
                     }
                 ],
                 "envVars": [

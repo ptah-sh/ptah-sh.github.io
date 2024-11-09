@@ -71,7 +71,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "bitnami/mysql:8.4"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "bitnami/mysql:8.4"
+                            }
+                        }
                     }
                 ],
                 "envVars": [

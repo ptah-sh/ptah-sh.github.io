@@ -1,9 +1,8 @@
 ---
 title: Services
 description: "What are the Services? How to launch them?"
-next: CI/CD introduction
+next: Daemons and Workers
 ---
-
 import { Aside } from '@astrojs/starlight/components';
 
 Services are the main building blocks of the Ptah.sh system.
@@ -26,161 +25,22 @@ Each worker can have the following configurations:
 
 1. Docker Image: Specify the Docker image to use for this worker.
 2. Registry: Choose between public registries or pre-configured private registries.
-3. Replicas: Define how many instances of this worker should run.
-4. Launch Mode: Specify how and when this worker should be started (e.g., always, on-demand, or scheduled).
-5. Healthcheck: Configure health monitoring for the worker.
-6. Release Command: Set up commands to run before the main process starts.
-7. Command: Define the main command to run for this worker.
+3. Git Repository: Specify the Git repository to use for this worker.
+4. Replicas: Define how many instances of this worker should run.
+5. Launch Mode: Specify how and when this worker should be started (e.g., always, on-demand, or scheduled).
+6. Healthcheck: Configure health monitoring for the worker.
+7. Release Command: Set up commands to run before the main process starts.
+8. Command (Entrypoint): Define the main command to run for this worker.
 
 <Aside type="note">
-  Workers within a service share certain resources and configurations. These shared elements include config files, volumes, secret files, environment variables, and secret variables. This allows for consistent configuration across all workers in a service while still allowing for individual worker customization.
+  <strong>Workers within a Process</strong> share certain resources and configurations. These shared elements include config files, volumes, secret files, environment variables, and secret variables. This allows for consistent configuration across all workers in a service while still allowing for individual worker customization.
 </Aside>
 
 This worker-based approach allows you to create complex, multi-component services where each component (worker) can be fine-tuned to your specific needs while maintaining a shared configuration base.
 
-#### Docker Images
+Learn more about workers in the [Daemons and Workers](/concepts/daemons-and-workers/) page.
 
-Each worker must specify a Docker image to use. Ptah.sh handles this in two ways:
-
-1. For public registries:
-   - Specify the full form of the Docker image name (e.g., `ghcr.io/ptah-sh/ptah-server:latest`).
-   - No pre-configuration is needed for public registries.
-
-2. For private registries:
-   - Pre-configure your private registries in the Ptah.sh dashboard.
-   - When setting up a worker, select the appropriate private registry from a dropdown in the configuration form.
-   - Specify the image name and tag for your worker.
-
-This approach streamlines the use of private registries and enhances security by centralizing credential management for private images.
-
-For more detailed information on working with Docker registries in Ptah.sh, including how to pre-configure private registries, see the [Docker Registries](/concepts/docker-registries/) page.
-
-#### Launch Modes
-
-Launch modes specify how and when a worker should be started. This feature provides flexibility in managing resource usage and application behavior. Ptah.sh offers the following launch modes:
-
-1. Daemon or Queue Worker: The worker runs continuously as a background process.
-2. Schedule: Cronjob: The worker runs on a predefined schedule, similar to a cron job.
-3. Backup: create a backup: The worker is launched to create a backup of the service data.
-4. Restore: restore a backup: The worker is launched to restore service data from a backup.
-
-Each launch mode is designed for specific use cases, allowing you to optimize your service's behavior and resource utilization.
-
-For more detailed information on launch modes, including how to configure and use them, see the [Launch Modes](/concepts/launch-modes/) page.
-
-#### Healthcheck Configuration
-
-Each worker can be configured with a healthcheck to monitor its health and availability. Healthchecks are crucial for maintaining the reliability of your services and enabling automatic recovery from failures.
-
-When configuring a healthcheck, you need to provide the following information:
-
-1. Test: The shell command to run inside the container to check its health
-2. Interval: How often to run the healthcheck (in seconds)
-3. Timeout: Maximum time to wait for the healthcheck to complete (in seconds)
-4. Retries: Number of consecutive failures needed to consider the container unhealthy
-5. Start Period: Initial grace period during which failures don't count towards the retry limit (in seconds)
-
-<Aside type="note">
-  The healthcheck command should exit with a non-zero status code if the worker is unhealthy. This signals to Docker that the container is in an unhealthy state.
-</Aside>
-
-Examples of healthcheck configurations:
-
-1. For a web server:
-   - Test: `curl -f http://localhost/ || exit 1`
-   - Interval: 30
-   - Timeout: 10
-   - Retries: 3
-   - Start Period: 40
-
-2. For a database:
-   - Test: `pg_isready -U postgres`
-   - Interval: 10
-   - Timeout: 5
-   - Retries: 5
-   - Start Period: 60
-
-3. For a custom application:
-   - Test: `/app/healthcheck.sh`
-   - Interval: 60
-   - Timeout: 30
-   - Retries: 3
-   - Start Period: 120
-
-By configuring healthchecks, you ensure that Docker Swarm can automatically detect and respond to service failures, improving the overall reliability and availability of your application.
-
-<Aside type="note">
-  If you specify a healthcheck command in Ptah.sh, it will override any healthcheck defined in the container's image Dockerfile. This allows you to customize the healthcheck for your specific deployment needs without modifying the original image.
-</Aside>
-
-#### Release Command
-
-Each worker may have a release command that is executed when the worker is started, before the default command of the container runs. This feature is particularly useful for performing setup tasks, running migrations, or other initialization processes that need to occur before the main application starts.
-
-Release commands are typically used for:
-
-1. Database migrations: Updating the database schema before starting the application.
-2. Asset compilation: Building or compiling assets required by the application.
-3. Configuration updates: Modifying configuration files based on environment variables.
-4. Dependency checks: Ensuring all required services are available before starting the main process.
-
-Examples of release commands:
-
-1. Running database migrations for a Rails application:
-   ```
-   bundle exec rails db:migrate
-   ```
-
-2. Running multiple commands in sequence:
-   ```
-   python manage.py collectstatic --noinput && python manage.py migrate
-   ```
-
-To use a release command in Ptah.sh:
-1. When configuring your service, locate the "Release Command" field in the worker settings.
-2. Enter the command or script you want to run before the main container process starts.
-3. Ensure that any necessary dependencies or scripts are included in your Docker image.
-
-By utilizing release commands, you can ensure that your application environment is properly prepared before the main process begins, leading to smoother deployments and reducing potential startup issues.
-
-#### Backup Command
-
-Each worker may also have a backup command that is executed when the service is stopped. The backup command is designed to create a snapshot of important data before the container is terminated.
-
-Key points about the backup command:
-
-1. Execution context: The command runs within the container, similar to using `docker exec`.
-2. Purpose: It's used to create backups of critical data, configurations, or state information.
-3. Output handling: The backup file should be created in the current working directory. It will then be automatically compressed (gzipped) and uploaded to the specified S3 Storage.
-
-Examples of backup commands:
-
-1. For a PostgreSQL database:
-   ```
-   pg_dump -U username -d database_name > ./database_backup.sql
-   ```
-
-2. For a Redis instance:
-   ```
-   redis-cli save && cp /var/lib/redis/dump.rdb ./redis_backup.rdb
-   ```
-
-3. For a custom application data directory:
-   ```
-   tar -czf ./app_data.tar.gz /app/data
-   ```
-
-To use a backup command in Ptah.sh:
-1. When configuring your service, locate the "Backup Command" field in the worker settings.
-2. Enter the command or script you want to run when the container is about to stop.
-3. Ensure that your command saves the backup file in the current working directory.
-4. Ensure that you have configured an S3 Storage destination for your backups.
-
-By utilizing backup commands, you can ensure that critical data is safely preserved before a container is terminated, facilitating easier recovery and data management. Remember that the backup file created in the current working directory will be automatically handled by Ptah.sh for compression and upload to S3 storage.
-
-For more information on configuring and using S3 storage for backups, including setup instructions and restoration processes, see the [S3 Storages](/concepts/s3-storages/) page.
-
-### Volumes
+## Volumes
 
 Volumes are shared among all workers within a service. Each service may have a list of volumes that are mounted to its workers' containers. These volumes are Docker Swarm volumes, which provide persistent storage for your services.
 
@@ -193,7 +53,7 @@ Volumes can be configured with different drivers, including local storage or net
 
 For more information on S3 storage integration, see the [S3 Storages](/concepts/s3-storages/) page.
 
-### Environment Variables
+## Environment Variables
 
 Environment variables are shared among all workers within a service. Each service may have a list of environment variables that are set on its workers' containers.
 
@@ -207,7 +67,7 @@ Common uses for environment variables include:
 
 By using environment variables, you can easily manage different configurations across various deployment environments and keep sensitive information out of your codebase.
 
-### Secret Variables
+## Secret Variables
 
 Secret variables are shared among all workers within a service. In addition to regular environment variables, Ptah.sh supports secret variables. These are similar to environment variables but offer enhanced security features:
 
@@ -228,7 +88,7 @@ To use secret variables in Ptah.sh:
 
 By utilizing secret variables, you can ensure that sensitive data is kept secure and separate from your regular configuration, reducing the risk of accidental exposure or unauthorized access.
 
-### Config Files
+## Config Files
 
 Config files are shared among all workers within a service. Each service may have a list of config files that are mounted to its workers' containers. Users can specify:
 
@@ -237,7 +97,7 @@ Config files are shared among all workers within a service. Each service may hav
 
 This allows for easy management and deployment of configuration files alongside your services.
 
-Examples:
+### Examples
 
 1. Nginx configuration:
    - Path: `/etc/nginx/nginx.conf`
@@ -296,7 +156,7 @@ Examples:
 
 These examples demonstrate how you can use config files to manage various types of configurations, from web server settings to application-specific options, directly within your Ptah.sh service definition.
 
-### Secret Files
+## Secret Files
 
 Secret files are shared among all workers within a service. In addition to config files, Ptah.sh supports secret files. These are similar to config files but offer enhanced security features:
 
@@ -316,7 +176,7 @@ To use secret files in Ptah.sh:
 2. Specify the path where the file should be mounted in the container.
 3. Provide the contents of the secret file.
 
-Examples:
+### Examples
 
 1. SSL Certificate:
    - Path: `/etc/ssl/private/example.com.pem`
@@ -350,21 +210,11 @@ Examples:
 
 By utilizing secret files, you can securely manage sensitive data that needs to be mounted as files in your containers, ensuring that this information remains encrypted and inaccessible to the Ptah.sh panel or unauthorized users.
 
-### Public Access Over the Internet
+## Expose as HTTP(s)
 
 Each worker can be configured for public access over the internet using either direct port publishing or Caddy endpoints.
 
-#### Ports
-
-When publishing ports directly, users can specify two port numbers:
-1. The published port on the node (available from the internet)
-2. The target port on the container
-
-This allows for flexible port mapping between the host and the container, enabling you to expose services on specific ports while potentially using different internal port numbers.
-
-#### Caddy
-
-Users can also specify Caddy endpoints to map services to HTTP and HTTPS. When configuring a Caddy endpoint, you need to provide the following information:
+You can use Caddy endpoints to map services to HTTP and HTTPS. When configuring a Caddy endpoint, you need to provide the following information:
 
 1. Container Protocol: Currently, either HTTP or FCGI
 2. Container Port: The port your service is listening on inside the container
@@ -374,7 +224,7 @@ Users can also specify Caddy endpoints to map services to HTTP and HTTPS. When c
 
 This configuration allows for flexible and powerful routing of HTTP/HTTPS traffic to your services, including support for multiple domains and path-based routing.
 
-#### Redirect Rules
+### Redirect Rules
 
 Redirect Rules allow users to specify URL redirects. When configuring a redirect, you need to provide:
 
@@ -386,7 +236,7 @@ Redirect Rules allow users to specify URL redirects. When configuring a redirect
 
 Redirects are useful for scenarios such as domain changes, HTTP to HTTPS redirects, or URL structure changes.
 
-Examples:
+#### Examples
 
 1. Blog migration:
    - Domain From: `old-domain.com`
@@ -408,7 +258,7 @@ Examples:
 
 These examples demonstrate how Redirect Rules can be used to manage common URL redirection scenarios in Ptah.sh.
 
-#### Rewrite Rules
+### Rewrite Rules
 
 Rewrite Rules allow users to modify URLs internally without changing what the user sees in their browser. When configuring a rewrite, you need to provide:
 
@@ -417,34 +267,28 @@ Rewrite Rules allow users to modify URLs internally without changing what the us
 
 Rewrites are useful for implementing clean URLs, content organization, or URL structures that don't directly map to your file system.
 
-Example:
-- Path From: `/products/(.*)/(.*)`
-- Path To: `/products.php?category=$1&item=$2`
+#### Examples
 
-This would internally rewrite a URL like `/products/electronics/smartphone` to `/products.php?category=electronics&item=smartphone`, allowing for a cleaner URL structure.
+1. Clean URLs:
+   - Path From: `/products/(.*)/(.*)`
+   - Path To: `/products.php?category=$1&item=$2`
 
-These powerful routing features in Ptah.sh enable you to create sophisticated URL handling schemes without modifying your application code, improving both SEO and user experience.
+   This would internally rewrite a URL like `/products/electronics/smartphone` to `/products.php?category=electronics&item=smartphone`, allowing for a cleaner URL structure.
 
-### Command
+   These powerful routing features in Ptah.sh enable you to create sophisticated URL handling schemes without modifying your application code, improving both SEO and user experience.
 
-The command setting for a worker defines the main process that will run inside the container. This is typically the entry point for your application or service. For example:
+## Expose as TCP/UDP
 
-1. For a Node.js application:
-   ```
-   node server.js
-   ```
+When publishing ports directly, users can specify two port numbers:
+1. The published port on the node (available from the internet)
+2. The target port on the container
 
-2. For a Python web application using Gunicorn:
-   ```
-   gunicorn myapp.wsgi:application
-   ```
+This allows for flexible port mapping between the host and the container, enabling you to expose services on specific ports while potentially using different internal port numbers.
 
-3. For a custom shell script:
-   ```
-   /app/start.sh
-   ```
+<Aside type="note">
+  Use this method when you need to expose a service that is not HTTP/HTTPS. Ports are exposed as is, without any additional routing.
+</Aside>
 
-By specifying the command for each worker, you have fine-grained control over how each component of your service runs.
 
 ## 1-Click Apps
 

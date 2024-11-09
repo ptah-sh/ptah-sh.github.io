@@ -48,7 +48,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "bitnami/clickhouse:24.3"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "bitnami/clickhouse:24.3"
+                            }
+                        }
                     }
                 ],
                 "envVars": [

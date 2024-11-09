@@ -47,7 +47,10 @@ jobs:
         service: 'my-service-slug'
         processes: |
           - name: svc
-            dockerImage: my-service:${{ github.sha }}
+            source:
+              type: docker_image
+              docker:
+                image: my-service:${{ github.sha }}
             envVars:
               - name: SENTRY_VERSION
                 value: ${{ github.sha }}
@@ -69,6 +72,6 @@ curl --fail-with-body -X POST \
             -H 'Content-Type: application/json' \
             -H 'Accept: application/json' \
             -H "Authorization: Bearer ${{ secrets.PTAH_API_TOKEN }}" \
-            -d '{"processes":[{"name":"svc","dockerImage":"ghcr.io/ptah-sh/ptah-server:latest"}]}' \
+            -d '{"processes":[{"name":"svc","source":{"type":"docker_image","docker":{"image":"ghcr.io/ptah-sh/ptah-server:latest"}}}]}' \
             https://ctl.ptah.sh/api/v0/services/custom-ptah-server/deploy
 ```

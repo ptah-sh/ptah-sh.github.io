@@ -43,17 +43,32 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "chatwoot/chatwoot",
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "chatwoot/chatwoot"
+                            }
+                        },
                         "command": "bin/rails db:migrate && bundle exec rails s -p 3000 -b '0.0.0.0'"
                     },
                     {
                         "name": "sidekiq",
-                        "dockerImage": "chatwoot/chatwoot",
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "chatwoot/chatwoot"
+                            }
+                        },
                         "command": "bundle exec sidekiq -C config/sidekiq.yml"
                     },
                     {
                         "name": "backup",
-                        "dockerImage": "alpine",
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "alpine"
+                            }
+                        },
                         "launchMode": "backup_create",
                         "command": "cp -r /app/storage $PTAH_BACKUP_DIR/"
                     }

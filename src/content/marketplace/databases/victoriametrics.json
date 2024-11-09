@@ -20,7 +20,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "victoriametrics/victoria-metrics"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "victoriametrics/victoria-metrics"
+                            }
+                        }
                     }
                 ],
                 "volumes": [

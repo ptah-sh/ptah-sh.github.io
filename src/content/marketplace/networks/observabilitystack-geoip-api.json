@@ -19,7 +19,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "observabilitystack/geoip-api:latest"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "observabilitystack/geoip-api:latest"
+                            }
+                        }
                     }
                 ],
                 "envVars": [],

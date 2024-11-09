@@ -42,7 +42,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "bitnami/rabbitmq"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "bitnami/rabbitmq"
+                            }
+                        }
                     }
                 ],
                 "envVars": [

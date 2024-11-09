@@ -23,7 +23,7 @@ export async function GET({ params }: any) {
                 return {
                     name: p.name,
                     description: p.description,
-                    dockerImage: p.data.dockerImage,
+                    source: p.data.source,
                     url: p.url,
                 }
             }),

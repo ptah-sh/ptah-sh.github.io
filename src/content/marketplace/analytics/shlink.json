@@ -57,7 +57,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "shlinkio/shlink"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "shlinkio/shlink"
+                            }
+                        }
                     }
                 ],
                 "envVars": [

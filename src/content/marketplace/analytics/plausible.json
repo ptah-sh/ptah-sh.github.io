@@ -45,7 +45,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "ghcr.io/plausible/community-edition:v2.1.4",
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "ghcr.io/plausible/community-edition:v2.1.4"
+                            }
+                        },
                         "releaseCommand": {
                             "command": "/entrypoint.sh db migrate"
                         },

@@ -74,7 +74,12 @@
                 "workers": [
                     {
                         "name": "main",
-                        "dockerImage": "bitnami/mariadb:11.5"
+                        "source": {
+                            "type": "docker_image",
+                            "docker": {
+                                "image": "bitnami/mariadb:11.5"
+                            }
+                        }
                     }
                 ],
                 "envVars": [
